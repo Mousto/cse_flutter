@@ -29,12 +29,14 @@ class PanierProvider with ChangeNotifier {
   double get sommeTotale {
     var total = 0.0;
     _items.forEach((key, panierItem) {
-      total += panierItem.prix * panierItem.quantite;
+      total += (panierItem.prixAdulte * panierItem.quantite) +
+          (panierItem.prixEnfant * panierItem.quantite);
     });
     return total;
   }
 
-  void addItem(int produitId, double prix, String intitule) {
+  void addItem(
+      int produitId, double prixAdulte, double prixEnfant, String intitule) {
     if (_items.containsKey(produitId)) {
       //change de quantité du produit concerné
       _items.update(
@@ -43,7 +45,8 @@ class PanierProvider with ChangeNotifier {
             id: produitExistant.id,
             nomProduit: produitExistant.nomProduit,
             quantite: produitExistant.quantite + 1,
-            prix: produitExistant.prix),
+            prixAdulte: produitExistant.prixAdulte,
+            prixEnfant: produitExistant.prixEnfant),
       );
     } else {
       _items.putIfAbsent(
@@ -52,7 +55,8 @@ class PanierProvider with ChangeNotifier {
                 id: produitId,
                 nomProduit: intitule,
                 quantite: 1,
-                prix: prix,
+                prixAdulte: prixAdulte,
+                prixEnfant: prixEnfant,
               ));
     }
     notifyListeners();
@@ -74,7 +78,8 @@ class PanierProvider with ChangeNotifier {
           id: panierItemExistant.id,
           nomProduit: panierItemExistant.nomProduit,
           quantite: panierItemExistant.quantite - 1,
-          prix: panierItemExistant.prix,
+          prixAdulte: panierItemExistant.prixAdulte,
+          prixEnfant: panierItemExistant.prixEnfant,
         ),
       );
     } else {

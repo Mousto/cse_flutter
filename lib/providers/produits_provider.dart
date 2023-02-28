@@ -30,6 +30,8 @@ class ProduitsProvider with ChangeNotifier {
         'nom': prod.nom,
         'prix_adulte': prod.prixAdulte,
         'prix_enfant': prod.prixEnfant,
+        'billet_adulte': prod.billetAdulte,
+        'billet_enfant': prod.billetEnfant,
       },
       "image": await MultipartFile.fromFile(image.path,
           filename: File(image.path).path.split('/').last),

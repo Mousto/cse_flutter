@@ -7,13 +7,15 @@ class PanierItem extends StatelessWidget {
   final int id;
   final int produitId;
   final String intitule;
-  final double prix;
+  final double prixAdulte;
+  final double prixEnfant;
   final int quantite;
   const PanierItem({
     super.key,
     required this.id,
     required this.intitule,
-    required this.prix,
+    required this.prixAdulte,
+    required this.prixEnfant,
     required this.quantite,
     required this.produitId,
   });
@@ -74,12 +76,12 @@ class PanierItem extends StatelessWidget {
               child: Padding(
                 padding: const EdgeInsets.all(2),
                 child: FittedBox(
-                  child: Text('€ $prix'),
+                  child: Text('€ $prixAdulte'),
                 ),
               ),
             ),
             title: Text(intitule),
-            subtitle: Text('Total : ${(prix * quantite)} €'),
+            subtitle: Text('Total : ${(prixAdulte * quantite)} €'),
             trailing: Column(
               children: <Widget>[
                 const SizedBox(

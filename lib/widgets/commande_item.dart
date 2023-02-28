@@ -54,7 +54,7 @@ class _CommandeItemState extends State<CommandeItem> {
                               ),
                             ),
                             Text(
-                              '${prod.quantite} x ${prod.prix} €',
+                              '${prod.quantite} x ${prod.prixAdulte} €',
                               style: const TextStyle(
                                 fontSize: 18,
                                 color: Colors.grey,

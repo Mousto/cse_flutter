@@ -61,6 +61,7 @@ class ProduitItem extends StatelessWidget {
                         lePanier.addItem(
                           leProduit.id,
                           leProduit.prixAdulte,
+                          leProduit.prixEnfant,
                           leProduit.nom,
                         );
                         ScaffoldMessenger.of(context).hideCurrentSnackBar();

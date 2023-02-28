@@ -78,6 +78,7 @@ class ProduitDetailCard extends StatelessWidget {
                     lePanier.addItem(
                       leProduit.id,
                       leProduit.prixAdulte,
+                      leProduit.prixEnfant,
                       leProduit.nom,
                     );
                   },

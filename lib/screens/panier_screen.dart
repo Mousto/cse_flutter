@@ -46,22 +46,7 @@ class PanierScreen extends StatelessWidget {
                       backgroundColor: Theme.of(context).primaryColor,
                     ),
                     const Spacer(), //Ajouter un espace en poussant les éléments suivant vers l'espace restant
-                    TextButton(
-                      onPressed: () {
-                        //On appelle directement Provider.of<CommandeProvider>(context) sans passer par une variable et on n'a pas besoin ici d'écouter l'ajout de commande d'où le listen à false.s
-                        Provider.of<CommandeProvider>(context, listen: false)
-                            .addCommande(
-                          panier.items.values.toList(),
-                          panier.sommeTotale,
-                        );
-                        panier.clearPanier();
-                      },
-                      style: ButtonStyle(
-                        foregroundColor: MaterialStateProperty.all<Color>(
-                            Theme.of(context).primaryColor),
-                      ),
-                      child: const Text('Passer commande'),
-                    ),
+                    PasserCommandeBouton(panier: panier),
                   ]),
             ),
           ),
@@ -74,13 +59,61 @@ class PanierScreen extends StatelessWidget {
             itemBuilder: (context, index) => PanierItem(
               id: panier.items.values.toList()[index].id,
               intitule: panier.items.values.toList()[index].nomProduit,
-              prix: panier.items.values.toList()[index].prix,
+              prixAdulte: panier.items.values.toList()[index].prixAdulte,
+              prixEnfant: panier.items.values.toList()[index].prixEnfant,
               quantite: panier.items.values.toList()[index].quantite,
               produitId: panier.items.keys.toList()[index],
             ),
           ))
         ],
       ),
+    );
+  }
+}
+
+class PasserCommandeBouton extends StatefulWidget {
+  const PasserCommandeBouton({
+    Key? key,
+    required this.panier,
+  }) : super(key: key);
+
+  final PanierProvider panier;
+
+  @override
+  State<PasserCommandeBouton> createState() => _PasserCommandeBoutonState();
+}
+
+class _PasserCommandeBoutonState extends State<PasserCommandeBouton> {
+  var _isLoading = false;
+  @override
+  Widget build(BuildContext context) {
+    return TextButton(
+      onPressed: widget.panier.sommeTotale <= 0 || _isLoading == true
+          ? null
+          : () async {
+              setState(() {
+                _isLoading = true;
+              });
+              //On appelle directement Provider.of<CommandeProvider>(context) sans passer par une variable et on n'a pas besoin ici d'écouter l'ajout de commande d'où le listen à false.s
+              await Provider.of<CommandeProvider>(context, listen: false)
+                  .addCommande(
+                widget.panier.items.values.toList(),
+                widget.panier.sommeTotale,
+              );
+              setState(() {
+                _isLoading = false;
+              });
+              widget.panier.clearPanier();
+            },
+      style: widget.panier.sommeTotale <= 0
+          ? null
+          : ButtonStyle(
+              foregroundColor: MaterialStateProperty.all<Color>(
+                  Theme.of(context).primaryColor),
+            ),
+      child: _isLoading
+          ? const CircularProgressIndicator()
+          : const Text('Passer commande'),
     );
   }
 }

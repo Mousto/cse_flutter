@@ -10,6 +10,8 @@ class Produit with ChangeNotifier {
   final String nom;
   final double prixAdulte;
   final double prixEnfant;
+  int billetAdulte;
+  int billetEnfant;
   final String photo;
   final Color couleur;
   bool disponible;
@@ -20,6 +22,8 @@ class Produit with ChangeNotifier {
     required this.nom,
     required this.prixAdulte,
     required this.prixEnfant,
+    this.billetAdulte = 0,
+    this.billetEnfant = 0,
     required this.photo,
     this.couleur = Colors.orange,
     required this.disponible,
@@ -32,6 +36,8 @@ class Produit with ChangeNotifier {
       nom: json['nom'],
       prixAdulte: json['prix_adulte'],
       prixEnfant: json['prix_enfant'],
+      billetAdulte: json['billet_adulte'],
+      billetEnfant: json['billet_enfant'],
       photo: json['photo'],
       disponible: json['disponible'], //json['disponible'],
       isFavorite: false,

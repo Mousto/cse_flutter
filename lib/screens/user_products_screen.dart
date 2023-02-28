@@ -45,6 +45,8 @@ class UserProductsScreen extends StatelessWidget {
                   photo: productsData.items[index].photo,
                   prixAdulte: productsData.items[index].prixAdulte,
                   prixEnfant: productsData.items[index].prixEnfant,
+                  billetAdulte: productsData.items[index].billetAdulte,
+                  billetEnfant: productsData.items[index].billetEnfant,
                   disponible: productsData.items[index].disponible,
                 ),
                 child: UserProductItem(
