@@ -53,8 +53,8 @@ class _UserProductItemState extends State<UserProductItem> {
     final produit = Provider.of<Produit>(context, listen: false);
     final produitProvider =
         Provider.of<ProduitsProvider>(context, listen: false);
-    print(
-        '§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§ ${widget.title},${widget.disponible}');
+    // print(
+    //     '§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§ ${widget.title},${widget.disponible}');
 
     //On définit cette variable ici car le context de BuildContext ne marche pas dans async où la variable est utilisé. On consigne donc un context dans cette variable ci-dessous
     final scaffoldMessenger = ScaffoldMessenger.of(context);
@@ -64,20 +64,7 @@ class _UserProductItemState extends State<UserProductItem> {
       try {
         await produitProvider.deleteProduit(widget.id);
       } catch (error) {
-        await showDialog(
-          context: context,
-          builder: (ctx) => AlertDialog(
-            title: const Text('Une erreur est advenue !'),
-            content: const Text('Suppression non effectuée'),
-            actions: [
-              TextButton(
-                  onPressed: () {
-                    Navigator.of(ctx).pop();
-                  },
-                  child: const Text('OK'))
-            ],
-          ),
-        );
+        rethrow;
       }
     }
 
@@ -156,16 +143,33 @@ class _UserProductItemState extends State<UserProductItem> {
               ),
             ),
             IconButton(
-              onPressed: () {
-                deleteProd();
-                ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(
-                    content: Text(
-                      'Produit supprimé',
-                      textAlign: TextAlign.center,
+              onPressed: () async {
+                try {
+                  await deleteProd();
+                  scaffoldMessenger.showSnackBar(
+                    const SnackBar(
+                      content: Text(
+                        'Produit supprimé',
+                        textAlign: TextAlign.center,
+                      ),
                     ),
-                  ),
-                );
+                  );
+                } catch (error) {
+                  await showDialog(
+                    context: context,
+                    builder: (ctx) => AlertDialog(
+                      title: const Text('Une erreur est advenue !'),
+                      content: const Text('Suppression non effectuée'),
+                      actions: [
+                        TextButton(
+                            onPressed: () {
+                              Navigator.of(ctx).pop();
+                            },
+                            child: const Text('OK'))
+                      ],
+                    ),
+                  );
+                }
               },
               icon: Icon(
                 Icons.delete,

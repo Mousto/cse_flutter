@@ -35,18 +35,24 @@ class PanierProvider with ChangeNotifier {
     return total;
   }
 
-  void addItem(
-      int produitId, double prixAdulte, double prixEnfant, String intitule) {
+  void addItem(int produitId, double prixAdulte, double prixEnfant,
+      String intitule, int billetAdulte, int billetEnfant) {
     if (_items.containsKey(produitId)) {
       //change de quantité du produit concerné
       _items.update(
         produitId,
         (produitExistant) => PanierModelItem(
-            id: produitExistant.id,
-            nomProduit: produitExistant.nomProduit,
-            quantite: produitExistant.quantite + 1,
-            prixAdulte: produitExistant.prixAdulte,
-            prixEnfant: produitExistant.prixEnfant),
+          id: produitExistant.id,
+          nomProduit: produitExistant.nomProduit,
+          quantite: produitExistant.quantite + 1,
+          prixAdulte: produitExistant.prixAdulte,
+          prixEnfant: produitExistant.prixEnfant,
+          billetAdulte: produitExistant.billetAdulte,
+          billetEnfant: produitExistant.billetEnfant,
+          sousTotal:
+              (produitExistant.prixAdulte * produitExistant.billetAdulte) +
+                  (produitExistant.prixEnfant * produitExistant.billetEnfant),
+        ),
       );
     } else {
       _items.putIfAbsent(
@@ -57,6 +63,10 @@ class PanierProvider with ChangeNotifier {
                 quantite: 1,
                 prixAdulte: prixAdulte,
                 prixEnfant: prixEnfant,
+                billetAdulte: billetAdulte,
+                billetEnfant: billetEnfant,
+                sousTotal:
+                    (prixAdulte * billetAdulte) + (prixEnfant * billetEnfant),
               ));
     }
     notifyListeners();
@@ -80,6 +90,11 @@ class PanierProvider with ChangeNotifier {
           quantite: panierItemExistant.quantite - 1,
           prixAdulte: panierItemExistant.prixAdulte,
           prixEnfant: panierItemExistant.prixEnfant,
+          billetAdulte: panierItemExistant.billetAdulte,
+          billetEnfant: panierItemExistant.billetEnfant,
+          sousTotal: (panierItemExistant.prixAdulte *
+                  panierItemExistant.billetAdulte) +
+              (panierItemExistant.prixEnfant * panierItemExistant.billetEnfant),
         ),
       );
     } else {

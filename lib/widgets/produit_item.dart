@@ -63,6 +63,8 @@ class ProduitItem extends StatelessWidget {
                           leProduit.prixAdulte,
                           leProduit.prixEnfant,
                           leProduit.nom,
+                          leProduit.billetAdulte,
+                          leProduit.billetEnfant,
                         );
                         ScaffoldMessenger.of(context).hideCurrentSnackBar();
                         ScaffoldMessenger.of(context).showSnackBar(

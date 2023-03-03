@@ -80,6 +80,8 @@ class ProduitDetailCard extends StatelessWidget {
                       leProduit.prixAdulte,
                       leProduit.prixEnfant,
                       leProduit.nom,
+                      leProduit.billetAdulte,
+                      leProduit.billetEnfant,
                     );
                   },
 
@@ -107,12 +109,19 @@ class ProduitDetailCard extends StatelessWidget {
               ],
             ),
             Padding(
-              padding: const EdgeInsets.all(5),
-              child: Row(
+              padding: const EdgeInsets.all(15),
+              child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: <Widget>[
                   Row(
                     children: [
+                      const Text(
+                        'Prix Adulte :',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 16,
+                        ),
+                      ),
                       const Icon(
                           //Icons.schedule,
                           euroSymbol),
@@ -125,8 +134,42 @@ class ProduitDetailCard extends StatelessWidget {
                       ),
                     ],
                   ),
+                  const SizedBox(
+                    height: 10,
+                  ),
                   Row(
                     children: [
+                      const Text(
+                        'Prix Enfant :',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 16,
+                        ),
+                      ),
+                      const Icon(
+                          //Icons.schedule,
+                          euroSymbol),
+                      Text(
+                        '${leProduit.prixEnfant}',
+                        style: const TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 16,
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  Row(
+                    children: [
+                      const Text(
+                        'Stock :',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 16,
+                        ),
+                      ),
                       getDispo(leProduit.disponible) == 'En rupture'
                           ? const Icon(
                               semanticLabel:
@@ -145,8 +188,18 @@ class ProduitDetailCard extends StatelessWidget {
                       ),
                     ],
                   ),
+                  const SizedBox(
+                    height: 10,
+                  ),
                   Row(
                     children: const [
+                      Text(
+                        'Lieu Retrait : ',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 16,
+                        ),
+                      ),
                       Icon(
                           //Icons.schedule,
                           localisation),

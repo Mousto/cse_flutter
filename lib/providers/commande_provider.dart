@@ -6,6 +6,7 @@ import '../models/commande_model_item.dart';
 import '../models/panier_model_item.dart';
 
 class CommandeProvider with ChangeNotifier {
+  // ignore: prefer_final_fields
   List<CommandeModelItem> _commandes = [];
 
   //Getter des commandes
@@ -17,29 +18,30 @@ class CommandeProvider with ChangeNotifier {
   //Ajouter une commande
   Future<void> addCommande(
       List<PanierModelItem> panierProduits, double total) async {
-    const url = 'http://192.168.1.48:8000/api/commandes/';
+    const url = 'http://192.168.1.48:8000/api/panier/';
     final timeStamp = DateTime
         .now(); //On stock le timeStamp ici pour avoir la même valeur vers le serveur et en retour de la requête du serveur
     final reponse = await http.post(
       Uri.parse(url),
       body: json.encode({
-        'valeur_totale': total,
-        'produits': panierProduits
+        'commandes': panierProduits
             .map((e) => {
                   'id': e.id,
                   'nom': e.nomProduit,
-                  'quantite': e.quantite,
+                  //'quantite': e.quantite,
                   'prix_adulte': e.prixAdulte,
                   'prix_enfant': e.prixEnfant,
+                  'billet_adulte': e.billetAdulte,
+                  'billet_enfant': e.billetEnfant,
+                  'sous_total': e.sousTotal,
                 })
             .toList(),
+        'valeur_totale': total,
         'date': timeStamp
             .toIso8601String(), //facilement reconvertible en DateTime au besion dans dart.
         'date_retrait': timeStamp.toIso8601String(),
         'lieu_retrait': 'Talant',
-        'billet_adulte': 10,
-        'billet_enfant': 5,
-        'commanditaire': 'Mous Dia'
+        'commanditaire': 1
       }),
       headers: {
         'Content-Type': 'application/json; charset=UTF-8',
