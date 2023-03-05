@@ -192,7 +192,7 @@ class _PanierListTileItemState extends State<PanierListTileItem> {
       ),
       title: Text(widget.intitule),
       subtitle: Text(
-          '${widget.prixAdulte} x ${widget.billetAdulte} + ${widget.prixEnfant} x ${widget.billetAdulte}'),
+          '${widget.prixAdulte} x ${widget.billetAdulte} + ${widget.prixEnfant} x ${widget.billetEnfant}'),
       trailing: ElevatedButton(
         onPressed: () async {
           final rep = await openDialog();
