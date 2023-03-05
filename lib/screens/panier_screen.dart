@@ -16,7 +16,7 @@ class PanierScreen extends StatelessWidget {
     //final commande = Provider.of<CommandeProvider>(context);
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Votre panier'),
+        title: const Text('Ajustez le nombre de billets'),
       ),
       body: Column(
         children: <Widget>[

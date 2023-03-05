@@ -134,7 +134,8 @@ class ProduitsProvider with ChangeNotifier {
       notifyListeners();
       //print(json.decode(reponse.body));
     } catch (error) {
-      print('****************************$error');
+      print(
+          '**************************** catch de fetchAndSetproduit : $error');
       rethrow; // relance l'erreur
     }
   }
