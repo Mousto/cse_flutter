@@ -29,8 +29,8 @@ class PanierProvider with ChangeNotifier {
   double get sommeTotale {
     var total = 0.0;
     _items.forEach((key, panierItem) {
-      total += (panierItem.prixAdulte * panierItem.quantite) +
-          (panierItem.prixEnfant * panierItem.quantite);
+      total += (panierItem.prixAdulte * panierItem.billetAdulte) +
+          (panierItem.prixEnfant * panierItem.billetEnfant);
     });
     return total;
   }
