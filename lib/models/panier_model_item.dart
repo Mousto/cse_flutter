@@ -4,17 +4,11 @@ class PanierModelItem {
   final int quantite;
   final double prixAdulte;
   final double prixEnfant;
-  final int billetAdulte;
-  final int billetEnfant;
-  final double sousTotal;
-  // final DateTime? dateCommande;
-  // final DateTime? dateRetrait;
-  // final String? lieuRetrait;
+  late int billetAdulte;
+  late int billetEnfant;
+  late double sousTotal;
 
   PanierModelItem({
-    // this.dateCommande,
-    // this.dateRetrait,
-    // this.lieuRetrait,
     required this.id,
     required this.nomProduit,
     required this.quantite,
