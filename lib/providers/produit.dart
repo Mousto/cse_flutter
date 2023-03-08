@@ -10,6 +10,7 @@ class Produit with ChangeNotifier {
   final String nom;
   final double prixAdulte;
   final double prixEnfant;
+  double sommeTotale;
   int billetAdulte;
   int billetEnfant;
   final String photo;
@@ -22,8 +23,9 @@ class Produit with ChangeNotifier {
     required this.nom,
     required this.prixAdulte,
     required this.prixEnfant,
-    this.billetAdulte = 1,
-    this.billetEnfant = 1,
+    this.billetAdulte = 0,
+    this.billetEnfant = 0,
+    this.sommeTotale = 0,
     required this.photo,
     this.couleur = Colors.orange,
     required this.disponible,

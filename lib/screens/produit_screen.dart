@@ -37,6 +37,7 @@ class _ProduitScreenState extends State<ProduitScreen> {
           _isLoading = false;
         });
       }).catchError((error) {
+        print(' Dans catch de fetchAndSetprodui de Produit_screen $error');
         showDialog(
           context: context,
           builder: (ctx) => AlertDialog(

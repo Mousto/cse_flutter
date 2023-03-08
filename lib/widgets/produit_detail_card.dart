@@ -82,6 +82,7 @@ class ProduitDetailCard extends StatelessWidget {
                       leProduit.nom,
                       leProduit.billetAdulte,
                       leProduit.billetEnfant,
+                      leProduit.sommeTotale,
                     );
                   },
 

@@ -119,7 +119,7 @@ class ProduitsProvider with ChangeNotifier {
       final reponse = await http.get(Uri.parse('$url/api/produits'));
       //print(json.decode(reponse.body));
       final donneesExtraites = const Utf8Decoder().convert(reponse.bodyBytes);
-      print(json.decode(donneesExtraites));
+      //print(json.decode(donneesExtraites));
       final List<Produit> listProduits = [];
       for (var el in jsonDecode(donneesExtraites)) {
         listProduits.add(
@@ -134,7 +134,8 @@ class ProduitsProvider with ChangeNotifier {
       notifyListeners();
       //print(json.decode(reponse.body));
     } catch (error) {
-      print('****************************$error');
+      print(
+          '**************************** catch de fetchAndSetproduit : $error');
       rethrow; // relance l'erreur
     }
   }

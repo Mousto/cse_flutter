@@ -57,7 +57,7 @@ class ProduitItem extends StatelessWidget {
                     ),
                     child: IconButton(
                       icon: const Icon(Icons.shopping_cart),
-                      onPressed: () {
+                      onPressed: () async {
                         lePanier.addItem(
                           leProduit.id,
                           leProduit.prixAdulte,
@@ -65,6 +65,7 @@ class ProduitItem extends StatelessWidget {
                           leProduit.nom,
                           leProduit.billetAdulte,
                           leProduit.billetEnfant,
+                          leProduit.sommeTotale,
                         );
                         ScaffoldMessenger.of(context).hideCurrentSnackBar();
                         ScaffoldMessenger.of(context).showSnackBar(
