@@ -38,8 +38,6 @@ class Produit with ChangeNotifier {
       nom: json['nom'],
       prixAdulte: json['prix_adulte'],
       prixEnfant: json['prix_enfant'],
-      // billetAdulte: json['billet_adulte'],
-      // billetEnfant: json['billet_enfant'],
       photo: json['photo'],
       disponible: json['disponible'], //json['disponible'],
       isFavorite: false,
@@ -79,8 +77,4 @@ class Produit with ChangeNotifier {
       notifyListeners(); //informer les écouteurs
     }
   }
-
-  // int? produitId(int id) {
-  //   return this.id;
-  // }
 }

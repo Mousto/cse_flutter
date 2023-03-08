@@ -74,7 +74,7 @@ class ProduitsProvider with ChangeNotifier {
           await MultipartFile.fromFile(nouveauProduit.photo),
         ));
         var response = await dio.patch(url, data: formData);
-        print('***********************************$response');
+
         //Ajouter le prod
         _items[prodIndex] = nouveauProduit;
         //Le notifier aux écouteurs
@@ -83,8 +83,6 @@ class ProduitsProvider with ChangeNotifier {
         print(error);
         rethrow;
       }
-    } else {
-      print('...');
     }
   }
 

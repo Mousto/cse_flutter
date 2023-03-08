@@ -1,4 +1,3 @@
-import 'package:cse_talant_valmy/widgets/panier_item.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter/foundation.dart';
@@ -31,19 +30,9 @@ class PanierProvider with ChangeNotifier {
     var total = 0.0;
     _items.forEach((key, panierItem) {
       total += panierItem.sousTotal;
-      // (panierItem.prixAdulte * panierItem.billetAdulte) +
-      //     (panierItem.prixEnfant * panierItem.billetEnfant);
     });
     return total;
   }
-
-  // void addBillets(int prodId, int nbBilletAdulte, int nbBilletEnfant) {
-  //   var panierItem = _items[prodId];
-  //   print('*************************${panierItem?.id}');
-  //   panierItem?.billetAdulte = nbBilletAdulte;
-  //   panierItem?.billetEnfant = nbBilletEnfant;
-  //   notifyListeners();
-  // }
 
   void addItem(int produitId, double prixAdulte, double prixEnfant,
       String intitule, int billetAdulte, int billetEnfant, double sousTotal) {
@@ -60,8 +49,6 @@ class PanierProvider with ChangeNotifier {
           billetAdulte: produitExistant.billetAdulte,
           billetEnfant: produitExistant.billetEnfant,
           sousTotal: produitExistant.sousTotal,
-          // (produitExistant.prixAdulte * produitExistant.billetAdulte) +
-          //     (produitExistant.prixEnfant * produitExistant.billetEnfant),
         ),
       );
     } else {
@@ -76,7 +63,6 @@ class PanierProvider with ChangeNotifier {
                 billetAdulte: billetAdulte,
                 billetEnfant: billetEnfant,
                 sousTotal: sousTotal,
-                // (prixAdulte * billetAdulte) + (prixEnfant * billetEnfant),
               ));
     }
     notifyListeners();
@@ -87,7 +73,6 @@ class PanierProvider with ChangeNotifier {
       print('yeah');
       _items[panierId]!.sousTotal = totalPanier;
     }
-    //print(totalPanier);
     notifyListeners();
   }
 
