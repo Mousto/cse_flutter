@@ -37,7 +37,7 @@ class _ProduitScreenState extends State<ProduitScreen> {
           _isLoading = false;
         });
       }).catchError((error) {
-        print(' Dans catch de fetchAndSetprodui de Produit_screen $error');
+        print(' Dans catch de fetchAndSetproduit de Produit_screen $error');
         showDialog(
           context: context,
           builder: (ctx) => AlertDialog(
@@ -56,16 +56,15 @@ class _ProduitScreenState extends State<ProduitScreen> {
         });
       });
     }
-    _isInit = false;
+    _isInit = false; //évite l'excution intempestive de cette fonction
     super.didChangeDependencies();
   }
 
   @override
   Widget build(BuildContext context) {
     final produitsData = Provider.of<ProduitsProvider>(context);
-    final lesProduits = _showOnlyFavorites
-        ? produitsData.favoriteProduct
-        : (produitsData.items);
+    final lesProduits =
+        _showOnlyFavorites ? produitsData.favoriteProduct : produitsData.items;
 
     return Scaffold(
       appBar: AppBar(
@@ -78,7 +77,7 @@ class _ProduitScreenState extends State<ProduitScreen> {
                 if (seletedValue == OptionsFiltrage.produitsFavoris) {
                   _showOnlyFavorites = true;
                 } else if (seletedValue == OptionsFiltrage.connexionDjango) {
-                  //print('Connexion avec django');
+                  print('Connexion avec django');
                 } else {
                   _showOnlyFavorites = false;
                 }

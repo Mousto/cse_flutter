@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 #Wed Mar 08 23:37:52 CET 2023
+=======
+#Thu Mar 09 08:41:29 CET 2023
+>>>>>>> Ajout de la fonction favori pour les produits
 base.0=/Users/macmous/Documents/Flutter/cse_talant_valmy/build/app/intermediates/dex/debug/mergeDexDebug/classes.dex
 renamed.0=classes.dex
 path.0=classes.dex

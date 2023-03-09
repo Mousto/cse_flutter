@@ -27,7 +27,7 @@ class Produit with ChangeNotifier {
     this.billetEnfant = 0,
     this.sommeTotale = 0,
     required this.photo,
-    this.couleur = Colors.orange,
+    this.couleur = Colors.purple,
     required this.disponible,
     this.isFavorite = false,
   });
@@ -69,9 +69,8 @@ class Produit with ChangeNotifier {
         disponible = oldStatus;
         notifyListeners(); //informer les écouteurs
       }
-      print(json.decode(res.body));
+      //print(json.decode(res.body));
     } catch (error) {
-      //print('*******************ECHEC');
       //En cas d'échec, on remet la valeur initiale de la variable disponible
       disponible = oldStatus;
       notifyListeners(); //informer les écouteurs
