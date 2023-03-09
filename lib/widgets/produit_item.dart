@@ -22,7 +22,7 @@ class ProduitItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final leProduit = Provider.of<Produit>(context, listen: false);
+    final leProduit = Provider.of<Produit>(context);
     final lePanier = Provider.of<PanierProvider>(context);
     return ClipRRect(
       borderRadius: BorderRadius.circular(10),
@@ -34,9 +34,6 @@ class ProduitItem extends StatelessWidget {
               leProduit.couleur.withOpacity(0.7),
               leProduit.couleur,
               //Colors.primaries[Random().nextInt(Colors.primaries.length)],
-
-              // Colors.orange,
-              // Colors.red,
             ],
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
@@ -72,7 +69,7 @@ class ProduitItem extends StatelessWidget {
                           SnackBar(
                             content: Text(
                                 '1 Billet ${leProduit.nom.toLowerCase()} ajouté'),
-                            duration: const Duration(seconds: 2),
+                            duration: const Duration(seconds: 3),
                             action: SnackBarAction(
                               label: 'Annuler',
                               onPressed: () {

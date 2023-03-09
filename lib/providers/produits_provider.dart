@@ -117,9 +117,7 @@ class ProduitsProvider with ChangeNotifier {
     const String url = 'http://192.168.1.48:8000';
     try {
       final reponse = await http.get(Uri.parse('$url/api/produits'));
-      //print(json.decode(reponse.body));
       final donneesExtraites = const Utf8Decoder().convert(reponse.bodyBytes);
-      //print(json.decode(donneesExtraites));
       final List<Produit> listProduits = [];
       for (var el in jsonDecode(donneesExtraites)) {
         listProduits.add(
@@ -127,12 +125,9 @@ class ProduitsProvider with ChangeNotifier {
             el,
           ),
         );
-        // print('€€€€€€€€€€€€€€€€€€€€€€€€ ${el['nom']}, ${el['disponible']} ');
       }
-      //print(listProduits);
       _items = listProduits;
       notifyListeners();
-      //print(json.decode(reponse.body));
     } catch (error) {
       print(
           '**************************** catch de fetchAndSetproduit : $error');
@@ -140,9 +135,6 @@ class ProduitsProvider with ChangeNotifier {
     }
   }
 
-  // void setProduits(List<Produit> produits) {
-  //   _items = produits;
-  // }
   Future<List<Produit>> setProduits(List<Produit> produits) {
     _items = produits;
     return Future.value(_items);
