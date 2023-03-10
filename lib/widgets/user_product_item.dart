@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 //import 'dart:io'; // Pour File()
@@ -29,15 +31,24 @@ class UserProductItem extends StatefulWidget {
 }
 
 class _UserProductItemState extends State<UserProductItem> {
-  var prodDispo;
-  var msgDispo;
-  //var txtDispo;
+  //Declaration du Timer
+  Timer? timer;
+  //Disponibilité du produit
+  bool? prodDispo;
 
   @override
   void initState() {
-    msgDispo = 'Produit ${widget.title} marqué indisponible';
+    //msgDispo = 'Produit ${widget.title} marqué indisponible';
     //prodDispo = widget.disponible; //false;
     super.initState();
+  }
+
+  //cancel le Timer quand le widget est disposed,
+  //pour éviter qu'il soit actif.
+  @override
+  void dispose() {
+    super.dispose();
+    timer?.cancel();
   }
 
   @override
@@ -53,8 +64,6 @@ class _UserProductItemState extends State<UserProductItem> {
     final produit = Provider.of<Produit>(context, listen: false);
     final produitProvider =
         Provider.of<ProduitsProvider>(context, listen: false);
-    // print(
-    //     '§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§§ ${widget.title},${widget.disponible}');
 
     //On définit cette variable ici car le context de BuildContext ne marche pas dans async où la variable est utilisé. On consigne donc un context dans cette variable ci-dessous
     final scaffoldMessenger = ScaffoldMessenger.of(context);
@@ -87,37 +96,46 @@ class _UserProductItemState extends State<UserProductItem> {
               //revoir la partie consumer pour en particulier connaitre le role du 3ieme argument de builder ci-dessous. Il permet succintement de rajouter un child dans le consumer qu'on aimerait ne pas rebuilder.
               builder: (context, produitProvider, _) => IconButton(
                 onPressed: () async {
-                  try {
-                    produit.isDisponible();
-                  } catch (error) {
-                    print(error);
-                  }
-                  scaffoldMessenger.showSnackBar(
-                    SnackBar(
-                      content: prodDispo
-                          ? Text(
-                              msgDispo,
-                              textAlign: TextAlign.center,
-                            )
-                          : Text(
-                              msgDispo,
-                              textAlign: TextAlign.center,
-                            ),
-                    ),
-                  );
                   setState(() {
-                    prodDispo = !prodDispo;
-                    if (!prodDispo) {
-                      // La phrase contraire est nécéssaire dans ce cas
-                      msgDispo = 'Produit ${widget.title} marqué disponible';
-                      //txtDispo = 'Indisponible';
-                    } else {
-                      msgDispo = 'Produit ${widget.title} marqué indisponible';
-                      //txtDispo = 'Disponible';
-                    }
+                    prodDispo = !prodDispo!;
                   });
+                  try {
+                    // setState(() {
+                    //   prodDispo = !prodDispo;
+                    // });
+                    await produit.isDisponible();
+                    scaffoldMessenger.showSnackBar(
+                      SnackBar(
+                        content: produit.disponible
+                            ? Text(
+                                'Produit ${widget.title} marqué disponible',
+                                textAlign: TextAlign.center,
+                              )
+                            : Text(
+                                'Produit ${widget.title} marqué indisponible',
+                                textAlign: TextAlign.center,
+                              ),
+                      ),
+                    );
+                  } catch (error) {
+                    timer = Timer(const Duration(milliseconds: 450), () {
+                      scaffoldMessenger.showSnackBar(
+                        SnackBar(
+                          content: Text(
+                            error.toString(),
+                            textAlign: TextAlign.center,
+                          ),
+                        ),
+                      );
+                    });
+                    timer = Timer(const Duration(milliseconds: 400), () {
+                      setState(() {
+                        prodDispo = !prodDispo!;
+                      });
+                    });
+                  }
                 },
-                icon: prodDispo
+                icon: produit.disponible!
                     ? const Icon(
                         Icons.toggle_on,
                         color: Color.fromARGB(234, 100, 212, 20),

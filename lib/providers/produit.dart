@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'dart:math';
 import 'package:http/http.dart' as http;
-import 'dart:convert';
+import 'dart:convert'; //besoin de cet import pour la méthode jsonDecode().
 
-//import 'dart:convert'; //besoin de cet import pour la méthode jsonDecode().
+import '../models/http_exception.dart';
 
 class Produit with ChangeNotifier {
   final int id;
@@ -68,12 +68,16 @@ class Produit with ChangeNotifier {
         //En cas d'échec, on remet la valeur initiale de la variable disponible
         disponible = oldStatus;
         notifyListeners(); //informer les écouteurs
+        //Lancer l'erreur
+        throw HttpException(
+            'Échec à changer la disponibilité du produit $nom.');
       }
       //print(json.decode(res.body));
     } catch (error) {
       //En cas d'échec, on remet la valeur initiale de la variable disponible
       disponible = oldStatus;
       notifyListeners(); //informer les écouteurs
+      rethrow;
     }
   }
 }
