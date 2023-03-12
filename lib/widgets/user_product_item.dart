@@ -32,9 +32,9 @@ class UserProductItem extends StatefulWidget {
 
 class _UserProductItemState extends State<UserProductItem> {
   //Declaration du Timer
-  Timer? timer;
+  Timer? _timer;
   //Disponibilité du produit
-  bool? prodDispo;
+  bool? _prodDispo;
 
   @override
   void initState() {
@@ -48,13 +48,13 @@ class _UserProductItemState extends State<UserProductItem> {
   @override
   void dispose() {
     super.dispose();
-    timer?.cancel();
+    _timer?.cancel();
   }
 
   @override
   void didChangeDependencies() {
     setState(() {
-      prodDispo = widget.disponible;
+      _prodDispo = widget.disponible;
     });
     super.didChangeDependencies();
   }
@@ -97,7 +97,7 @@ class _UserProductItemState extends State<UserProductItem> {
               builder: (context, produitProvider, _) => IconButton(
                 onPressed: () async {
                   setState(() {
-                    prodDispo = !prodDispo!;
+                    _prodDispo = !_prodDispo!;
                   });
                   try {
                     // setState(() {
@@ -118,7 +118,7 @@ class _UserProductItemState extends State<UserProductItem> {
                       ),
                     );
                   } catch (error) {
-                    timer = Timer(const Duration(milliseconds: 450), () {
+                    _timer = Timer(const Duration(milliseconds: 450), () {
                       scaffoldMessenger.showSnackBar(
                         SnackBar(
                           content: Text(
@@ -128,9 +128,9 @@ class _UserProductItemState extends State<UserProductItem> {
                         ),
                       );
                     });
-                    timer = Timer(const Duration(milliseconds: 400), () {
+                    _timer = Timer(const Duration(milliseconds: 400), () {
                       setState(() {
-                        prodDispo = !prodDispo!;
+                        _prodDispo = !_prodDispo!;
                       });
                     });
                   }

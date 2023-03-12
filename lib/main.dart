@@ -7,6 +7,7 @@ import './screens/home_screen.dart';
 import 'screens/user_products_screen.dart';
 import './screens/panier_screen.dart';
 import './screens/edit_product_screen.dart';
+import './screens/commandes_screen.dart';
 import './providers/produits_provider.dart';
 import './providers/panier_provider.dart';
 import './providers/commande_provider.dart';
@@ -68,6 +69,7 @@ class MyApp extends StatelessWidget {
           PanierScreen.routeName: ((context) => const PanierScreen()),
           EditProductScreen.routeName: ((context) => const EditProductScreen()),
           TabsScreen.routeName: ((context) => const TabsScreen()),
+          CommandesScreen.routeName: ((context) => const CommandesScreen()),
         },
       ),
     );
