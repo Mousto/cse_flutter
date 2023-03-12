@@ -34,8 +34,6 @@ class PanierProvider with ChangeNotifier {
     return total;
   }
 
-<<<<<<< HEAD
-=======
   Future<void> addBillets(
       int panierId, int nbBilletAdulte, int nbBilletEnfant) async {
     if (_items.containsKey(panierId)) {
@@ -45,7 +43,6 @@ class PanierProvider with ChangeNotifier {
     notifyListeners();
   }
 
->>>>>>> commande
   void addItem(int produitId, double prixAdulte, double prixEnfant,
       String intitule, int billetAdulte, int billetEnfant, double sousTotal) {
     if (_items.containsKey(produitId)) {
