@@ -15,6 +15,12 @@ class CommandeProvider with ChangeNotifier {
     return [..._commandes];
   }
 
+  Future<void> fetchAndSetCommandes() async {
+    const url = 'http://192.168.1.48:8000/api/panier/';
+    final reponse = await http.get(Uri.parse(url));
+    print(json.decode(reponse.body));
+  }
+
   //Ajouter une commande
   Future<void> addCommande(
       List<PanierModelItem> panierProduits, double total) async {

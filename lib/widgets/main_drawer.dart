@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../screens/user_products_screen.dart';
+import '../screens/commandes_screen.dart';
 
 class MainDrawer extends StatelessWidget {
   const MainDrawer({super.key});
@@ -36,9 +37,10 @@ class MainDrawer extends StatelessWidget {
           const Divider(),
           ListTile(
             leading: const Icon(Icons.shop),
-            title: const Text('Produits & commandes'),
+            title: const Text('commandes'),
             onTap: () {
-              Navigator.of(context).pushReplacementNamed('/');
+              Navigator.of(context)
+                  .pushReplacementNamed(CommandesScreen.routeName);
             },
           ),
           const Divider(),

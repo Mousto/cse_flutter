@@ -17,24 +17,16 @@ class PanierScreen extends StatefulWidget {
 class _PanierScreenState extends State<PanierScreen> {
   RegExp regex = RegExp(
       r'([.]*0)(?!.*\d)'); //Pour enlever les zéros si la partie décimale est nulle
-  var _totalPanier = 0.0;
-
-  // void _setTotalPanier(double panierItemTotal) {
-  //   _totalPanier = panierItemTotal;
-  //   // print('*********************** panierItemTotalArg : $panierItemTotal');
-  // }
 
   @override
   Widget build(BuildContext context) {
     final panier = Provider.of<PanierProvider>(context, listen: false);
-    // var totalPanier = panier.sommeTotale;
 
-    // print(
-    //     '************************** panier.sommeTotale : ${panier.sommeTotale}');
+    //Fonction s'exécutant à partir du widget enfant PasserCommandeBouton.
+    void resetPanier() {
+      panier.clearPanier();
+    }
 
-    // print('************************** panier : ${panier.items[1]!.sousTotal}');
-
-    //final commande = Provider.of<CommandeProvider>(context);
     return Scaffold(
       appBar: AppBar(
         title: const Text('Ajustez le nombre de billets'),
@@ -46,33 +38,36 @@ class _PanierScreenState extends State<PanierScreen> {
             child: Padding(
               padding: const EdgeInsets.all(8),
               child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    const Text(
-                      'Total',
-                      style: TextStyle(
-                        fontSize: 20,
-                      ),
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  const Text(
+                    'Total',
+                    style: TextStyle(
+                      fontSize: 20,
                     ),
-                    const SizedBox(width: 10),
-                    Consumer<PanierProvider>(
-                      //revoir le role du param child(non utilisé ici) dans le concept de Consumer.
-                      builder: (BuildContext context, panier, Widget? child) =>
-                          Chip(
-                        label: Text(
-                          '${panier.sommeTotale..toString().replaceAll(regex, '')} €',
-                          style: TextStyle(
-                              color: Theme.of(context)
-                                  .primaryTextTheme
-                                  .titleLarge
-                                  ?.color),
-                        ),
-                        backgroundColor: Theme.of(context).primaryColor,
+                  ),
+                  const SizedBox(width: 10),
+                  Consumer<PanierProvider>(
+                    //revoir le role du param child(non utilisé ici) dans le concept de Consumer.
+                    builder:
+                        (BuildContext context, consumerPanier, Widget? child) =>
+                            Chip(
+                      label: Text(
+                        '${consumerPanier.sommeTotale.toString().replaceAll(regex, '')} €',
+                        style: TextStyle(
+                            color: Theme.of(context)
+                                .primaryTextTheme
+                                .titleLarge
+                                ?.color),
                       ),
+                      backgroundColor: Theme.of(context).primaryColor,
                     ),
-                    const Spacer(), //Ajouter un espace en poussant les éléments suivant vers l'espace restant
-                    PasserCommandeBouton(panier: panier),
-                  ]),
+                  ),
+                  const Spacer(), //Ajouter un espace en poussant les éléments suivant vers l'espace restant
+                  PasserCommandeBouton(
+                      panier: panier, viderPanier: resetPanier),
+                ],
+              ),
             ),
           ),
           const SizedBox(height: 10),
@@ -92,7 +87,7 @@ class _PanierScreenState extends State<PanierScreen> {
                       panier.items.values.toList()[index].billetAdulte) +
                   (panier.items.values.toList()[index].prixEnfant *
                       panier.items.values.toList()[index].billetEnfant),
-              //renvoiTotalItem: _setTotalPanier, //Execution fonction
+              //renvoiTotalItem: setSommeTotalePanier,
             ),
           ))
         ],
@@ -105,9 +100,11 @@ class PasserCommandeBouton extends StatefulWidget {
   const PasserCommandeBouton({
     Key? key,
     required this.panier,
+    required this.viderPanier,
   }) : super(key: key);
 
   final PanierProvider panier;
+  final VoidCallback viderPanier;
 
   @override
   State<PasserCommandeBouton> createState() => _PasserCommandeBoutonState();
@@ -118,6 +115,7 @@ class _PasserCommandeBoutonState extends State<PasserCommandeBouton> {
   @override
   Widget build(BuildContext context) {
     Provider.of<PanierProvider>(context); //Mise en écoute.
+
     return TextButton(
       onPressed: widget.panier.sommeTotale <= 0 || _isLoading == true
           ? null
@@ -134,7 +132,8 @@ class _PasserCommandeBoutonState extends State<PasserCommandeBouton> {
               setState(() {
                 _isLoading = false;
               });
-              widget.panier.clearPanier();
+              widget.viderPanier(); //Exécute fonction dans le parent
+              //widget.panier.clearPanier();
             },
       style: widget.panier.sommeTotale <= 0
           ? null

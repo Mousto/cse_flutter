@@ -34,6 +34,18 @@ class PanierProvider with ChangeNotifier {
     return total;
   }
 
+<<<<<<< HEAD
+=======
+  Future<void> addBillets(
+      int panierId, int nbBilletAdulte, int nbBilletEnfant) async {
+    if (_items.containsKey(panierId)) {
+      _items[panierId]!.billetAdulte = nbBilletAdulte;
+      _items[panierId]!.billetEnfant = nbBilletEnfant;
+    }
+    notifyListeners();
+  }
+
+>>>>>>> commande
   void addItem(int produitId, double prixAdulte, double prixEnfant,
       String intitule, int billetAdulte, int billetEnfant, double sousTotal) {
     if (_items.containsKey(produitId)) {
@@ -70,7 +82,6 @@ class PanierProvider with ChangeNotifier {
 
   void setTotalPanier(int panierId, double totalPanier) {
     if (_items.containsKey(panierId)) {
-      print('yeah');
       _items[panierId]!.sousTotal = totalPanier;
     }
     notifyListeners();

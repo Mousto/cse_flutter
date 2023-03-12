@@ -123,12 +123,15 @@ class PanierListTileItem extends StatefulWidget {
 }
 
 class _PanierListTileItemState extends State<PanierListTileItem> {
-  int _countBilletAdulte = 0;
-  int _countBilletEnfant = 0;
+  int countBilletAdulte = 0;
+  int countBilletEnfant = 0;
   RegExp regex = RegExp(
       r'([.]*0)(?!.*\d)'); //Pour enlever les zéros si la partie décimale est nulle
+
   @override
   Widget build(BuildContext context) {
+    final panierProvider = Provider.of<PanierProvider>(context, listen: false);
+
     //Dialogue ajout de billet
     Future<dynamic> openDialog() => showDialog(
         context: context,
@@ -145,13 +148,13 @@ class _PanierListTileItemState extends State<PanierListTileItem> {
                               icon: const Icon(
                                 Icons.remove,
                               ),
-                              onPressed: _countBilletAdulte == 0
+                              onPressed: countBilletAdulte == 0
                                   ? null
                                   : () {
-                                      setState(() => _countBilletAdulte--);
+                                      setState(() => countBilletAdulte--);
                                     }),
                           Text(
-                            _countBilletAdulte.toString(),
+                            countBilletAdulte.toString(),
                             style: TextStyle(
                               color: Theme.of(context).primaryColor,
                               fontSize: 16,
@@ -159,25 +162,27 @@ class _PanierListTileItemState extends State<PanierListTileItem> {
                             ),
                           ),
                           IconButton(
-                              icon: const Icon(Icons.add),
-                              onPressed: () =>
-                                  setState(() => _countBilletAdulte++))
+                            icon: const Icon(Icons.add),
+                            onPressed: () =>
+                                setState(() => countBilletAdulte++),
+                          ),
                         ],
                       ),
                       Row(
                         children: <Widget>[
                           const Text('Billet Enfant :'),
                           IconButton(
-                              icon: const Icon(
-                                Icons.remove,
-                              ),
-                              onPressed: _countBilletEnfant == 0
-                                  ? null
-                                  : () {
-                                      setState(() => _countBilletEnfant--);
-                                    }),
+                            icon: const Icon(
+                              Icons.remove,
+                            ),
+                            onPressed: countBilletEnfant == 0
+                                ? null
+                                : () {
+                                    setState(() => countBilletEnfant--);
+                                  },
+                          ),
                           Text(
-                            _countBilletEnfant.toString(),
+                            countBilletEnfant.toString(),
                             style: TextStyle(
                               color: Theme.of(context).primaryColor,
                               fontSize: 16,
@@ -185,10 +190,11 @@ class _PanierListTileItemState extends State<PanierListTileItem> {
                             ),
                           ),
                           IconButton(
-                              icon: const Icon(Icons.add),
-                              onPressed: () {
-                                setState(() => _countBilletEnfant++);
-                              }),
+                            icon: const Icon(Icons.add),
+                            onPressed: () {
+                              setState(() => countBilletEnfant++);
+                            },
+                          ),
                         ],
                       ),
                     ],
@@ -207,9 +213,9 @@ class _PanierListTileItemState extends State<PanierListTileItem> {
                       TextButton(
                         onPressed: () {
                           var reponse = {
-                            'nbBilletAdulte': _countBilletAdulte,
-                            'nbBilletEnfant': _countBilletEnfant,
-                            'totalItemPanie': widget.total
+                            'nbBilletAdulte': countBilletAdulte,
+                            'nbBilletEnfant': countBilletEnfant,
+                            'totalItemPanier': widget.total
                           };
                           Navigator.of(context).pop(reponse);
                         },
@@ -224,9 +230,9 @@ class _PanierListTileItemState extends State<PanierListTileItem> {
     return ListTile(
       leading: CircleAvatar(
         child: Padding(
-          padding: const EdgeInsets.all(2),
+          padding: const EdgeInsets.all(3),
           child: FittedBox(
-            child: Text('€ ${widget.total.toString().replaceAll(regex, '')}'),
+            child: Text('${widget.total.toString().replaceAll(regex, '')}€'),
           ),
         ),
       ),
@@ -242,10 +248,11 @@ class _PanierListTileItemState extends State<PanierListTileItem> {
               widget.billetEnfant = rep['nbBilletEnfant'];
               widget.total = (widget.prixAdulte * widget.billetAdulte) +
                   (widget.prixEnfant * widget.billetEnfant);
-              //widget.renvoiTotalItem(widget.total);
-              Provider.of<PanierProvider>(context, listen: false)
-                  .setTotalPanier(widget.id, widget.total);
             });
+            //widget.renvoiTotalItem(widget.total);
+            panierProvider.setTotalPanier(widget.id, widget.total);
+            panierProvider.addBillets(
+                widget.id, rep['nbBilletAdulte'], rep['nbBilletEnfant']);
           }
         },
         child: const Text('Ajout Billet'),
