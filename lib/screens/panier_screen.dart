@@ -24,7 +24,10 @@ class _PanierScreenState extends State<PanierScreen> {
 
     //Fonction s'exécutant à partir du widget enfant PasserCommandeBouton.
     void resetPanier() {
-      panier.clearPanier();
+      setState(() {
+        print('****************** reset panier');
+        panier.clearPanier();
+      });
     }
 
     return Scaffold(
