@@ -206,6 +206,8 @@ class _PanierListTileItemState extends State<PanierListTileItem> {
                     children: [
                       TextButton(
                         onPressed: () {
+                          countBilletAdulte = 0;
+                          countBilletEnfant = 0;
                           Navigator.of(context).pop();
                         },
                         child: const Text('Ennuler'),

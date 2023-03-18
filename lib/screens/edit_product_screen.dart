@@ -30,13 +30,13 @@ class _EditProductScreenState extends State<EditProductScreen> {
   //Utilisation d'un GlobalKey pour accéder aux données du formulaire``
   final _form = GlobalKey<FormState>();
   //On créer artificiellement une instance de produit vide dans l'optique de la remplacer par des valeurs concrète saisies dans le formulaire car les champs de la class Produit sont finaux(une fois le produit créer on ne peux le modifier). Le procédé s'effectue dans chaque champ du formulaire
-  var _editedProduct = Produit(
+  var _editedProduct = ProduitProvider(
     id: 0,
     nom: '',
     prixAdulte: 0,
     prixEnfant: 0,
-    billetAdulte: 0,
-    billetEnfant: 0,
+    // billetAdulte: 0,
+    // billetEnfant: 0,
     photo: '',
     disponible: false,
   );
@@ -233,13 +233,13 @@ class _EditProductScreenState extends State<EditProductScreen> {
                       },
                       //onSaved est appeler et fourni en param la valeur saisie du champ
                       onSaved: (newValue) {
-                        _editedProduct = Produit(
+                        _editedProduct = ProduitProvider(
                           id: _editedProduct.id,
                           nom: newValue.toString(),
                           prixAdulte: _editedProduct.prixAdulte,
                           prixEnfant: _editedProduct.prixEnfant,
-                          billetAdulte: _editedProduct.billetAdulte,
-                          billetEnfant: _editedProduct.billetEnfant,
+                          // billetAdulte: _editedProduct.billetAdulte,
+                          // billetEnfant: _editedProduct.billetEnfant,
                           photo: _editedProduct.photo,
                           isFavorite: _editedProduct.isFavorite,
                           disponible: _editedProduct.disponible,
@@ -357,13 +357,13 @@ class _EditProductScreenState extends State<EditProductScreen> {
                       },
                       //onSaved est appeler et fourni en param la valeur saisie du champ
                       onSaved: (newValue) {
-                        _editedProduct = Produit(
+                        _editedProduct = ProduitProvider(
                           id: _editedProduct.id,
                           nom: _editedProduct.nom,
                           prixAdulte: double.parse(newValue!),
                           prixEnfant: _editedProduct.prixEnfant,
-                          billetAdulte: _editedProduct.billetAdulte,
-                          billetEnfant: _editedProduct.billetEnfant,
+                          // billetAdulte: _editedProduct.billetAdulte,
+                          // billetEnfant: _editedProduct.billetEnfant,
                           photo: _editedProduct.photo,
                           isFavorite: _editedProduct.isFavorite,
                           disponible: _editedProduct.disponible,
@@ -402,13 +402,13 @@ class _EditProductScreenState extends State<EditProductScreen> {
                       },
                       //onSaved est appeler et fourni en param la valeur saisie du champ
                       onSaved: (newValue) {
-                        _editedProduct = Produit(
+                        _editedProduct = ProduitProvider(
                           id: _editedProduct.id,
                           nom: _editedProduct.nom,
                           prixEnfant: double.parse(newValue!),
                           prixAdulte: _editedProduct.prixAdulte,
-                          billetAdulte: _editedProduct.billetAdulte,
-                          billetEnfant: _editedProduct.billetEnfant,
+                          // billetAdulte: _editedProduct.billetAdulte,
+                          // billetEnfant: _editedProduct.billetEnfant,
                           photo: _editedProduct.photo,
                           isFavorite: _editedProduct.isFavorite,
                           disponible: _editedProduct.disponible,

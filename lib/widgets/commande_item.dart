@@ -47,14 +47,14 @@ class _CommandeItemState extends State<CommandeItem> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              prod.nomProduit,
+                              prod.produit.nom,
                               style: const TextStyle(
                                 fontSize: 18,
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
                             Text(
-                              '${prod.quantite} x ${prod.prixAdulte} €',
+                              '${prod.quantite} x ${prod.produit.prixAdulte} €',
                               style: const TextStyle(
                                 fontSize: 18,
                                 color: Colors.grey,

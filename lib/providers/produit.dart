@@ -5,7 +5,7 @@ import 'dart:convert'; //besoin de cet import pour la méthode jsonDecode().
 
 import '../models/http_exception.dart';
 
-class Produit with ChangeNotifier {
+class ProduitProvider with ChangeNotifier {
   final int id;
   final String nom;
   final double prixAdulte;
@@ -18,7 +18,7 @@ class Produit with ChangeNotifier {
   bool disponible;
   bool isFavorite;
 
-  Produit({
+  ProduitProvider({
     required this.id,
     required this.nom,
     required this.prixAdulte,
@@ -32,8 +32,8 @@ class Produit with ChangeNotifier {
     this.isFavorite = false,
   });
 
-  factory Produit.fromJson(Map<String, dynamic> json) {
-    return Produit(
+  factory ProduitProvider.fromJson(Map<String, dynamic> json) {
+    return ProduitProvider(
       id: json['id'],
       nom: json['nom'],
       prixAdulte: json['prix_adulte'],

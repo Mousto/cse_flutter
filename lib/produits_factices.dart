@@ -4,8 +4,8 @@ import 'dart:convert'; //besoin de cet import pour la méthode jsonDecode().
 
 import 'providers/produit.dart';
 
-List<Produit> PRODUITS_FACTICES = [
-  Produit(
+List<ProduitProvider> PRODUITS_FACTICES = [
+  ProduitProvider(
     id: 1,
     nom: 'Cinéma',
     prixAdulte: 10,
@@ -14,7 +14,7 @@ List<Produit> PRODUITS_FACTICES = [
     photo: 'cinema.webp',
     couleur: Colors.purple,
   ),
-  Produit(
+  ProduitProvider(
     id: 2,
     nom: 'Bowling',
     prixAdulte: 15,
@@ -23,7 +23,7 @@ List<Produit> PRODUITS_FACTICES = [
     photo: 'cinema.webp',
     couleur: Colors.red,
   ),
-  Produit(
+  ProduitProvider(
     id: 3,
     nom: 'Parc attraction',
     prixAdulte: 18,
@@ -32,7 +32,7 @@ List<Produit> PRODUITS_FACTICES = [
     photo: 'cinema.webp',
     couleur: Colors.orange,
   ),
-  Produit(
+  ProduitProvider(
     id: 4,
     nom: 'Carting',
     prixAdulte: 21,
@@ -41,7 +41,7 @@ List<Produit> PRODUITS_FACTICES = [
     photo: 'cinema.webp',
     couleur: Colors.amber,
   ),
-  Produit(
+  ProduitProvider(
     id: 5,
     nom: 'Théatre',
     prixAdulte: 22.5,
@@ -50,7 +50,7 @@ List<Produit> PRODUITS_FACTICES = [
     photo: 'cinema.webp',
     couleur: Colors.blue,
   ),
-  Produit(
+  ProduitProvider(
     id: 6,
     nom: 'Concert',
     prixAdulte: 25,

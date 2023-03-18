@@ -22,7 +22,7 @@ class ProduitItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final leProduit = Provider.of<Produit>(context);
+    final leProduit = Provider.of<ProduitProvider>(context);
     final lePanier = Provider.of<PanierProvider>(context);
     return ClipRRect(
       borderRadius: BorderRadius.circular(10),
@@ -92,7 +92,7 @@ class ProduitItem extends StatelessWidget {
                     ),
                     color: Colors.white,
                   ),
-                  Consumer<Produit>(
+                  Consumer<ProduitProvider>(
                     builder: (_, produit, _1) => IconButton(
                       icon: Icon(produit.isFavorite
                           ? Icons.favorite

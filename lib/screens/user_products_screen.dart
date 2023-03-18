@@ -39,7 +39,7 @@ class UserProductsScreen extends StatelessWidget {
             itemCount: productsData.items.length,
             itemBuilder: (_, index) => Column(children: [
               ChangeNotifierProvider.value(
-                value: Produit(
+                value: ProduitProvider(
                   id: productsData.items[index].id,
                   nom: productsData.items[index].nom,
                   photo: productsData.items[index].photo,
