@@ -35,7 +35,7 @@ class ProduitDetailCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final leProduit = Provider.of<Produit>(context);
+    final leProduit = Provider.of<ProduitProvider>(context);
     final lePanier = Provider.of<PanierProvider>(context);
 
     return InkWell(

@@ -22,10 +22,14 @@ class _PanierScreenState extends State<PanierScreen> {
   Widget build(BuildContext context) {
     final panier = Provider.of<PanierProvider>(context, listen: false);
 
+    // panier.items.forEach((key, panierItem) {
+    //   print(
+    //       '*************************** ${panierItem.nomProduit} : ${panierItem.billetAdulte}');
+    // });
+
     //Fonction s'exécutant à partir du widget enfant PasserCommandeBouton.
     void resetPanier() {
       setState(() {
-        print('****************** reset panier');
         panier.clearPanier();
       });
     }
@@ -81,14 +85,16 @@ class _PanierScreenState extends State<PanierScreen> {
             itemCount: panier.items.length,
             itemBuilder: (context, index) => PanierItem(
               id: panier.items.values.toList()[index].id,
-              intitule: panier.items.values.toList()[index].nomProduit,
-              prixAdulte: panier.items.values.toList()[index].prixAdulte,
-              prixEnfant: panier.items.values.toList()[index].prixEnfant,
+              intitule: panier.items.values.toList()[index].produit.nom,
+              prixAdulte:
+                  panier.items.values.toList()[index].produit.prixAdulte,
+              prixEnfant:
+                  panier.items.values.toList()[index].produit.prixEnfant,
               //quantite: panier.items.values.toList()[index].quantite,
               produitId: panier.items.keys.toList()[index],
-              total: (panier.items.values.toList()[index].prixAdulte *
+              total: (panier.items.values.toList()[index].produit.prixAdulte *
                       panier.items.values.toList()[index].billetAdulte) +
-                  (panier.items.values.toList()[index].prixEnfant *
+                  (panier.items.values.toList()[index].produit.prixEnfant *
                       panier.items.values.toList()[index].billetEnfant),
               //renvoiTotalItem: setSommeTotalePanier,
             ),

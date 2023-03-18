@@ -33,10 +33,10 @@ class CommandeProvider with ChangeNotifier {
         'commandes': panierProduits
             .map((e) => {
                   'id': e.id,
-                  'nom': e.nomProduit,
+                  'nom': e.produit.nom,
                   //'quantite': e.quantite,
-                  'prix_adulte': e.prixAdulte,
-                  'prix_enfant': e.prixEnfant,
+                  'prix_adulte': e.produit.prixAdulte,
+                  'prix_enfant': e.produit.prixEnfant,
                   'billet_adulte': e.billetAdulte,
                   'billet_enfant': e.billetEnfant,
                   'sous_total': e.sousTotal,
@@ -53,12 +53,13 @@ class CommandeProvider with ChangeNotifier {
         'Content-Type': 'application/json; charset=UTF-8',
       },
     );
-    print(reponse.body);
+    var jsonReponse = json.decode(reponse.body);
+    print(jsonReponse['commandes'][0]);
     //index de la methode insert() à 0 pour dire que l'élément à ajouter doit être en début de liste sinon utiliser la méthode add() pour ajouter en fin de liste
     // _commandes.insert(
     //   0,
     //   CommandeModelItem(
-    //     id: json.decode(reponse.body)['id'],
+    //     id: jsonReponse['commandes'][0]['id'],
     //     montant: total,
     //     dateCommande: timeStamp,
     //     produits: panierProduits,
@@ -66,6 +67,8 @@ class CommandeProvider with ChangeNotifier {
     //     //lieuRetrait: lieuRetrait,
     //   ),
     // );
+
+    // jsonReponse['commandes'][0] => {id: 32, billet_adulte: 1, billet_enfant: 0, sous_total: 12.0, produit: {id: 1, nom: Bowling, prix_adulte: 12.0, prix_enfant: 7.5, photo: /media/img-produits/bowling_3ihTNd9_js4I98E_5Q7os7C.jpeg, disponible: true}}
     notifyListeners();
   }
 }

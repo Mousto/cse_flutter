@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
 
 import '../models/panier_model_item.dart';
+import '../models/produit_model.dart';
 
 class PanierProvider with ChangeNotifier {
   Map<int, PanierModelItem> _items = {};
@@ -19,7 +20,7 @@ class PanierProvider with ChangeNotifier {
   int itemCountByName(String nomProduit) {
     var count = 0;
     _items.forEach((key, panierItem) {
-      if (panierItem.nomProduit == nomProduit) {
+      if (panierItem.produit.nom == nomProduit) {
         count = panierItem.quantite;
       }
     });
@@ -51,27 +52,36 @@ class PanierProvider with ChangeNotifier {
         produitId,
         (produitExistant) => PanierModelItem(
           id: produitExistant.id,
-          nomProduit: produitExistant.nomProduit,
+          //nomProduit: produitExistant.nomProduit,
           quantite: produitExistant.quantite,
-          prixAdulte: produitExistant.prixAdulte,
-          prixEnfant: produitExistant.prixEnfant,
+          //prixAdulte: produitExistant.prixAdulte,
+          //prixEnfant: produitExistant.prixEnfant,
           billetAdulte: produitExistant.billetAdulte,
           billetEnfant: produitExistant.billetEnfant,
           sousTotal: produitExistant.sousTotal,
+          produit: produitExistant.produit,
         ),
       );
     } else {
+      var prod = ProduitModel(
+          id: produitId,
+          nom: intitule,
+          prixAdulte: prixAdulte,
+          prixEnfant: prixEnfant,
+          photo: "",
+          disponible: true);
       _items.putIfAbsent(
           produitId,
           () => PanierModelItem(
                 id: produitId,
-                nomProduit: intitule,
+                //nomProduit: intitule,
                 quantite: 1,
-                prixAdulte: prixAdulte,
-                prixEnfant: prixEnfant,
+                //prixAdulte: prixAdulte,
+                //prixEnfant: prixEnfant,
                 billetAdulte: billetAdulte,
                 billetEnfant: billetEnfant,
                 sousTotal: sousTotal,
+                produit: prod,
               ));
     }
     notifyListeners();
@@ -98,15 +108,17 @@ class PanierProvider with ChangeNotifier {
         productId,
         (panierItemExistant) => PanierModelItem(
           id: panierItemExistant.id,
-          nomProduit: panierItemExistant.nomProduit,
+          //nomProduit: panierItemExistant.nomProduit,
           quantite: panierItemExistant.quantite - 1,
-          prixAdulte: panierItemExistant.prixAdulte,
-          prixEnfant: panierItemExistant.prixEnfant,
+          //prixAdulte: panierItemExistant.prixAdulte,
+          //prixEnfant: panierItemExistant.prixEnfant,
           billetAdulte: panierItemExistant.billetAdulte,
           billetEnfant: panierItemExistant.billetEnfant,
-          sousTotal: (panierItemExistant.prixAdulte *
+          sousTotal: (panierItemExistant.produit.prixAdulte *
                   panierItemExistant.billetAdulte) +
-              (panierItemExistant.prixEnfant * panierItemExistant.billetEnfant),
+              (panierItemExistant.produit.prixEnfant *
+                  panierItemExistant.billetEnfant),
+          produit: panierItemExistant.produit,
         ),
       );
     } else {

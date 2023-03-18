@@ -1,7 +1,7 @@
 import 'panier_model_item.dart';
 
 class CommandeModelItem {
-  final String id;
+  final int id;
   final double montant;
   final List<PanierModelItem> produits;
   final DateTime dateCommande;
@@ -13,7 +13,7 @@ class CommandeModelItem {
     required this.montant,
     required this.produits,
     required this.dateCommande,
-    this.dateRetrait,
-    this.lieuRetrait,
+    required this.dateRetrait,
+    required this.lieuRetrait,
   });
 }

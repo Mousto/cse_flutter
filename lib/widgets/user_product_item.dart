@@ -61,7 +61,7 @@ class _UserProductItemState extends State<UserProductItem> {
 
   @override
   Widget build(BuildContext context) {
-    final produit = Provider.of<Produit>(context, listen: false);
+    final produit = Provider.of<ProduitProvider>(context, listen: false);
     final produitProvider =
         Provider.of<ProduitsProvider>(context, listen: false);
 

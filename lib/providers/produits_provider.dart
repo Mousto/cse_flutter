@@ -7,19 +7,19 @@ import 'dart:convert'; //besoin de cet import pour la méthode jsonDecode().
 import 'produit.dart';
 
 class ProduitsProvider with ChangeNotifier {
-  List<Produit> _items = []; // PRODUITS_FACTICES;
+  List<ProduitProvider> _items = []; // PRODUITS_FACTICES;
 
   //Le getter de _items qui est privé et nom directement accessible à l'extérieur de cette class
-  List<Produit> get items {
+  List<ProduitProvider> get items {
     //Renvoi d'une copie de la liste(pour éviter d'éditer et muter la liste) avec un spread operator
     return [..._items];
   }
 
-  List<Produit> get favoriteProduct {
+  List<ProduitProvider> get favoriteProduct {
     return _items.where((element) => element.isFavorite).toList();
   }
 
-  Future<void> addProduit(Produit prod, File image) async {
+  Future<void> addProduit(ProduitProvider prod, File image) async {
     //192.168.1.48 adresse ip de wifi de l'ordi qui sert pour le téléphone connecté en usb. Il faut démarrer le serveur Django avec l'adresse allant avec le ip donc : [python manage.py runserver http://192.168.1.48:8000]
     const url = 'http://192.168.1.48:8000/api/produits/';
     Dio dio = Dio();
@@ -30,8 +30,8 @@ class ProduitsProvider with ChangeNotifier {
         'nom': prod.nom,
         'prix_adulte': prod.prixAdulte,
         'prix_enfant': prod.prixEnfant,
-        'billet_adulte': prod.billetAdulte,
-        'billet_enfant': prod.billetEnfant,
+        // 'billet_adulte': prod.billetAdulte,
+        // 'billet_enfant': prod.billetEnfant,
       },
       "image": await MultipartFile.fromFile(image.path,
           filename: File(image.path).path.split('/').last),
@@ -49,7 +49,7 @@ class ProduitsProvider with ChangeNotifier {
                 "accept": "*/*",
                 "Content-Type": "multipart/form-data",
               }));
-      final nouveauProduit = Produit.fromJson(reponseServeur.data);
+      final nouveauProduit = ProduitProvider.fromJson(reponseServeur.data);
       _items.add(nouveauProduit);
       //_items.insert(0, nouveauProduit); //alternative qui place le nouvel élément en début de liste
 
@@ -61,7 +61,7 @@ class ProduitsProvider with ChangeNotifier {
     }
   }
 
-  Future<void> updateProduit(int id, Produit nouveauProduit) async {
+  Future<void> updateProduit(int id, ProduitProvider nouveauProduit) async {
     final url = 'http://192.168.1.48:8000/api/produits/$id/';
     final Dio dio = Dio();
 
@@ -106,7 +106,7 @@ class ProduitsProvider with ChangeNotifier {
     }
   }
 
-  Produit findById(int id) {
+  ProduitProvider findById(int id) {
     return _items.firstWhere((element) => element.id == id);
   }
 
@@ -116,10 +116,10 @@ class ProduitsProvider with ChangeNotifier {
     try {
       final reponse = await http.get(Uri.parse('$url/api/produits'));
       final donneesExtraites = const Utf8Decoder().convert(reponse.bodyBytes);
-      final List<Produit> listProduits = [];
+      final List<ProduitProvider> listProduits = [];
       for (var el in jsonDecode(donneesExtraites)) {
         listProduits.add(
-          Produit.fromJson(
+          ProduitProvider.fromJson(
             el,
           ),
         );
@@ -133,7 +133,7 @@ class ProduitsProvider with ChangeNotifier {
     }
   }
 
-  Future<List<Produit>> setProduits(List<Produit> produits) {
+  Future<List<ProduitProvider>> setProduits(List<ProduitProvider> produits) {
     _items = produits;
     return Future.value(_items);
   }
