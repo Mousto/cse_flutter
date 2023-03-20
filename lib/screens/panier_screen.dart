@@ -133,16 +133,60 @@ class _PasserCommandeBoutonState extends State<PasserCommandeBouton> {
                 _isLoading = true;
               });
               //On appelle directement Provider.of<CommandeProvider>(context) sans passer par une variable et on n'a pas besoin ici d'écouter l'ajout de commande d'où le listen à false.
-              await Provider.of<CommandeProvider>(context, listen: false)
-                  .addCommande(
-                widget.panier.items.values.toList(),
-                widget.panier.sommeTotale,
-              );
+              try {
+                await Provider.of<CommandeProvider>(context, listen: false)
+                    .addCommande(
+                  widget.panier.items.values.toList(),
+                  widget.panier.sommeTotale,
+                );
+
+                widget.viderPanier(); //Exécute fonction dans le parent
+                //widget.panier.clearPanier();
+              } catch (error) {
+                print('erreur à traiter : $error');
+                showDialog(
+                  context: context,
+                  builder: (context) => AlertDialog(
+                    title: const Text(
+                      'Avertissement !',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 20.0,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    content: const Text(
+                      "Désolé, cette opération n'a pas abouti. Veuillez essayer ultérieurement.",
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 18.0,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    actions: [
+                      TextButton(
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                        },
+                        child: const Text(
+                          'OK',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 20.0,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                    ],
+                    elevation: 24.0,
+                    backgroundColor: Colors.purple,
+                    // shape: const CircleBorder(),
+                  ),
+                );
+              }
               setState(() {
                 _isLoading = false;
               });
-              widget.viderPanier(); //Exécute fonction dans le parent
-              //widget.panier.clearPanier();
             },
       style: widget.panier.sommeTotale <= 0
           ? null

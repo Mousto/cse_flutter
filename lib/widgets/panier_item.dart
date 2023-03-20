@@ -55,10 +55,11 @@ class PanierItem extends StatelessWidget {
             content: const Text('Veux-tu supprimer cet item de ton panier ?'),
             actions: [
               TextButton(
-                  onPressed: () {
-                    Navigator.of(context).pop(false);
-                  },
-                  child: const Text('Non')),
+                onPressed: () {
+                  Navigator.of(context).pop(false);
+                },
+                child: const Text('Non'),
+              ),
               TextButton(
                   onPressed: () {
                     Navigator.of(context).pop(true);
