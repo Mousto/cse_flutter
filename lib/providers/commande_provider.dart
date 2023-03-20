@@ -24,7 +24,7 @@ class CommandeProvider with ChangeNotifier {
   //Ajouter une commande
   Future<void> addCommande(
       List<PanierModelItem> panierProduits, double total) async {
-    const url = 'http://192.168.1.48:8000/api/panie/';
+    const url = 'http://192.168.1.48:8000/api/panier/';
     final timeStamp = DateTime
         .now(); //On stock le timeStamp ici pour avoir la même valeur vers le serveur et en retour de la requête du serveur
     final reponse = await http.post(
