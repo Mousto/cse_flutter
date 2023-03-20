@@ -1,32 +1,4 @@
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-#Wed Mar 08 23:37:52 CET 2023
-=======
-#Thu Mar 09 08:41:29 CET 2023
->>>>>>> Ajout de la fonction favori pour les produits
-=======
-#Thu Mar 09 08:41:29 CET 2023
->>>>>>> commande
-=======
-#Thu Mar 09 21:15:59 CET 2023
->>>>>>> commande
-=======
-#Sun Mar 12 09:39:46 CET 2023
->>>>>>> commande
-=======
-#Mon Mar 13 10:06:27 CET 2023
->>>>>>> commande
-=======
-#Tue Mar 14 10:51:01 CET 2023
->>>>>>> commande
-=======
-#Sat Mar 18 22:38:28 CET 2023
->>>>>>> commande
+#Mon Mar 20 19:38:49 CET 2023
 base.0=/Users/macmous/Documents/Flutter/cse_talant_valmy/build/app/intermediates/dex/debug/mergeDexDebug/classes.dex
 renamed.0=classes.dex
 path.0=classes.dex
