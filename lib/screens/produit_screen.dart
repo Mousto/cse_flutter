@@ -6,6 +6,7 @@ import 'package:provider/provider.dart';
 
 import '../widgets/produit_item.dart';
 import '../providers/panier_provider.dart';
+import '../providers/commande_provider.dart';
 import '../providers/produits_provider.dart';
 //import '../providers/produit.dart';
 import '../widgets/main_drawer.dart';
@@ -62,6 +63,8 @@ class _ProduitScreenState extends State<ProduitScreen> {
 
   @override
   Widget build(BuildContext context) {
+    print(
+        '******************* les commandes : ${Provider.of<CommandeProvider>(context).commandes[0].id}');
     final produitsData = Provider.of<ProduitsProvider>(context);
     final lesProduits =
         _showOnlyFavorites ? produitsData.favoriteProduct : produitsData.items;

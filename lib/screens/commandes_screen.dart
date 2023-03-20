@@ -36,7 +36,7 @@ class _CommandesScreenState extends State<CommandesScreen> {
         body: ListView.builder(
           itemCount: lesCommandes.commandes.length,
           itemBuilder: (context, index) =>
-              CommandeItem(commande: lesCommandes.commandes[index]),
+              CommandeItem(panier: lesCommandes.commandes[index]),
         ));
   }
 }

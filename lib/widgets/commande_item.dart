@@ -3,11 +3,13 @@ import 'package:intl/intl.dart';
 import 'dart:math';
 
 import '../models/commande_model_item.dart';
+import '../models/panier_bdd.dart';
 
 class CommandeItem extends StatefulWidget {
-  final CommandeModelItem commande;
+  //final CommandeModelItem commande;
+  final PanierBdd panier;
 
-  const CommandeItem({super.key, required this.commande});
+  const CommandeItem({super.key, required this.panier});
 
   @override
   State<CommandeItem> createState() => _CommandeItemState();
@@ -22,10 +24,9 @@ class _CommandeItemState extends State<CommandeItem> {
       child: Column(
         children: <Widget>[
           ListTile(
-            title: Text('${widget.commande.montant} €'),
+            title: Text('${widget.panier.valeurTotale} €'),
             subtitle: Text(
-              DateFormat('dd/MM/yyyy hh:mm')
-                  .format(widget.commande.dateCommande),
+              DateFormat('dd/MM/yyyy hh:mm').format(widget.panier.dateCommande),
             ),
             trailing: IconButton(
               icon: Icon(_expanded ? Icons.expand_less : Icons.expand_more),
@@ -40,9 +41,9 @@ class _CommandeItemState extends State<CommandeItem> {
           if (_expanded)
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 4),
-              height: min(widget.commande.produits.length * 20.0 + 10, 100),
+              height: min(widget.panier.commandes.length * 20.0 + 10, 100),
               child: ListView(
-                children: widget.commande.produits
+                children: widget.panier.commandes
                     .map((prod) => Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
@@ -54,7 +55,7 @@ class _CommandeItemState extends State<CommandeItem> {
                               ),
                             ),
                             Text(
-                              '${prod.quantite} x ${prod.produit.prixAdulte} €',
+                              '${prod.billetAdulte} x ${prod.produit.prixAdulte} €',
                               style: const TextStyle(
                                 fontSize: 18,
                                 color: Colors.grey,
