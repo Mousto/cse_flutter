@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../providers/panier_provider.dart';
+import './date_picker.dart';
 
 class PanierItem extends StatelessWidget {
-  //final Function renvoiTotalItem;
+  final VoidCallback renvoiDateRetrait;
   final int id;
   final int produitId;
   final String intitule;
@@ -25,7 +26,7 @@ class PanierItem extends StatelessWidget {
     //required this.quantite,
     required this.produitId,
     required this.total,
-    //required this.renvoiTotalItem,
+    required this.renvoiDateRetrait,
   });
 
   @override
@@ -88,7 +89,7 @@ class PanierItem extends StatelessWidget {
             billetEnfant: billetEnfant,
             prixEnfant: prixEnfant,
             id: id,
-            //renvoiTotalItem: renvoiTotalItem,
+            renvoiDateCommande: renvoiDateRetrait,
           ),
         ),
       ),
@@ -107,7 +108,7 @@ class PanierListTileItem extends StatefulWidget {
     required this.billetEnfant,
     required this.prixEnfant,
     required this.id,
-    //required this.renvoiTotalItem,
+    required this.renvoiDateCommande,
   }) : super(key: key);
 
   final int id;
@@ -117,7 +118,7 @@ class PanierListTileItem extends StatefulWidget {
   late int billetAdulte;
   late int billetEnfant;
   final double prixEnfant;
-  //final Function renvoiTotalItem;
+  final VoidCallback renvoiDateCommande;
 
   @override
   State<PanierListTileItem> createState() => _PanierListTileItemState();
@@ -139,67 +140,75 @@ class _PanierListTileItemState extends State<PanierListTileItem> {
         builder: (context) => StatefulBuilder(builder: (context, setState) {
               return AlertDialog(
                 title: Text('Ajout Billets ${widget.intitule}'),
-                content: FittedBox(
-                  child: Column(
-                    children: [
-                      Row(
-                        children: <Widget>[
-                          const Text('Billet Adulte :'),
-                          IconButton(
-                              icon: const Icon(
-                                Icons.remove,
-                              ),
-                              onPressed: countBilletAdulte == 0
-                                  ? null
-                                  : () {
-                                      setState(() => countBilletAdulte--);
-                                    }),
-                          Text(
-                            countBilletAdulte.toString(),
-                            style: TextStyle(
-                              color: Theme.of(context).primaryColor,
-                              fontSize: 16,
-                              fontWeight: FontWeight.bold,
+                content: Row(
+                  children: [
+                    Expanded(
+                      child: SizedBox(
+                        height: 200.0,
+                        child: Column(
+                          children: [
+                            Row(
+                              children: <Widget>[
+                                const Text('Billet Adulte :'),
+                                IconButton(
+                                    icon: const Icon(
+                                      Icons.remove,
+                                    ),
+                                    onPressed: countBilletAdulte == 0
+                                        ? null
+                                        : () {
+                                            setState(() => countBilletAdulte--);
+                                          }),
+                                Text(
+                                  countBilletAdulte.toString(),
+                                  style: TextStyle(
+                                    color: Theme.of(context).primaryColor,
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                IconButton(
+                                  icon: const Icon(Icons.add),
+                                  onPressed: () =>
+                                      setState(() => countBilletAdulte++),
+                                ),
+                              ],
                             ),
-                          ),
-                          IconButton(
-                            icon: const Icon(Icons.add),
-                            onPressed: () =>
-                                setState(() => countBilletAdulte++),
-                          ),
-                        ],
-                      ),
-                      Row(
-                        children: <Widget>[
-                          const Text('Billet Enfant :'),
-                          IconButton(
-                            icon: const Icon(
-                              Icons.remove,
-                            ),
-                            onPressed: countBilletEnfant == 0
-                                ? null
-                                : () {
-                                    setState(() => countBilletEnfant--);
+                            Row(
+                              children: <Widget>[
+                                const Text('Billet Enfant :'),
+                                IconButton(
+                                  icon: const Icon(
+                                    Icons.remove,
+                                  ),
+                                  onPressed: countBilletEnfant == 0
+                                      ? null
+                                      : () {
+                                          setState(() => countBilletEnfant--);
+                                        },
+                                ),
+                                Text(
+                                  countBilletEnfant.toString(),
+                                  style: TextStyle(
+                                    color: Theme.of(context).primaryColor,
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                IconButton(
+                                  icon: const Icon(Icons.add),
+                                  onPressed: () {
+                                    setState(() => countBilletEnfant++);
                                   },
-                          ),
-                          Text(
-                            countBilletEnfant.toString(),
-                            style: TextStyle(
-                              color: Theme.of(context).primaryColor,
-                              fontSize: 16,
-                              fontWeight: FontWeight.bold,
+                                ),
+                              ],
                             ),
-                          ),
-                          IconButton(
-                            icon: const Icon(Icons.add),
-                            onPressed: () {
-                              setState(() => countBilletEnfant++);
-                            },
-                          ),
-                        ],
+                            DatePickerWidget(),
+                          ],
+                        ),
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
                 actions: [
                   Row(

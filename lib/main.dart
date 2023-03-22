@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 
 import 'screens/produit_detail_screen.dart';
 import './screens/tabs_screen.dart';
@@ -36,6 +37,10 @@ class MyApp extends StatelessWidget {
         ),
       ],
       child: MaterialApp(
+        //Internationnalisation de l'app avec les 2 propriétés suivantes
+        localizationsDelegates: const [GlobalMaterialLocalizations.delegate],
+        supportedLocales: const [Locale('en'), Locale('fr')],
+
         title: 'CSE_TALANT_VALMY',
         theme: ThemeData(
           primarySwatch: Colors.purple,
