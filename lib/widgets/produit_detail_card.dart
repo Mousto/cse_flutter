@@ -3,7 +3,7 @@ import 'package:provider/provider.dart';
 
 import '../providers/produit.dart';
 import '../providers/panier_provider.dart';
-import 'badge.dart';
+import 'mon_badge.dart';
 
 // ignore: use_key_in_widget_constructors
 class ProduitDetailCard extends StatelessWidget {
@@ -68,7 +68,7 @@ class ProduitDetailCard extends StatelessWidget {
                 ),
               ),
               trailing: Consumer(
-                builder: (_, value, ch) => Badge(
+                builder: (_, value, ch) => MonBadge(
                   value: lePanier.itemCountByName(leProduit.nom).toString(),
                   child: ch!,
                 ),

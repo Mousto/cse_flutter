@@ -17,21 +17,21 @@ class PanierScreen extends StatefulWidget {
 class _PanierScreenState extends State<PanierScreen> {
   RegExp regex = RegExp(
       r'([.]*0)(?!.*\d)'); //Pour enlever les zéros si la partie décimale est nulle
-
+  late DateTime dateRetait;
   @override
   Widget build(BuildContext context) {
     final panier = Provider.of<PanierProvider>(context, listen: false);
-
-    // panier.items.forEach((key, panierItem) {
-    //   print(
-    //       '*************************** ${panierItem.nomProduit} : ${panierItem.billetAdulte}');
-    // });
 
     //Fonction s'exécutant à partir du widget enfant PasserCommandeBouton.
     void resetPanier() {
       setState(() {
         panier.clearPanier();
       });
+    }
+
+    void setDateRetrait() {
+      dateRetait = DateTime.now();
+      print('*******************$dateRetait ');
     }
 
     return Scaffold(
@@ -96,7 +96,7 @@ class _PanierScreenState extends State<PanierScreen> {
                       panier.items.values.toList()[index].billetAdulte) +
                   (panier.items.values.toList()[index].produit.prixEnfant *
                       panier.items.values.toList()[index].billetEnfant),
-              //renvoiTotalItem: setSommeTotalePanier,
+              renvoiDateRetrait: setDateRetrait,
             ),
           ))
         ],

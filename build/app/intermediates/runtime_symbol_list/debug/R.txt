@@ -145,6 +145,9 @@ int id text2 0x7f050049
 int id time 0x7f05004a
 int id title 0x7f05004b
 int id view_tree_lifecycle_owner 0x7f05004c
+int id view_tree_on_back_pressed_dispatcher_owner 0x7f05004d
+int id view_tree_saved_state_registry_owner 0x7f05004e
+int id view_tree_view_model_store_owner 0x7f05004f
 int integer status_bar_notification_info_maxnum 0x7f060000
 int layout custom_dialog 0x7f070000
 int layout notification_action 0x7f070001

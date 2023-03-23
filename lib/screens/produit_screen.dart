@@ -9,7 +9,7 @@ import '../providers/panier_provider.dart';
 import '../providers/produits_provider.dart';
 //import '../providers/produit.dart';
 import '../widgets/main_drawer.dart';
-import '../widgets/badge.dart';
+import '../widgets/mon_badge.dart';
 import '../screens/panier_screen.dart';
 
 enum OptionsFiltrage { produitsFavoris, tousLesProduits, connexionDjango }
@@ -101,7 +101,7 @@ class _ProduitScreenState extends State<ProduitScreen> {
           ),
           //Utilisation de Consumer() sur seulement le badge qui est celui qui est concerné par les données. On vient donc au plus près avec ce widget pour éviter le rechargement entier la page en utilisant le widget Privider
           Consumer<PanierProvider>(
-            builder: (_, panier, ch) => Badge(
+            builder: (_, panier, ch) => MonBadge(
               value: panier.itemCount.toString(),
               child:
                   ch!, // le point d'exclamation certifie à dart qu'on sait que ch peut être null

@@ -4,7 +4,7 @@ import 'package:provider/provider.dart';
 
 import '../providers/produit.dart';
 import '../providers/panier_provider.dart';
-import 'badge.dart';
+import 'mon_badge.dart';
 
 class ProduitItem extends StatelessWidget {
   const ProduitItem({super.key});
@@ -46,7 +46,7 @@ class ProduitItem extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Consumer(
-                    builder: (_, value, ch) => Badge(
+                    builder: (_, value, ch) => MonBadge(
                       value: lePanier.itemCountByName(leProduit.nom).toString(),
                       child: ch ??
                           const Text(

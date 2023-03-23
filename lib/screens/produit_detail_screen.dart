@@ -3,7 +3,7 @@ import 'package:provider/provider.dart';
 
 import '../providers/produits_provider.dart';
 import '../providers/panier_provider.dart';
-import '../widgets/badge.dart';
+import '../widgets/mon_badge.dart';
 import '../widgets/produit_detail_card.dart';
 import '../screens/panier_screen.dart';
 
@@ -39,7 +39,7 @@ class ProduitDetailScreen extends StatelessWidget {
           ),
           actions: [
             Consumer<PanierProvider>(
-              builder: (_, panier, ch) => Badge(
+              builder: (_, panier, ch) => MonBadge(
                 value: panier.itemCount.toString(),
                 child:
                     ch!, // le point d'exclamation certifie à dart que ch ne sera jamais null
