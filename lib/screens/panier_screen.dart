@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:intl/intl.dart';
 
 import '../providers/panier_provider.dart';
 import '../providers/commande_provider.dart';
 import '../widgets/panier_item.dart';
+import '../models/date_notification.dart';
 
 class PanierScreen extends StatefulWidget {
   const PanierScreen({super.key});
@@ -15,6 +17,17 @@ class PanierScreen extends StatefulWidget {
 }
 
 class _PanierScreenState extends State<PanierScreen> {
+  DateTime? date;
+
+  String getText() {
+    if (date == null) {
+      return 'Date retrait ?';
+    } else {
+      return 'À retirer le : ${DateFormat('dd/MM/yyyy').format(date!)}';
+      //return '${date!.month}/${date!.day}/${date!.year}';
+    }
+  }
+
   RegExp regex = RegExp(
       r'([.]*0)(?!.*\d)'); //Pour enlever les zéros si la partie décimale est nulle
   late DateTime dateRetait;
@@ -27,11 +40,6 @@ class _PanierScreenState extends State<PanierScreen> {
       setState(() {
         panier.clearPanier();
       });
-    }
-
-    void setDateRetrait() {
-      dateRetait = DateTime.now();
-      print('*******************$dateRetait ');
     }
 
     return Scaffold(
@@ -67,7 +75,7 @@ class _PanierScreenState extends State<PanierScreen> {
                                 .titleLarge
                                 ?.color),
                       ),
-                      backgroundColor: Theme.of(context).primaryColor,
+                      backgroundColor: Theme.of(context).colorScheme.primary,
                     ),
                   ),
                   const Spacer(), //Ajouter un espace en poussant les éléments suivant vers l'espace restant
@@ -90,13 +98,11 @@ class _PanierScreenState extends State<PanierScreen> {
                   panier.items.values.toList()[index].produit.prixAdulte,
               prixEnfant:
                   panier.items.values.toList()[index].produit.prixEnfant,
-              //quantite: panier.items.values.toList()[index].quantite,
               produitId: panier.items.keys.toList()[index],
               total: (panier.items.values.toList()[index].produit.prixAdulte *
                       panier.items.values.toList()[index].billetAdulte) +
                   (panier.items.values.toList()[index].produit.prixEnfant *
                       panier.items.values.toList()[index].billetEnfant),
-              renvoiDateRetrait: setDateRetrait,
             ),
           ))
         ],
@@ -192,7 +198,7 @@ class _PasserCommandeBoutonState extends State<PasserCommandeBouton> {
           ? null
           : ButtonStyle(
               foregroundColor: MaterialStateProperty.all<Color>(
-                  Theme.of(context).primaryColor),
+                  Theme.of(context).colorScheme.primary),
             ),
       child: _isLoading
           ? const CircularProgressIndicator()

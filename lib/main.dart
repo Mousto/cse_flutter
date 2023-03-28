@@ -44,9 +44,6 @@ class MyApp extends StatelessWidget {
         title: 'CSE_TALANT_VALMY',
         theme: ThemeData(
           primarySwatch: Colors.purple,
-          accentColor: Colors.deepOrange,
-          //colorScheme: ThemeData().colorScheme.copyWith(secondary: Colors.amber),
-          //canvasColor: const Color.fromRGBO(255, 254, 229, 1),
           fontFamily: 'Raleway',
           textTheme: ThemeData.light().textTheme.copyWith(
                 bodyLarge: const TextStyle(
@@ -61,6 +58,8 @@ class MyApp extends StatelessWidget {
                   fontWeight: FontWeight.bold,
                 ),
               ),
+          colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.purple)
+              .copyWith(secondary: Colors.deepOrange),
         ),
         //home: const ProduitScreen(),
         initialRoute: '/', // default is '/'

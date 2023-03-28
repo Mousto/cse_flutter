@@ -135,7 +135,7 @@ class _UserProductItemState extends State<UserProductItem> {
                     });
                   }
                 },
-                icon: produit.disponible!
+                icon: produit.disponible
                     ? const Icon(
                         Icons.toggle_on,
                         color: Color.fromARGB(234, 100, 212, 20),
@@ -191,7 +191,7 @@ class _UserProductItemState extends State<UserProductItem> {
               },
               icon: Icon(
                 Icons.delete,
-                color: Theme.of(context).errorColor,
+                color: Theme.of(context).colorScheme.error,
               ),
             ),
           ],

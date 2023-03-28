@@ -7,6 +7,7 @@ class PanierModelItem {
   late int billetAdulte;
   late int billetEnfant;
   late double sousTotal;
+  late DateTime dateRetrait;
 
   PanierModelItem({
     required this.produit,

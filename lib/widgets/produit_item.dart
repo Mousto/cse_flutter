@@ -45,43 +45,46 @@ class ProduitItem extends StatelessWidget {
             child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Consumer(
-                    builder: (_, value, ch) => MonBadge(
-                      value: lePanier.itemCountByName(leProduit.nom).toString(),
-                      child: ch ??
-                          const Text(
-                              '0'), //si ch est null on le remplace par un text
-                    ),
-                    child: IconButton(
-                      icon: const Icon(Icons.shopping_cart),
-                      onPressed: () async {
-                        lePanier.addItem(
-                          leProduit.id,
-                          leProduit.prixAdulte,
-                          leProduit.prixEnfant,
-                          leProduit.nom,
-                          leProduit.billetAdulte,
-                          leProduit.billetEnfant,
-                          leProduit.sommeTotale,
-                        );
-                        ScaffoldMessenger.of(context).hideCurrentSnackBar();
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(
-                            content: Text(
-                                '1 Billet ${leProduit.nom.toLowerCase()} ajouté'),
-                            duration: const Duration(seconds: 3),
-                            action: SnackBarAction(
-                              label: 'Annuler',
-                              onPressed: () {
-                                lePanier.removeSingleItem(leProduit.id);
-                              },
+                  Expanded(
+                    child: Consumer(
+                      builder: (_, value, ch) => MonBadge(
+                        value:
+                            lePanier.itemCountByName(leProduit.nom).toString(),
+                        child: ch ??
+                            const Text(
+                                '0'), //si ch est null on le remplace par un text
+                      ),
+                      child: IconButton(
+                        icon: const Icon(Icons.shopping_cart),
+                        onPressed: () async {
+                          lePanier.addItem(
+                            leProduit.id,
+                            leProduit.prixAdulte,
+                            leProduit.prixEnfant,
+                            leProduit.nom,
+                            leProduit.billetAdulte,
+                            leProduit.billetEnfant,
+                            leProduit.sommeTotale,
+                          );
+                          ScaffoldMessenger.of(context).hideCurrentSnackBar();
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              content: Text(
+                                  '1 Billet ${leProduit.nom.toLowerCase()} ajouté'),
+                              duration: const Duration(seconds: 3),
+                              action: SnackBarAction(
+                                label: 'Annuler',
+                                onPressed: () {
+                                  lePanier.removeSingleItem(leProduit.id);
+                                },
+                              ),
                             ),
-                          ),
-                        );
-                      },
+                          );
+                        },
 
-                      // ignore: deprecated_member_use
-                      color: Colors.white,
+                        // ignore: deprecated_member_use
+                        color: Colors.white,
+                      ),
                     ),
                   ),
                   IconButton(

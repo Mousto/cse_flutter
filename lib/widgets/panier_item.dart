@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:intl/intl.dart';
 
 import '../providers/panier_provider.dart';
 import './date_picker.dart';
+import '../models/date_notification.dart';
 
 class PanierItem extends StatelessWidget {
-  final VoidCallback renvoiDateRetrait;
   final int id;
   final int produitId;
   final String intitule;
@@ -13,7 +14,6 @@ class PanierItem extends StatelessWidget {
   final double prixEnfant;
   final int billetAdulte;
   final int billetEnfant;
-  //final int quantite;
   final double total;
   const PanierItem({
     super.key,
@@ -23,73 +23,77 @@ class PanierItem extends StatelessWidget {
     required this.prixEnfant,
     this.billetAdulte = 0,
     this.billetEnfant = 0,
-    //required this.quantite,
     required this.produitId,
     required this.total,
-    required this.renvoiDateRetrait,
   });
 
   @override
   Widget build(BuildContext context) {
-    return Dismissible(
-      key: ValueKey(id),
-      background: Container(
-        color: Theme.of(context).errorColor,
-        alignment: Alignment.centerRight,
-        padding: const EdgeInsets.only(right: 20),
-        margin: const EdgeInsets.symmetric(
-          horizontal: 15,
-          vertical: 4,
-        ),
-        child: const Icon(
-          Icons.delete,
-          color: Colors.white,
-          size: 40,
-        ),
-      ),
-      direction: DismissDirection.endToStart,
-      confirmDismiss: (direction) {
-        return showDialog(
-          context: context,
-          builder: (context) => AlertDialog(
-            title: const Text('Supprimer ?'),
-            content: const Text('Veux-tu supprimer cet item de ton panier ?'),
-            actions: [
-              TextButton(
-                onPressed: () {
-                  Navigator.of(context).pop(false);
-                },
-                child: const Text('Non'),
-              ),
-              TextButton(
-                  onPressed: () {
-                    Navigator.of(context).pop(true);
-                  },
-                  child: const Text('Oui')),
-            ],
+    return NotificationListener<DateNotification>(
+      onNotification: (notification) {
+        print(
+            'PanierItem NotificationListener : ${DateFormat('dd/MM/yyyy').format(notification.date)}');
+        return true;
+      },
+      child: Dismissible(
+        key: ValueKey(id),
+        background: Container(
+          color: Theme.of(context).errorColor,
+          alignment: Alignment.centerRight,
+          padding: const EdgeInsets.only(right: 20),
+          margin: const EdgeInsets.symmetric(
+            horizontal: 15,
+            vertical: 4,
           ),
-        );
-      },
-      onDismissed: (direction) {
-        Provider.of<PanierProvider>(context, listen: false)
-            .removeItem(produitId);
-      },
-      child: Card(
-        margin: const EdgeInsets.symmetric(
-          horizontal: 15,
-          vertical: 4,
+          child: const Icon(
+            Icons.delete,
+            color: Colors.white,
+            size: 40,
+          ),
         ),
-        child: Padding(
-          padding: const EdgeInsets.all(8),
-          child: PanierListTileItem(
-            total: total,
-            intitule: intitule,
-            prixAdulte: prixAdulte,
-            billetAdulte: billetAdulte,
-            billetEnfant: billetEnfant,
-            prixEnfant: prixEnfant,
-            id: id,
-            renvoiDateCommande: renvoiDateRetrait,
+        direction: DismissDirection.endToStart,
+        confirmDismiss: (direction) {
+          return showDialog(
+            context: context,
+            builder: (context) => AlertDialog(
+              title: const Text('Supprimer ?'),
+              content: const Text('Veux-tu supprimer cet item de ton panier ?'),
+              actions: [
+                TextButton(
+                  onPressed: () {
+                    Navigator.of(context).pop(false);
+                  },
+                  child: const Text('Non'),
+                ),
+                TextButton(
+                    onPressed: () {
+                      Navigator.of(context).pop(true);
+                    },
+                    child: const Text('Oui')),
+              ],
+            ),
+          );
+        },
+        onDismissed: (direction) {
+          Provider.of<PanierProvider>(context, listen: false)
+              .removeItem(produitId);
+        },
+        child: Card(
+          margin: const EdgeInsets.symmetric(
+            horizontal: 15,
+            vertical: 4,
+          ),
+          child: Padding(
+            padding: const EdgeInsets.all(8),
+            child: PanierListTileItem(
+              total: total,
+              intitule: intitule,
+              prixAdulte: prixAdulte,
+              billetAdulte: billetAdulte,
+              billetEnfant: billetEnfant,
+              prixEnfant: prixEnfant,
+              id: id,
+            ),
           ),
         ),
       ),
@@ -108,7 +112,6 @@ class PanierListTileItem extends StatefulWidget {
     required this.billetEnfant,
     required this.prixEnfant,
     required this.id,
-    required this.renvoiDateCommande,
   }) : super(key: key);
 
   final int id;
@@ -118,7 +121,6 @@ class PanierListTileItem extends StatefulWidget {
   late int billetAdulte;
   late int billetEnfant;
   final double prixEnfant;
-  final VoidCallback renvoiDateCommande;
 
   @override
   State<PanierListTileItem> createState() => _PanierListTileItemState();
@@ -127,6 +129,7 @@ class PanierListTileItem extends StatefulWidget {
 class _PanierListTileItemState extends State<PanierListTileItem> {
   int countBilletAdulte = 0;
   int countBilletEnfant = 0;
+  DateTime? dateRetrait;
   RegExp regex = RegExp(
       r'([.]*0)(?!.*\d)'); //Pour enlever les zéros si la partie décimale est nulle
 
@@ -139,7 +142,10 @@ class _PanierListTileItemState extends State<PanierListTileItem> {
         context: context,
         builder: (context) => StatefulBuilder(builder: (context, setState) {
               return AlertDialog(
-                title: Text('Ajout Billets ${widget.intitule}'),
+                title: Text(
+                  'Ajout Billets ${widget.intitule}',
+                  textAlign: TextAlign.center,
+                ),
                 content: Row(
                   children: [
                     Expanded(
@@ -148,9 +154,11 @@ class _PanierListTileItemState extends State<PanierListTileItem> {
                         child: Column(
                           children: [
                             Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: <Widget>[
-                                const Text('Billet Adulte :'),
+                                const Text('Adulte :'),
                                 IconButton(
+                                    color: Colors.purple,
                                     icon: const Icon(
                                       Icons.remove,
                                     ),
@@ -168,6 +176,7 @@ class _PanierListTileItemState extends State<PanierListTileItem> {
                                   ),
                                 ),
                                 IconButton(
+                                  color: Colors.purple,
                                   icon: const Icon(Icons.add),
                                   onPressed: () =>
                                       setState(() => countBilletAdulte++),
@@ -175,9 +184,11 @@ class _PanierListTileItemState extends State<PanierListTileItem> {
                               ],
                             ),
                             Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: <Widget>[
-                                const Text('Billet Enfant :'),
+                                const Text('Enfant :'),
                                 IconButton(
+                                  color: Colors.purple,
                                   icon: const Icon(
                                     Icons.remove,
                                   ),
@@ -196,6 +207,7 @@ class _PanierListTileItemState extends State<PanierListTileItem> {
                                   ),
                                 ),
                                 IconButton(
+                                  color: Colors.purple,
                                   icon: const Icon(Icons.add),
                                   onPressed: () {
                                     setState(() => countBilletEnfant++);
@@ -203,7 +215,14 @@ class _PanierListTileItemState extends State<PanierListTileItem> {
                                 ),
                               ],
                             ),
-                            DatePickerWidget(),
+                            NotificationListener<DateNotification>(
+                              onNotification: (notification) {
+                                dateRetrait = notification.date;
+
+                                return true;
+                              },
+                              child: const DatePickerWidget(),
+                            ),
                           ],
                         ),
                       ),
@@ -212,7 +231,7 @@ class _PanierListTileItemState extends State<PanierListTileItem> {
                 ),
                 actions: [
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       TextButton(
                         onPressed: () {
@@ -227,7 +246,8 @@ class _PanierListTileItemState extends State<PanierListTileItem> {
                           var reponse = {
                             'nbBilletAdulte': countBilletAdulte,
                             'nbBilletEnfant': countBilletEnfant,
-                            'totalItemPanier': widget.total
+                            'totalItemPanier': widget.total,
+                            'dateRetrait': dateRetrait
                           };
                           Navigator.of(context).pop(reponse);
                         },
@@ -261,7 +281,9 @@ class _PanierListTileItemState extends State<PanierListTileItem> {
               widget.total = (widget.prixAdulte * widget.billetAdulte) +
                   (widget.prixEnfant * widget.billetEnfant);
             });
-            //widget.renvoiTotalItem(widget.total);
+            if (mounted) {
+              DateNotification(date: rep['dateRetrait']).dispatch(context);
+            }
             panierProvider.setTotalPanier(widget.id, widget.total);
             panierProvider.addBillets(
                 widget.id, rep['nbBilletAdulte'], rep['nbBilletEnfant']);
