@@ -5,7 +5,6 @@ import 'package:intl/intl.dart';
 import '../providers/panier_provider.dart';
 import '../providers/commande_provider.dart';
 import '../widgets/panier_item.dart';
-import '../models/date_notification.dart';
 
 class PanierScreen extends StatefulWidget {
   const PanierScreen({super.key});
@@ -17,20 +16,42 @@ class PanierScreen extends StatefulWidget {
 }
 
 class _PanierScreenState extends State<PanierScreen> {
-  DateTime? date;
-
-  String getText() {
-    if (date == null) {
-      return 'Date retrait ?';
-    } else {
-      return 'À retirer le : ${DateFormat('dd/MM/yyyy').format(date!)}';
-      //return '${date!.month}/${date!.day}/${date!.year}';
-    }
-  }
-
   RegExp regex = RegExp(
       r'([.]*0)(?!.*\d)'); //Pour enlever les zéros si la partie décimale est nulle
-  late DateTime dateRetait;
+
+  String? dateRetrait;
+  String? lieuRetrait;
+  DateTime? date;
+
+  Future<dynamic> pickDate(BuildContext context) async {
+    final initialDate = DateTime.now();
+    final newDate = await showDatePicker(
+      locale: const Locale("fr", "FR"),
+      context: context,
+      initialDate: date ?? initialDate,
+      firstDate: DateTime.now(),
+      lastDate: DateTime(DateTime.now().year + 1),
+    );
+    if (newDate == null) return;
+
+    setState(() => dateRetrait = DateFormat('dd/MM/yyyy').format(newDate));
+  }
+
+  List<DropdownMenuItem<String>>? itemDeMenu = const [
+    DropdownMenuItem(
+      value: 'Sélectionner',
+      child: Text('Sélectionner'),
+    ),
+    DropdownMenuItem(
+      value: 'Clinique Bénigne Joly',
+      child: Text('Clinique Bénigne Joly'),
+    ),
+    DropdownMenuItem(
+      value: 'SSR Valmy',
+      child: Text('SSR Valmy'),
+    ),
+  ];
+  String? selectedItem = 'Sélectionner';
   @override
   Widget build(BuildContext context) {
     final panier = Provider.of<PanierProvider>(context, listen: false);
@@ -44,11 +65,12 @@ class _PanierScreenState extends State<PanierScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Ajustez le nombre de billets'),
+        title: const Text('Billets, Date et Lieu Retrait'),
       ),
       body: Column(
         children: <Widget>[
           Card(
+            elevation: 5.0,
             margin: const EdgeInsets.all(15),
             child: Padding(
               padding: const EdgeInsets.all(8),
@@ -61,7 +83,7 @@ class _PanierScreenState extends State<PanierScreen> {
                       fontSize: 20,
                     ),
                   ),
-                  const SizedBox(width: 10),
+                  const SizedBox(width: 5),
                   Consumer<PanierProvider>(
                     //revoir le role du param child(non utilisé ici) dans le concept de Consumer.
                     builder:
@@ -79,8 +101,102 @@ class _PanierScreenState extends State<PanierScreen> {
                     ),
                   ),
                   const Spacer(), //Ajouter un espace en poussant les éléments suivant vers l'espace restant
+
                   PasserCommandeBouton(
                       panier: panier, viderPanier: resetPanier),
+                ],
+              ),
+            ),
+          ),
+          Card(
+            elevation: 5.0,
+            margin: const EdgeInsets.all(15),
+            child: Padding(
+              padding: const EdgeInsets.all(8),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  const Text(
+                    'Date Retrait :',
+                    style: TextStyle(
+                      fontSize: 20,
+                    ),
+                  ),
+                  const SizedBox(width: 5),
+                  dateRetrait == null
+                      ? IconButton(
+                          //color: Colors.purple,
+                          icon: const Icon(Icons.calendar_month),
+                          onPressed: () async {
+                            await pickDate(context);
+                          },
+                        )
+                      : SizedBox(
+                          width: 200.0,
+                          child: SizedBox(
+                            child: Row(
+                              children: [
+                                Text(
+                                  dateRetrait!,
+                                  style: const TextStyle(
+                                    fontSize: 20,
+                                  ),
+                                ),
+                                const Spacer(), //Ajouter un espace en poussant les éléments suivant vers l'espace restant,
+                                IconButton(
+                                  color: Colors.green,
+                                  icon: const Icon(Icons.calendar_month),
+                                  onPressed: () async {
+                                    await pickDate(context);
+                                  },
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                ],
+              ),
+            ),
+          ),
+          Card(
+            elevation: 5.0,
+            margin: const EdgeInsets.all(15),
+            child: Padding(
+              padding: const EdgeInsets.all(8),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  const Text(
+                    'Lieu Retrait :',
+                    style: TextStyle(
+                      fontSize: 20,
+                    ),
+                  ),
+                  const Spacer(),
+                  lieuRetrait == null
+                      ? SizedBox(
+                          width: 200,
+                          child: DropdownButton(
+                              value: selectedItem,
+                              items: itemDeMenu,
+                              iconSize: 45.0,
+                              isExpanded: true,
+                              iconEnabledColor: Colors.purple,
+                              onChanged: (String? selectedValue) {
+                                if (selectedValue is String) {
+                                  setState(() {
+                                    selectedItem = selectedValue;
+                                  });
+                                }
+                              }),
+                        )
+                      : Text(
+                          lieuRetrait!,
+                          style: const TextStyle(
+                            fontSize: 20,
+                          ),
+                        ),
+                  const Spacer(), //Ajouter un espace en poussant les éléments suivant vers l'espace restant
                 ],
               ),
             ),

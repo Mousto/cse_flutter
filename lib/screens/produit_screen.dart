@@ -68,7 +68,7 @@ class _ProduitScreenState extends State<ProduitScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Produits en billeterie'),
+        title: const Text('Billeterie'),
         actions: <Widget>[
           PopupMenuButton(
             //optioFiltrage en param est le type enum ci-dessus définit

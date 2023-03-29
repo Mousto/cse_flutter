@@ -94,6 +94,13 @@ class PanierProvider with ChangeNotifier {
     notifyListeners();
   }
 
+  void setDateRetrait(int panierId, DateTime dateRetrait) {
+    if (_items.containsKey(panierId)) {
+      _items[panierId]!.dateRetrait = dateRetrait;
+    }
+    notifyListeners();
+  }
+
   void removeItem(int id) {
     _items.remove(id);
     notifyListeners();
