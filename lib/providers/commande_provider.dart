@@ -22,8 +22,8 @@ class CommandeProvider with ChangeNotifier {
   }
 
   //Ajouter une commande
-  Future<void> addCommande(
-      List<PanierModelItem> panierProduits, double total) async {
+  Future<void> addCommande(List<PanierModelItem> panierProduits, double total,
+      DateTime dateRetrait, String lieuRetrait) async {
     const url = 'http://192.168.1.48:8000/api/panier/';
     final timeStamp = DateTime
         .now(); //On stock le timeStamp ici pour avoir la même valeur vers le serveur et en retour de la requête du serveur
@@ -45,8 +45,8 @@ class CommandeProvider with ChangeNotifier {
         'valeur_totale': total,
         'date': timeStamp
             .toIso8601String(), //facilement reconvertible en DateTime au besion dans dart.
-        'date_retrait': timeStamp.toIso8601String(),
-        'lieu_retrait': 'Talant',
+        'date_retrait': dateRetrait.toIso8601String(),
+        'lieu_retrait': lieuRetrait,
         'commanditaire': 1
       }),
       headers: {
@@ -54,7 +54,7 @@ class CommandeProvider with ChangeNotifier {
       },
     );
     var jsonReponse = json.decode(reponse.body);
-
+    print(lieuRetrait);
     //index de la methode insert() à 0 pour dire que l'élément à ajouter doit être en début de liste sinon utiliser la méthode add() pour ajouter en fin de liste
     _commandes.insert(
       0,

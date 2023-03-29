@@ -19,8 +19,8 @@ class _PanierScreenState extends State<PanierScreen> {
   RegExp regex = RegExp(
       r'([.]*0)(?!.*\d)'); //Pour enlever les zéros si la partie décimale est nulle
 
-  String? dateRetrait;
-  String? lieuRetrait;
+  DateTime dateRetrait = DateTime.now(); //Date d'initialisation artificielle
+  bool isDate = false;
   DateTime? date;
 
   Future<dynamic> pickDate(BuildContext context) async {
@@ -34,7 +34,10 @@ class _PanierScreenState extends State<PanierScreen> {
     );
     if (newDate == null) return;
 
-    setState(() => dateRetrait = DateFormat('dd/MM/yyyy').format(newDate));
+    setState(() {
+      dateRetrait = newDate;
+      isDate = true;
+    });
   }
 
   List<DropdownMenuItem<String>>? itemDeMenu = const [
@@ -43,15 +46,15 @@ class _PanierScreenState extends State<PanierScreen> {
       child: Text('Sélectionner'),
     ),
     DropdownMenuItem(
-      value: 'Clinique Bénigne Joly',
-      child: Text('Clinique Bénigne Joly'),
+      value: 'Talant',
+      child: Text('Bénigne Joly'),
     ),
     DropdownMenuItem(
-      value: 'SSR Valmy',
+      value: 'Valmy',
       child: Text('SSR Valmy'),
     ),
   ];
-  String? selectedItem = 'Sélectionner';
+  String selectedItem = 'Sélectionner';
   @override
   Widget build(BuildContext context) {
     final panier = Provider.of<PanierProvider>(context, listen: false);
@@ -103,7 +106,11 @@ class _PanierScreenState extends State<PanierScreen> {
                   const Spacer(), //Ajouter un espace en poussant les éléments suivant vers l'espace restant
 
                   PasserCommandeBouton(
-                      panier: panier, viderPanier: resetPanier),
+                    panier: panier,
+                    viderPanier: resetPanier,
+                    dateR: dateRetrait,
+                    lieuR: selectedItem,
+                  ),
                 ],
               ),
             ),
@@ -112,9 +119,9 @@ class _PanierScreenState extends State<PanierScreen> {
             elevation: 5.0,
             margin: const EdgeInsets.all(15),
             child: Padding(
-              padding: const EdgeInsets.all(8),
+              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   const Text(
                     'Date Retrait :',
@@ -123,7 +130,7 @@ class _PanierScreenState extends State<PanierScreen> {
                     ),
                   ),
                   const SizedBox(width: 5),
-                  dateRetrait == null
+                  !isDate
                       ? IconButton(
                           //color: Colors.purple,
                           icon: const Icon(Icons.calendar_month),
@@ -137,7 +144,7 @@ class _PanierScreenState extends State<PanierScreen> {
                             child: Row(
                               children: [
                                 Text(
-                                  dateRetrait!,
+                                  DateFormat('dd/MM/yyyy').format(dateRetrait!),
                                   style: const TextStyle(
                                     fontSize: 20,
                                   ),
@@ -164,7 +171,7 @@ class _PanierScreenState extends State<PanierScreen> {
             child: Padding(
               padding: const EdgeInsets.all(8),
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   const Text(
                     'Lieu Retrait :',
@@ -173,7 +180,7 @@ class _PanierScreenState extends State<PanierScreen> {
                     ),
                   ),
                   const Spacer(),
-                  lieuRetrait == null
+                  selectedItem == 'Sélectionner'
                       ? SizedBox(
                           width: 200,
                           child: DropdownButton(
@@ -191,7 +198,7 @@ class _PanierScreenState extends State<PanierScreen> {
                               }),
                         )
                       : Text(
-                          lieuRetrait!,
+                          selectedItem,
                           style: const TextStyle(
                             fontSize: 20,
                           ),
@@ -205,22 +212,23 @@ class _PanierScreenState extends State<PanierScreen> {
           //ListView ne fonctionne pas dans Column.Il faut donc le wrapper dans Expanded() par example qui permet de prendre tout l'espace restant ou de toute la place qu'on souhaite avoir ce qui est le cas de Listview.
           //Utilisation de ListView.builder car ne sachant pas à priori la longeur de la list.
           Expanded(
-              child: ListView.builder(
-            itemCount: panier.items.length,
-            itemBuilder: (context, index) => PanierItem(
-              id: panier.items.values.toList()[index].id,
-              intitule: panier.items.values.toList()[index].produit.nom,
-              prixAdulte:
-                  panier.items.values.toList()[index].produit.prixAdulte,
-              prixEnfant:
-                  panier.items.values.toList()[index].produit.prixEnfant,
-              produitId: panier.items.keys.toList()[index],
-              total: (panier.items.values.toList()[index].produit.prixAdulte *
-                      panier.items.values.toList()[index].billetAdulte) +
-                  (panier.items.values.toList()[index].produit.prixEnfant *
-                      panier.items.values.toList()[index].billetEnfant),
+            child: ListView.builder(
+              itemCount: panier.items.length,
+              itemBuilder: (context, index) => PanierItem(
+                id: panier.items.values.toList()[index].id,
+                intitule: panier.items.values.toList()[index].produit.nom,
+                prixAdulte:
+                    panier.items.values.toList()[index].produit.prixAdulte,
+                prixEnfant:
+                    panier.items.values.toList()[index].produit.prixEnfant,
+                produitId: panier.items.keys.toList()[index],
+                total: (panier.items.values.toList()[index].produit.prixAdulte *
+                        panier.items.values.toList()[index].billetAdulte) +
+                    (panier.items.values.toList()[index].produit.prixEnfant *
+                        panier.items.values.toList()[index].billetEnfant),
+              ),
             ),
-          ))
+          ),
         ],
       ),
     );
@@ -228,14 +236,18 @@ class _PanierScreenState extends State<PanierScreen> {
 }
 
 class PasserCommandeBouton extends StatefulWidget {
-  const PasserCommandeBouton({
-    Key? key,
-    required this.panier,
-    required this.viderPanier,
-  }) : super(key: key);
+  const PasserCommandeBouton(
+      {Key? key,
+      required this.panier,
+      required this.viderPanier,
+      required this.dateR,
+      required this.lieuR})
+      : super(key: key);
 
   final PanierProvider panier;
   final VoidCallback viderPanier;
+  final DateTime dateR;
+  final String lieuR;
 
   @override
   State<PasserCommandeBouton> createState() => _PasserCommandeBoutonState();
@@ -260,6 +272,8 @@ class _PasserCommandeBoutonState extends State<PasserCommandeBouton> {
                     .addCommande(
                   widget.panier.items.values.toList(),
                   widget.panier.sommeTotale,
+                  widget.dateR,
+                  widget.lieuR,
                 );
 
                 widget.viderPanier(); //Exécute fonction dans le parent
