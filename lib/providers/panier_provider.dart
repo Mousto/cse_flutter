@@ -7,6 +7,8 @@ import '../models/produit_model.dart';
 
 class PanierProvider with ChangeNotifier {
   Map<int, PanierModelItem> _items = {};
+  DateTime dateRetrait = DateTime.now();
+  String lieuRetrait = '';
 
   Map<int, PanierModelItem> get items {
     //On retourne une copie de la Map par Spreading
@@ -47,18 +49,16 @@ class PanierProvider with ChangeNotifier {
   void addItem(int produitId, double prixAdulte, double prixEnfant,
       String intitule, int billetAdulte, int billetEnfant, double sousTotal) {
     if (_items.containsKey(produitId)) {
+      print('Je ne fais que modifier ce produit existe deja');
       //change de quantité du produit concerné
       _items.update(
         produitId,
         (produitExistant) => PanierModelItem(
           id: produitExistant.id,
-          //nomProduit: produitExistant.nomProduit,
           quantite: produitExistant.quantite,
-          //prixAdulte: produitExistant.prixAdulte,
-          //prixEnfant: produitExistant.prixEnfant,
-          billetAdulte: produitExistant.billetAdulte,
-          billetEnfant: produitExistant.billetEnfant,
-          sousTotal: produitExistant.sousTotal,
+          billetAdulte: billetAdulte,
+          billetEnfant: billetEnfant,
+          sousTotal: sousTotal,
           produit: produitExistant.produit,
         ),
       );
@@ -74,10 +74,7 @@ class PanierProvider with ChangeNotifier {
           produitId,
           () => PanierModelItem(
                 id: produitId,
-                //nomProduit: intitule,
                 quantite: 1,
-                //prixAdulte: prixAdulte,
-                //prixEnfant: prixEnfant,
                 billetAdulte: billetAdulte,
                 billetEnfant: billetEnfant,
                 sousTotal: sousTotal,
@@ -90,13 +87,6 @@ class PanierProvider with ChangeNotifier {
   void setTotalPanier(int panierId, double totalPanier) {
     if (_items.containsKey(panierId)) {
       _items[panierId]!.sousTotal = totalPanier;
-    }
-    notifyListeners();
-  }
-
-  void setDateRetrait(int panierId, DateTime dateRetrait) {
-    if (_items.containsKey(panierId)) {
-      _items[panierId]!.dateRetrait = dateRetrait;
     }
     notifyListeners();
   }
@@ -137,5 +127,23 @@ class PanierProvider with ChangeNotifier {
   void clearPanier() {
     _items = {};
     notifyListeners();
+  }
+
+  void setDateRetrait(DateTime date) {
+    dateRetrait = date;
+    notifyListeners();
+  }
+
+  DateTime get dateDeRetrait {
+    return dateRetrait;
+  }
+
+  void setLieuRetrait(String lieu) {
+    lieuRetrait = lieu;
+    notifyListeners();
+  }
+
+  String get lieuDeRetrait {
+    return lieuRetrait;
   }
 }

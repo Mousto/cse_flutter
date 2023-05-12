@@ -54,7 +54,7 @@ class CommandeProvider with ChangeNotifier {
       },
     );
     var jsonReponse = json.decode(reponse.body);
-    print(lieuRetrait);
+    print('Dans CommandeProvider -> addcommande, Lieu retrait : $lieuRetrait');
     //index de la methode insert() à 0 pour dire que l'élément à ajouter doit être en début de liste sinon utiliser la méthode add() pour ajouter en fin de liste
     _commandes.insert(
       0,

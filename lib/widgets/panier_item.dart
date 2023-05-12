@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:intl/intl.dart';
+//import 'package:intl/intl.dart';
 
 import '../providers/panier_provider.dart';
 // import './date_picker.dart';
@@ -15,14 +15,15 @@ class PanierItem extends StatelessWidget {
   final int billetAdulte;
   final int billetEnfant;
   final double total;
+
   const PanierItem({
     super.key,
     required this.id,
     required this.intitule,
     required this.prixAdulte,
     required this.prixEnfant,
-    this.billetAdulte = 0,
-    this.billetEnfant = 0,
+    required this.billetAdulte,
+    required this.billetEnfant,
     required this.produitId,
     required this.total,
   });
@@ -121,143 +122,18 @@ class PanierListTileItem extends StatefulWidget {
 }
 
 class _PanierListTileItemState extends State<PanierListTileItem> {
-  int countBilletAdulte = 0;
-  int countBilletEnfant = 0;
-  //DateTime? dateRetrait;
+  // @override
+  // void didChangeDependencies() {
+  //   print('Dans didChangeDependencies()');
+  //   super.didChangeDependencies();
+  // }
+
   RegExp regex = RegExp(
       r'([.]*0)(?!.*\d)'); //Pour enlever les zéros si la partie décimale est nulle
 
   @override
   Widget build(BuildContext context) {
-    final panierProvider = Provider.of<PanierProvider>(context, listen: false);
-
-    //Dialogue ajout de billet
-    Future<dynamic> openDialog() => showDialog(
-          context: context,
-          builder: (context) => StatefulBuilder(
-            builder: (context, setState) {
-              return AlertDialog(
-                //scrollable:
-                //true, //Éviter d'avoir dans mon cas un alertDialog avec une grande hauteur non nécessaire
-                title: Text(
-                  'Ajout Billets ${widget.intitule}',
-                  textAlign: TextAlign.center,
-                ),
-                content: Row(
-                  children: [
-                    Expanded(
-                      child: SizedBox(
-                        height: 100.0,
-                        child: Column(
-                          children: [
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: <Widget>[
-                                const Text('Adulte :'),
-                                IconButton(
-                                    color: Colors.purple,
-                                    icon: const Icon(
-                                      Icons.remove,
-                                    ),
-                                    onPressed: countBilletAdulte == 0
-                                        ? null
-                                        : () {
-                                            setState(() => countBilletAdulte--);
-                                          }),
-                                Text(
-                                  countBilletAdulte.toString(),
-                                  style: TextStyle(
-                                    color: Theme.of(context).primaryColor,
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                                IconButton(
-                                  color: Colors.purple,
-                                  icon: const Icon(Icons.add),
-                                  onPressed: () =>
-                                      setState(() => countBilletAdulte++),
-                                ),
-                              ],
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: <Widget>[
-                                const Text('Enfant :'),
-                                IconButton(
-                                  color: Colors.purple,
-                                  icon: const Icon(
-                                    Icons.remove,
-                                  ),
-                                  onPressed: countBilletEnfant == 0
-                                      ? null
-                                      : () {
-                                          setState(() => countBilletEnfant--);
-                                        },
-                                ),
-                                Text(
-                                  countBilletEnfant.toString(),
-                                  style: TextStyle(
-                                    color: Theme.of(context).primaryColor,
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                                IconButton(
-                                  color: Colors.purple,
-                                  icon: const Icon(Icons.add),
-                                  onPressed: () {
-                                    setState(() => countBilletEnfant++);
-                                  },
-                                ),
-                              ],
-                            ),
-                            // NotificationListener<DateNotification>(
-                            //   onNotification: (notification) {
-                            //     dateRetrait = notification.date;
-
-                            //     return true;
-                            //   },
-                            //   child: const DatePickerWidget(),
-                            // ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-                actions: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      TextButton(
-                        onPressed: () {
-                          countBilletAdulte = 0;
-                          countBilletEnfant = 0;
-                          Navigator.of(context).pop();
-                        },
-                        child: const Text('Ennuler'),
-                      ),
-                      TextButton(
-                        onPressed: () {
-                          var reponse = {
-                            'nbBilletAdulte': countBilletAdulte,
-                            'nbBilletEnfant': countBilletEnfant,
-                            'totalItemPanier': widget.total,
-                            //'dateRetrait': dateRetrait
-                          };
-                          Navigator.of(context).pop(reponse);
-                        },
-                        child: const Text('Soumettre'),
-                      ),
-                    ],
-                  )
-                ],
-              );
-            },
-          ),
-        );
-
+    //final panierProvider = Provider.of<PanierProvider>(context, listen: false);
     return ListTile(
       leading: CircleAvatar(
         child: Padding(
@@ -270,30 +146,30 @@ class _PanierListTileItemState extends State<PanierListTileItem> {
       title: Text(widget.intitule),
       subtitle: Text(
           '${widget.billetAdulte} x ${widget.prixAdulte.toString().replaceAll(regex, '')}€ + ${widget.billetEnfant} x ${widget.prixEnfant.toString().replaceAll(regex, '')}€'),
-      trailing: ElevatedButton(
-        onPressed: () async {
-          final rep = await openDialog();
-          if (rep != null) {
-            setState(() {
-              widget.billetAdulte = rep['nbBilletAdulte'];
-              widget.billetEnfant = rep['nbBilletEnfant'];
-              widget.total = (widget.prixAdulte * widget.billetAdulte) +
-                  (widget.prixEnfant * widget.billetEnfant);
-            });
+      // trailing: ElevatedButton(
+      //   onPressed: () async {
+      //     final rep = await openDialog();
+      //     if (rep != null) {
+      //       setState(() {
+      //         widget.billetAdulte = rep['nbBilletAdulte'];
+      //         widget.billetEnfant = rep['nbBilletEnfant'];
+      //         widget.total = (widget.prixAdulte * widget.billetAdulte) +
+      //             (widget.prixEnfant * widget.billetEnfant);
+      //       });
 
-            if (rep['dateRetrait'] != null) {
-              panierProvider.setDateRetrait(
-                  widget.id,
-                  DateFormat('dd/MM/yyyy').format(rep['dateRetrait'])
-                      as DateTime);
-            }
-            panierProvider.setTotalPanier(widget.id, widget.total);
-            panierProvider.addBillets(
-                widget.id, rep['nbBilletAdulte'], rep['nbBilletEnfant']);
-          }
-        },
-        child: const Text('Ajout Billet'),
-      ),
+      //       // if (rep['dateRetrait'] != null) {
+      //       //   panierProvider.setDateRetrait(
+      //       //       widget.id,
+      //       //       DateFormat('dd/MM/yyyy').format(rep['dateRetrait'])
+      //       //           as DateTime);
+      //       // }
+      //       panierProvider.setTotalPanier(widget.id, widget.total);
+      //       panierProvider.addBillets(
+      //           widget.id, rep['nbBilletAdulte'], rep['nbBilletEnfant']);
+      //     }
+      //   },
+      //   child: const Text('Ajout Billet'),
+      // ),
     );
   }
 }

@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'dart:async';
+
 //import 'dart:math';
 
 import '../providers/produit.dart';
 import '../providers/panier_provider.dart';
 import 'mon_badge.dart';
+import '../models/billets_notification.dart';
 
 class ProduitItem extends StatelessWidget {
   const ProduitItem({super.key});
@@ -24,6 +27,135 @@ class ProduitItem extends StatelessWidget {
   Widget build(BuildContext context) {
     final leProduit = Provider.of<ProduitProvider>(context);
     final lePanier = Provider.of<PanierProvider>(context);
+
+    int countBilletAdulte = 0;
+    int countBilletEnfant = 0;
+    //Dialogue ajout de billet
+    Future<dynamic> openDialog() => showDialog(
+          context: context,
+          builder: (context) => StatefulBuilder(
+            builder: (context, setState) {
+              return AlertDialog(
+                //scrollable:
+                //true, //Éviter d'avoir dans mon cas un alertDialog avec une grande hauteur non nécessaire
+                title: Text(
+                  'Ajout Billets ${leProduit.nom}',
+                  textAlign: TextAlign.center,
+                ),
+                content: Row(
+                  children: [
+                    Expanded(
+                      child: SizedBox(
+                        height: 100.0,
+                        child: Column(
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: <Widget>[
+                                const Text('Adulte :'),
+                                IconButton(
+                                    color: Colors.purple,
+                                    icon: const Icon(
+                                      Icons.remove,
+                                    ),
+                                    onPressed: countBilletAdulte == 0
+                                        ? null
+                                        : () {
+                                            setState(() => countBilletAdulte--);
+                                          }),
+                                Text(
+                                  countBilletAdulte.toString(),
+                                  style: TextStyle(
+                                    color: Theme.of(context).primaryColor,
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                IconButton(
+                                  color: Colors.purple,
+                                  icon: const Icon(Icons.add),
+                                  onPressed: () =>
+                                      setState(() => countBilletAdulte++),
+                                ),
+                              ],
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: <Widget>[
+                                const Text('Enfant :'),
+                                IconButton(
+                                  color: Colors.purple,
+                                  icon: const Icon(
+                                    Icons.remove,
+                                  ),
+                                  onPressed: countBilletEnfant == 0
+                                      ? null
+                                      : () {
+                                          setState(() => countBilletEnfant--);
+                                        },
+                                ),
+                                Text(
+                                  countBilletEnfant.toString(),
+                                  style: TextStyle(
+                                    color: Theme.of(context).primaryColor,
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                IconButton(
+                                  color: Colors.purple,
+                                  icon: const Icon(Icons.add),
+                                  onPressed: () {
+                                    setState(() => countBilletEnfant++);
+                                  },
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                actions: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      TextButton(
+                        onPressed: () {
+                          countBilletAdulte = 0;
+                          countBilletEnfant = 0;
+                          lePanier.removeSingleItem(leProduit.id);
+                          Navigator.of(context).pop();
+                        },
+                        child: const Text('Ennuler'),
+                      ),
+                      TextButton(
+                        onPressed:
+                            countBilletAdulte == 0 && countBilletEnfant == 0
+                                ? null
+                                : () {
+                                    var reponse = {
+                                      'nbBilletAdulte': countBilletAdulte,
+                                      'nbBilletEnfant': countBilletEnfant,
+                                      'totalItemPanier': lePanier.sommeTotale,
+                                      // 'intitule': leProduit.nom,
+                                      // 'prixAdulte': leProduit.prixAdulte,
+                                      // 'prixEnfant': leProduit.prixEnfant,
+                                      // 'sousTotal': leProduit.sommeTotale,
+                                    };
+                                    Navigator.of(context).pop(reponse);
+                                  },
+                        child: const Text('Soumettre'),
+                      ),
+                    ],
+                  )
+                ],
+              );
+            },
+          ),
+        );
+
     return ClipRRect(
       borderRadius: BorderRadius.circular(10),
       child: Container(
@@ -57,29 +189,33 @@ class ProduitItem extends StatelessWidget {
                       child: IconButton(
                         icon: const Icon(Icons.shopping_cart),
                         onPressed: () async {
-                          lePanier.addItem(
-                            leProduit.id,
-                            leProduit.prixAdulte,
-                            leProduit.prixEnfant,
-                            leProduit.nom,
-                            leProduit.billetAdulte,
-                            leProduit.billetEnfant,
-                            leProduit.sommeTotale,
-                          );
-                          ScaffoldMessenger.of(context).hideCurrentSnackBar();
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(
-                              content: Text(
-                                  '1 Billet ${leProduit.nom.toLowerCase()} ajouté'),
-                              duration: const Duration(seconds: 3),
-                              action: SnackBarAction(
-                                label: 'Annuler',
-                                onPressed: () {
-                                  lePanier.removeSingleItem(leProduit.id);
-                                },
-                              ),
-                            ),
-                          );
+                          //Récup du nombre de billet choisi
+                          final rep = await openDialog();
+                          if (rep != null) {
+                            leProduit.billetAdulte = rep['nbBilletAdulte'];
+                            leProduit.billetEnfant = rep['nbBilletEnfant'];
+                            if (context.mounted) {
+                              BilletsNotification(
+                                id: leProduit.id,
+                                billetAdulte: rep['nbBilletAdulte'],
+                                billetEnfant: rep['nbBilletEnfant'],
+                              ).dispatch(context);
+                              //Ajout d'un produit au panier
+                              lePanier.addItem(
+                                leProduit.id,
+                                leProduit.prixAdulte,
+                                leProduit.prixEnfant,
+                                leProduit.nom,
+                                leProduit.billetAdulte,
+                                leProduit.billetEnfant,
+                                (leProduit.prixAdulte *
+                                        leProduit.billetAdulte) +
+                                    (leProduit.prixEnfant *
+                                        leProduit.billetEnfant),
+                              );
+                            }
+                          }
+                          // print('Taille du panier : ${lePanier.itemCount}');
                         },
 
                         // ignore: deprecated_member_use

@@ -80,4 +80,9 @@ class ProduitProvider with ChangeNotifier {
       rethrow;
     }
   }
+
+  //Total commande par produit
+  double total(int billetAdulte, int billetEnfant) {
+    return (billetAdulte * prixAdulte) + (billetEnfant * prixEnfant);
+  }
 }

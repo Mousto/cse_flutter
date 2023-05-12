@@ -11,6 +11,7 @@ import '../providers/produits_provider.dart';
 import '../widgets/main_drawer.dart';
 import '../widgets/mon_badge.dart';
 import '../screens/panier_screen.dart';
+import '../models/billets_notification.dart';
 
 enum OptionsFiltrage { produitsFavoris, tousLesProduits, connexionDjango }
 
@@ -37,7 +38,7 @@ class _ProduitScreenState extends State<ProduitScreen> {
           _isLoading = false;
         });
       }).catchError((error) {
-        print(' Dans catch de fetchAndSetproduit de Produit_screen $error');
+        //print(' Dans catch de fetchAndSetproduit de Produit_screen $error');
         showDialog(
           context: context,
           builder: (ctx) => AlertDialog(
@@ -63,6 +64,7 @@ class _ProduitScreenState extends State<ProduitScreen> {
   @override
   Widget build(BuildContext context) {
     final produitsData = Provider.of<ProduitsProvider>(context);
+    final panier = Provider.of<PanierProvider>(context);
     final lesProduits =
         _showOnlyFavorites ? produitsData.favoriteProduct : produitsData.items;
 
@@ -77,7 +79,7 @@ class _ProduitScreenState extends State<ProduitScreen> {
                 if (seletedValue == OptionsFiltrage.produitsFavoris) {
                   _showOnlyFavorites = true;
                 } else if (seletedValue == OptionsFiltrage.connexionDjango) {
-                  print('Connexion avec django');
+                  //print('Connexion avec django');
                 } else {
                   _showOnlyFavorites = false;
                 }
@@ -118,27 +120,39 @@ class _ProduitScreenState extends State<ProduitScreen> {
       ),
       //Menu hamburger
       drawer: const MainDrawer(),
-      body: _isLoading
-          ? const Center(
-              child: CircularProgressIndicator(),
-            )
-          : GridView(
-              padding: const EdgeInsets.all(25),
-              gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-                maxCrossAxisExtent: 200,
-                childAspectRatio: 3 / 2,
-                crossAxisSpacing: 20,
-                mainAxisSpacing: 20,
+      body: NotificationListener<BilletsNotification>(
+        onNotification: (notification) {
+          // print('le test du bubble idProduit :${notification.id}');
+          // print(
+          //     'le test du bubble nbBilletAdulte :${notification.billetAdulte}');
+          // print(
+          //     'le test du bubble nbBilletEnfant :${notification.billetEnfant}');
+          panier.addBillets(notification.id, notification.billetAdulte,
+              notification.billetEnfant);
+          return true;
+        },
+        child: _isLoading
+            ? const Center(
+                child: CircularProgressIndicator(),
+              )
+            : GridView(
+                padding: const EdgeInsets.all(25),
+                gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+                  maxCrossAxisExtent: 200,
+                  childAspectRatio: 3 / 2,
+                  crossAxisSpacing: 20,
+                  mainAxisSpacing: 20,
+                ),
+                children: lesProduits
+                    .map<Widget>(
+                      (prodData) => ChangeNotifierProvider.value(
+                        value: prodData,
+                        child: const ProduitItem(),
+                      ),
+                    )
+                    .toList(),
               ),
-              children: lesProduits
-                  .map<Widget>(
-                    (prodData) => ChangeNotifierProvider.value(
-                      value: prodData,
-                      child: const ProduitItem(),
-                    ),
-                  )
-                  .toList(),
-            ),
+      ),
     );
   }
 }

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 import './button_widget.dart';
-import '../models/date_notification.dart';
+import '../models/lieu_notification.dart';
 
 class DatePickerWidget extends StatefulWidget {
   const DatePickerWidget({super.key});
@@ -41,10 +41,6 @@ class _DatePickerWidgetState extends State<DatePickerWidget> {
       lastDate: DateTime(DateTime.now().year + 1),
     );
     if (newDate == null) return;
-
-    if (context.mounted) {
-      DateNotification(date: newDate!).dispatch(context);
-    }
 
     setState(() => date = newDate);
   }

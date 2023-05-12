@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class DateNotification extends Notification {
+class DateRetraitNotification extends Notification {
   final DateTime date;
 
-  const DateNotification({required this.date});
+  const DateRetraitNotification({required this.date});
 }
