@@ -125,6 +125,8 @@ class ProduitItem extends StatelessWidget {
                         onPressed: () {
                           countBilletAdulte = 0;
                           countBilletEnfant = 0;
+                          leProduit.billetAdulte = 0;
+                          leProduit.billetEnfant = 0;
                           lePanier.removeSingleItem(leProduit.id);
                           Navigator.of(context).pop();
                         },
@@ -139,10 +141,6 @@ class ProduitItem extends StatelessWidget {
                                       'nbBilletAdulte': countBilletAdulte,
                                       'nbBilletEnfant': countBilletEnfant,
                                       'totalItemPanier': lePanier.sommeTotale,
-                                      // 'intitule': leProduit.nom,
-                                      // 'prixAdulte': leProduit.prixAdulte,
-                                      // 'prixEnfant': leProduit.prixEnfant,
-                                      // 'sousTotal': leProduit.sommeTotale,
                                     };
                                     Navigator.of(context).pop(reponse);
                                   },
@@ -215,7 +213,6 @@ class ProduitItem extends StatelessWidget {
                               );
                             }
                           }
-                          // print('Taille du panier : ${lePanier.itemCount}');
                         },
 
                         // ignore: deprecated_member_use
@@ -249,6 +246,28 @@ class ProduitItem extends StatelessWidget {
               leProduit.nom,
               style: Theme.of(context).textTheme.titleLarge,
             ),
+          ),
+          Positioned(
+            top: 70,
+            left: 25,
+            child: Column(children: [
+              if (leProduit.billetAdulte != 0)
+                Text(
+                  'Billet Adulte : ${leProduit.billetAdulte.toString()}',
+                  style: const TextStyle(
+                    color: Colors.black87,
+                    fontSize: 18,
+                  ),
+                ),
+              if (leProduit.billetEnfant != 0)
+                Text(
+                  'Billet Enfant : ${leProduit.billetEnfant.toString()}',
+                  style: const TextStyle(
+                    color: Colors.black87,
+                    fontSize: 18,
+                  ),
+                ),
+            ]),
           ),
         ]),
       ),

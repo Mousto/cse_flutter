@@ -89,43 +89,54 @@ class _PanierScreenState extends State<PanierScreen> {
                 ),
               ),
             ),
-            Card(
-              elevation: 5.0,
-              margin: const EdgeInsets.all(15),
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
-                child: Column(
-                  children: [
-                    MonCalendrier(
-                      dateRetrait: _dateRetraitPanier!,
-                      onDateChange: (data) {
-                        _dateRetraitPanier = data;
-                        panier.setDateRetrait(data);
-                      },
-                    ),
-                    const SizedBox(height: 10),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        const Text(
-                          'Lieu Retrait :',
-                          style: TextStyle(
-                            fontSize: 20,
+            //Affichage selon contenu du panier
+            panier.itemCount != 0
+                ? Card(
+                    elevation: 5.0,
+                    margin: const EdgeInsets.all(15),
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 8, vertical: 8),
+                      child: Column(
+                        children: [
+                          MonCalendrier(
+                            dateRetrait: _dateRetraitPanier!,
+                            onDateChange: (data) {
+                              _dateRetraitPanier = data;
+                              panier.setDateRetrait(data);
+                            },
                           ),
-                        ),
-                        //const Spacer(), //Ajouter un espace en poussant les éléments suivant vers l'espace restant
-                        SizedBox(
-                          width: 200,
-                          child: MonDropdownBoutton(
-                              selectedItem: selectedItem,
-                              itemsDeMenu: itemsDeMenu),
-                        ),
-                      ],
+                          const SizedBox(height: 10),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              const Text(
+                                'Lieu Retrait :',
+                                style: TextStyle(
+                                  fontSize: 20,
+                                ),
+                              ),
+                              //const Spacer(), //Ajouter un espace en poussant les éléments suivant vers l'espace restant
+                              SizedBox(
+                                width: 200,
+                                child: MonDropdownBoutton(
+                                    selectedItem: selectedItem,
+                                    itemsDeMenu: itemsDeMenu),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
                     ),
-                  ],
-                ),
-              ),
-            ),
+                  )
+                : const Text(
+                    'Ton panier est vide.',
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.purple,
+                    ),
+                  ),
             //ListView ne fonctionne pas dans Column.Il faut donc le wrapper dans Expanded() par example qui permet de prendre tout l'espace restant ou de toute la place qu'on souhaite avoir ce qui est le cas de Listview.
             //Utilisation de ListView.builder car ne sachant pas à priori la longeur de la list.
             Expanded(
@@ -324,6 +335,7 @@ class _PasserCommandeBoutonState extends State<PasserCommandeBouton> {
               setState(() {
                 _isLoading = true;
               });
+
               //On appelle directement Provider.of<CommandeProvider>(context) sans passer par une variable et on n'a pas besoin ici d'écouter l'ajout de commande d'où le listen à false.
               try {
                 await Provider.of<CommandeProvider>(context, listen: false)
@@ -334,6 +346,10 @@ class _PasserCommandeBoutonState extends State<PasserCommandeBouton> {
                   panierPasserComm.lieuRetrait,
                 );
                 widget.viderPanier(); //Exécute fonction dans le parent
+                //Réinitialisation de la date
+                panierPasserComm.setDateRetrait(DateTime.now());
+                //réinitialisation du lieu de retrait
+                panierPasserComm.setLieuRetrait('');
               } catch (error) {
                 print('erreur à traiter : $error');
                 showDialog(
@@ -348,7 +364,7 @@ class _PasserCommandeBoutonState extends State<PasserCommandeBouton> {
                       ),
                     ),
                     content: const Text(
-                      "Désolé, cette opération n'a pas abouti. Veuillez essayer ultérieurement.",
+                      "Désolé, cette opération n'a pas abouti.Vous n'avez probablement pas choisi un lieu de retrait. Si un lieu de retrait est défini, Veuillez essayer ultérieurement.",
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: 18.0,
@@ -388,7 +404,7 @@ class _PasserCommandeBoutonState extends State<PasserCommandeBouton> {
             ),
       child: _isLoading
           ? const CircularProgressIndicator()
-          : const Text('Passer commande'),
+          : const Text('Passer Commande'),
     );
   }
 }
