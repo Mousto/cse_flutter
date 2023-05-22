@@ -230,9 +230,22 @@ class ProduitItem extends StatelessWidget {
                   ),
                   Consumer<ProduitProvider>(
                     builder: (_, produit, _1) => IconButton(
-                      icon: Icon(produit.isFavorite
-                          ? Icons.favorite
-                          : Icons.favorite_border),
+                      icon: AnimatedSwitcher(
+                        duration: const Duration(milliseconds: 300),
+                        transitionBuilder: (child, animation) {
+                          return RotationTransition(
+                            turns: Tween<double>(begin: 0.8, end: 1)
+                                .animate(animation),
+                            child: child,
+                          );
+                        },
+                        child: Icon(
+                          produit.isFavorite
+                              ? Icons.star //Icons.favorite
+                              : Icons.star_border, //Icons.favorite_border,
+                          key: ValueKey(produit.isFavorite),
+                        ),
+                      ),
                       onPressed: () {
                         produit.toggleIsFavorite();
                       },

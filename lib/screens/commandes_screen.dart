@@ -33,10 +33,30 @@ class _CommandesScreenState extends State<CommandesScreen> {
         ),
         //Menu hamburger
         drawer: const MainDrawer(),
-        body: ListView.builder(
-          itemCount: lesCommandes.commandes.length,
-          itemBuilder: (context, index) =>
-              CommandeItem(panier: lesCommandes.commandes[index]),
+        body: Card(
+          child: Column(
+            children: [
+              if (lesCommandes.paniers.length > 1)
+                Text(
+                  'Tu as ${lesCommandes.paniers.length} commandes en cours',
+                  style: const TextStyle(
+                      fontSize: 20, fontWeight: FontWeight.bold),
+                ),
+              if (lesCommandes.paniers.length == 1)
+                Text('Tu as ${lesCommandes.paniers.length} commande en cours'),
+              if (lesCommandes.paniers.isEmpty)
+                const Text("tu n'as aucune commande en cours"),
+              Expanded(
+                child: ListView.builder(
+                  itemCount: lesCommandes.paniers.length,
+                  itemBuilder: (context, index) => CommandeItem(
+                    panier: lesCommandes.paniers[index],
+                    index: index,
+                  ),
+                ),
+              ),
+            ],
+          ),
         ));
   }
 }

@@ -7,18 +7,39 @@ import '../models/panier_bdd.dart';
 
 class CommandeProvider with ChangeNotifier {
   // ignore: prefer_final_fields
-  List<PanierBdd> _commandes = [];
+  List<PanierBdd> _paniers = [];
 
   //Getter des commandes
-  List<PanierBdd> get commandes {
+  List<PanierBdd> get paniers {
     // Retour d'une copie par Spreading
-    return [..._commandes];
+    //print('les paniers ${[..._paniers]}');
+    return [..._paniers];
   }
 
   Future<void> fetchAndSetCommandes() async {
-    const url = 'http://192.168.1.48:8000/api/panier/';
+    const url = 'http://192.168.1.48:8000/api/panier';
     final reponse = await http.get(Uri.parse(url));
-    //print(json.decode(reponse.body));
+    final donneesExtraites = const Utf8Decoder().convert(reponse.bodyBytes);
+    var myList = List<Map<String, dynamic>>.from(json.decode(donneesExtraites));
+    if (_paniers.length != myList.length) {
+      bool match = true;
+      for (var i = 0; i < myList.length; i++) {
+        for (final panier in _paniers) {
+          if (myList[i]['id'] == panier.id) {
+            match = match && false;
+          }
+        }
+        if (match) {
+          _paniers.insert(
+            0,
+            PanierBdd.fromJson(myList[i]),
+          );
+        }
+      }
+    }
+    // print(
+    //     '******************${json.decode(reponse.body)[0]['commandes'][0]['produit']['nom']}');
+    notifyListeners();
   }
 
   //Ajouter une commande
@@ -57,7 +78,7 @@ class CommandeProvider with ChangeNotifier {
     //print('Dans CommandeProvider -> addcommande, Lieu retrait : $lieuRetrait');
 
     //index de la methode insert() à 0 pour dire que l'élément à ajouter doit être en début de liste sinon utiliser la méthode add() pour ajouter en fin de liste
-    _commandes.insert(
+    _paniers.insert(
       0,
       PanierBdd.fromJson(jsonReponse),
     );

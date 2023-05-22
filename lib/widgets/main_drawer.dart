@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../screens/user_products_screen.dart';
 import '../screens/commandes_screen.dart';
+import '../screens/doleances_screen.dart';
 
 class MainDrawer extends StatelessWidget {
   const MainDrawer({super.key});
@@ -30,7 +31,7 @@ class MainDrawer extends StatelessWidget {
       child: Column(
         children: <Widget>[
           AppBar(
-            title: const Text('Salut les collègues !'),
+            title: const Text('Salut collègue !'),
             automaticallyImplyLeading:
                 false, //permets de pas ajouter de btn retour
           ),
@@ -50,6 +51,15 @@ class MainDrawer extends StatelessWidget {
             onTap: () {
               Navigator.of(context)
                   .pushReplacementNamed(UserProductsScreen.routeName);
+            },
+          ),
+          const Divider(),
+          ListTile(
+            leading: const Icon(Icons.question_mark),
+            title: const Text('Mes questions'),
+            onTap: () {
+              Navigator.of(context)
+                  .pushReplacementNamed(DoleancesScreen.routeName);
             },
           ),
           /* Container(

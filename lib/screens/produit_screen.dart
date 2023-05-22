@@ -22,10 +22,32 @@ class ProduitScreen extends StatefulWidget {
   State<ProduitScreen> createState() => _ProduitScreenState();
 }
 
-class _ProduitScreenState extends State<ProduitScreen> {
+class _ProduitScreenState extends State<ProduitScreen>
+    with SingleTickerProviderStateMixin {
+  late AnimationController _animationController;
   var _showOnlyFavorites = false;
   var _isInit = true;
   var _isLoading = false;
+
+  @override
+  void initState() {
+    super.initState();
+
+    _animationController = AnimationController(
+      vsync: this,
+      duration: const Duration(microseconds: 300),
+      lowerBound: 0, //valeur par defaut 0
+      upperBound: 1, //valeur par defaut 1
+    );
+    _animationController
+        .forward(); //Commence l'animation jusqu'à sa fin à moins d'appeller _animationController.stop() pour l'arreter.
+  }
+
+  @override
+  void dispose() {
+    _animationController.dispose();
+    super.dispose();
+  }
 
   @override
   void didChangeDependencies() {
@@ -135,22 +157,31 @@ class _ProduitScreenState extends State<ProduitScreen> {
             ? const Center(
                 child: CircularProgressIndicator(),
               )
-            : GridView(
-                padding: const EdgeInsets.all(25),
-                gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-                  maxCrossAxisExtent: 200,
-                  childAspectRatio: 3 / 2,
-                  crossAxisSpacing: 20,
-                  mainAxisSpacing: 20,
+            : AnimatedBuilder(
+                animation: _animationController,
+                child: GridView(
+                  padding: const EdgeInsets.all(25),
+                  gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+                    maxCrossAxisExtent: 200,
+                    childAspectRatio: 3 / 2,
+                    crossAxisSpacing: 20,
+                    mainAxisSpacing: 20,
+                  ),
+                  children: lesProduits
+                      .map<Widget>(
+                        (prodData) => ChangeNotifierProvider.value(
+                          value: prodData,
+                          child: const ProduitItem(),
+                        ),
+                      )
+                      .toList(),
                 ),
-                children: lesProduits
-                    .map<Widget>(
-                      (prodData) => ChangeNotifierProvider.value(
-                        value: prodData,
-                        child: const ProduitItem(),
-                      ),
-                    )
-                    .toList(),
+                builder: (context, child) => Padding(
+                  padding: EdgeInsets.only(
+                    top: 100 - _animationController.value * 100,
+                  ),
+                  child: child,
+                ),
               ),
       ),
     );

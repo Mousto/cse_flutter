@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+// Je fais un as riverpod car il ya clash avec le package provider concernant la class ChangeNotifierProvider dans la méthode build ci-dessou
+import 'package:flutter_riverpod/flutter_riverpod.dart' as riverpod;
 import 'package:flutter_localizations/flutter_localizations.dart';
 
 import 'screens/produit_detail_screen.dart';
@@ -9,12 +11,18 @@ import 'screens/user_products_screen.dart';
 import './screens/panier_screen.dart';
 import './screens/edit_product_screen.dart';
 import './screens/commandes_screen.dart';
+import './screens/doleances_screen.dart';
 import './providers/produits_provider.dart';
 import './providers/panier_provider.dart';
 import './providers/commande_provider.dart';
 
 void main() {
-  runApp(const MyApp());
+  //ProviderScope permet de rendre disponible riverpod et les providers qu'on crée disponible dans notre app
+  runApp(
+    const riverpod.ProviderScope(
+      child: MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -60,6 +68,10 @@ class MyApp extends StatelessWidget {
               ),
           colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.purple)
               .copyWith(secondary: Colors.deepOrange),
+          // colorScheme: ColorScheme.fromSeed(
+          //   brightness: Brightness.dark,
+          //   seedColor: const Color.fromARGB(255, 131, 57, 0),
+          // ),
         ),
         //home: const ProduitScreen(),
         initialRoute: '/', // default is '/'
@@ -74,6 +86,7 @@ class MyApp extends StatelessWidget {
           EditProductScreen.routeName: ((context) => const EditProductScreen()),
           TabsScreen.routeName: ((context) => const TabsScreen()),
           CommandesScreen.routeName: ((context) => const CommandesScreen()),
+          DoleancesScreen.routeName: ((context) => const DoleancesScreen()),
         },
       ),
     );

@@ -112,24 +112,26 @@ class ProduitsProvider with ChangeNotifier {
 
   //Charger les produits à partir du serveur
   Future<void> fetchAndSetProducts() async {
-    const String url = 'http://192.168.1.48:8000';
-    try {
-      final reponse = await http.get(Uri.parse('$url/api/produits'));
-      final donneesExtraites = const Utf8Decoder().convert(reponse.bodyBytes);
-      final List<ProduitProvider> listProduits = [];
-      for (var el in jsonDecode(donneesExtraites)) {
-        listProduits.add(
-          ProduitProvider.fromJson(
-            el,
-          ),
-        );
+    if (_items.isEmpty) {
+      const String url = 'http://192.168.1.48:8000';
+      try {
+        final reponse = await http.get(Uri.parse('$url/api/produits'));
+        final donneesExtraites = const Utf8Decoder().convert(reponse.bodyBytes);
+        final List<ProduitProvider> listProduits = [];
+        for (var el in jsonDecode(donneesExtraites)) {
+          listProduits.add(
+            ProduitProvider.fromJson(
+              el,
+            ),
+          );
+        }
+        _items = listProduits;
+        notifyListeners();
+      } catch (error) {
+        print(
+            '**************************** catch de fetchAndSetproduit : $error');
+        rethrow; // relance l'erreur
       }
-      _items = listProduits;
-      notifyListeners();
-    } catch (error) {
-      print(
-          '**************************** catch de fetchAndSetproduit : $error');
-      rethrow; // relance l'erreur
     }
   }
 
