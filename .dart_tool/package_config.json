@@ -38,6 +38,12 @@
       "languageVersion": "2.17"
     },
     {
+      "name": "crypto",
+      "rootUri": "file:///Users/macmous/.pub-cache/hosted/pub.dev/crypto-3.0.3",
+      "packageUri": "lib/",
+      "languageVersion": "2.19"
+    },
+    {
       "name": "cupertino_icons",
       "rootUri": "file:///Users/macmous/.pub-cache/hosted/pub.dev/cupertino_icons-1.0.5",
       "packageUri": "lib/",
@@ -74,12 +80,6 @@
       "languageVersion": "2.17"
     },
     {
-      "name": "flutter_lints",
-      "rootUri": "file:///Users/macmous/.pub-cache/hosted/pub.dev/flutter_lints-2.0.1",
-      "packageUri": "lib/",
-      "languageVersion": "2.17"
-    },
-    {
       "name": "flutter_localizations",
       "rootUri": "file:///usr/local/Caskroom/flutter/3.3.9/flutter/packages/flutter_localizations",
       "packageUri": "lib/",
@@ -92,6 +92,12 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "flutter_riverpod",
+      "rootUri": "file:///Users/macmous/.pub-cache/hosted/pub.dev/flutter_riverpod-2.3.6",
+      "packageUri": "lib/",
+      "languageVersion": "2.17"
+    },
+    {
       "name": "flutter_test",
       "rootUri": "file:///usr/local/Caskroom/flutter/3.3.9/flutter/packages/flutter_test",
       "packageUri": "lib/",
@@ -102,6 +108,18 @@
       "rootUri": "file:///usr/local/Caskroom/flutter/3.3.9/flutter/packages/flutter_web_plugins",
       "packageUri": "lib/",
       "languageVersion": "2.17"
+    },
+    {
+      "name": "get",
+      "rootUri": "file:///Users/macmous/.pub-cache/hosted/pub.dev/get-4.6.5",
+      "packageUri": "lib/",
+      "languageVersion": "2.15"
+    },
+    {
+      "name": "google_fonts",
+      "rootUri": "file:///Users/macmous/.pub-cache/hosted/pub.dev/google_fonts-4.0.4",
+      "packageUri": "lib/",
+      "languageVersion": "2.14"
     },
     {
       "name": "http",
@@ -156,12 +174,6 @@
       "rootUri": "file:///Users/macmous/.pub-cache/hosted/pub.dev/js-0.6.5",
       "packageUri": "lib/",
       "languageVersion": "2.16"
-    },
-    {
-      "name": "lints",
-      "rootUri": "file:///Users/macmous/.pub-cache/hosted/pub.dev/lints-2.0.1",
-      "packageUri": "lib/",
-      "languageVersion": "2.17"
     },
     {
       "name": "matcher",
@@ -260,6 +272,12 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "riverpod",
+      "rootUri": "file:///Users/macmous/.pub-cache/hosted/pub.dev/riverpod-2.3.6",
+      "packageUri": "lib/",
+      "languageVersion": "2.17"
+    },
+    {
       "name": "sky_engine",
       "rootUri": "file:///usr/local/Caskroom/flutter/3.3.9/flutter/bin/cache/pkg/sky_engine",
       "packageUri": "lib/",
@@ -276,6 +294,12 @@
       "rootUri": "file:///Users/macmous/.pub-cache/hosted/pub.dev/stack_trace-1.11.0",
       "packageUri": "lib/",
       "languageVersion": "2.18"
+    },
+    {
+      "name": "state_notifier",
+      "rootUri": "file:///Users/macmous/.pub-cache/hosted/pub.dev/state_notifier-0.7.2+1",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
     },
     {
       "name": "stream_channel",
@@ -302,8 +326,20 @@
       "languageVersion": "2.18"
     },
     {
+      "name": "transparent_image",
+      "rootUri": "file:///Users/macmous/.pub-cache/hosted/pub.dev/transparent_image-2.0.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "typed_data",
       "rootUri": "file:///Users/macmous/.pub-cache/hosted/pub.dev/typed_data-1.3.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "uuid",
+      "rootUri": "file:///Users/macmous/.pub-cache/hosted/pub.dev/uuid-3.0.7",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -332,7 +368,7 @@
       "languageVersion": "2.18"
     }
   ],
-  "generated": "2023-06-02T11:21:08.164324Z",
+  "generated": "2023-06-02T11:44:43.427898Z",
   "generator": "pub",
   "generatorVersion": "2.19.5"
 }
