@@ -5,7 +5,15 @@ const uuid = Uuid();
 
 class Doleance {
   final String id;
-  final String titre;
+  final String objet;
+  final String contenu;
+  final String recepteur;
+  final DateTime dateQuestion;
 
-  Doleance({required this.titre}) : id = uuid.v4();
+  Doleance({
+    required this.objet,
+    required this.contenu,
+    required this.recepteur,
+    required this.dateQuestion,
+  }) : id = uuid.v4();
 }
