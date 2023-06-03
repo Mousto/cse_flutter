@@ -1,3 +1,4 @@
+import 'package:cse_talant_valmy/src/utils/theme/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
@@ -55,30 +56,8 @@ class MyApp extends StatelessWidget {
         supportedLocales: const [Locale('en'), Locale('fr')],
 
         title: 'CSE_TALANT_VALMY',
-        theme: ThemeData(
-          primarySwatch: Colors.purple,
-          fontFamily: 'Raleway',
-          textTheme: ThemeData.light().textTheme.copyWith(
-                bodyLarge: const TextStyle(
-                  color: Color.fromRGBO(20, 51, 51, 1),
-                ),
-                bodyMedium: const TextStyle(
-                  color: Color.fromRGBO(20, 51, 51, 1),
-                ),
-                titleLarge: const TextStyle(
-                  fontFamily: 'RobotoCondensed',
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-          colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.purple)
-              .copyWith(secondary: Colors.deepOrange),
-          // colorScheme: ColorScheme.fromSeed(
-          //brightness: Brightness.dark,
-          //   seedColor: const Color.fromARGB(255, 131, 57, 0),
-          // ),
-        ),
-        darkTheme: ThemeData(brightness: Brightness.dark),
+        theme: MonAppTheme.ligthTheme,
+        darkTheme: MonAppTheme.ligthTheme,
         themeMode: ThemeMode.system,
         //home: const ProduitScreen(),
         initialRoute: '/', // default is '/'
