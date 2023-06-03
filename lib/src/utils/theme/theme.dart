@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class MonAppTheme {
+  MonAppTheme._(); //Permet de créer un constructeur privé inaccessible de l'extérieur.
+
   static ThemeData ligthTheme = ThemeData(
     brightness: Brightness.light,
     primarySwatch: Colors.purple,
