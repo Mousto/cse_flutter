@@ -57,7 +57,7 @@ class ProduitDetailCard extends StatelessWidget {
                 onPressed: () {
                   leProduit.toggleIsFavorite();
                 },
-                color: Theme.of(context).accentColor,
+                color: Theme.of(context).colorScheme.secondary,
               ),
               title: Text(
                 leProduit.nom,
