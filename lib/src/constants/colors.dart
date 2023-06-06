@@ -11,5 +11,5 @@ const tDarkColor = Color(0xFF000000);
 
 /*lES COULEURS D'EMBARQUEMENT À BORD */
 const tOnBoardingPage1Color = Colors.white;
-const tOnBordingPage2Color = Color(0xfffddcdf);
+const tOnBoardingPage2Color = Color(0xfffddcdf);
 const tOnBoardingPage3Color = Color(0xffffdcbd);

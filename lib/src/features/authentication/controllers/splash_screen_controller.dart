@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
 
-import 'package:cse_talant_valmy/src/features/authentication/screens/welcome/welcome_screen.dart';
+import 'package:cse_talant_valmy/src/features/authentication/screens/on_boarding/on_boarding_screen.dart';
+// import 'package:cse_talant_valmy/src/features/authentication/screens/welcome/welcome_screen.dart';
 
 class SplashScreenController extends GetxController {
   static SplashScreenController get find => Get.find();
@@ -16,6 +17,6 @@ class SplashScreenController extends GetxController {
     print('Changement écran');
 
     Get.to(() =>
-        WelcomeScreen()); //pas besoin de context avec Getx pour la navigation
+        OnBoardingScreen()); //pas besoin de context avec Getx pour la navigation
   }
 }

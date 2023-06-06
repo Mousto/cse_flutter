@@ -380,7 +380,11 @@
       "languageVersion": "2.18"
     }
   ],
+<<<<<<< HEAD
   "generated": "2023-06-03T13:15:52.442864Z",
+=======
+  "generated": "2023-06-03T13:32:12.761330Z",
+>>>>>>> commande
   "generator": "pub",
   "generatorVersion": "2.19.5"
 }
