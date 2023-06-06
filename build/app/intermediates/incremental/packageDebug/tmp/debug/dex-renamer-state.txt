@@ -1,4 +1,4 @@
-#Fri Jun 02 12:59:47 CEST 2023
+#Mon Jun 05 12:15:01 CEST 2023
 base.0=/Users/macmous/Documents/Flutter/cse_talant_valmy/build/app/intermediates/dex/debug/mergeDexDebug/classes.dex
 renamed.0=classes.dex
 path.0=classes.dex

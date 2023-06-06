@@ -19,3 +19,8 @@ const String tOnboardingSubtitle3 =
 const String tOnboardingCounter1 = '1/3';
 const String tOnboardingCounter2 = '2/3';
 const String tOnboardingCounter3 = '3/3';
+
+/** Welcome string text */
+const String tWelcomeTitle = "Build Awasome Apps";
+const String tWelcomeSubtitle =
+    "Let's put your creativity on the developpement highway, craft apps";
