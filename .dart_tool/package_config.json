@@ -80,6 +80,12 @@
       "languageVersion": "3.0"
     },
     {
+      "name": "flutter_lints",
+      "rootUri": "file:///Users/macmous/.pub-cache/hosted/pub.dev/flutter_lints-2.0.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.17"
+    },
+    {
       "name": "flutter_localizations",
       "rootUri": "file:///usr/local/Caskroom/flutter/3.3.9/flutter/packages/flutter_localizations",
       "packageUri": "lib/",
@@ -174,6 +180,12 @@
       "rootUri": "file:///Users/macmous/.pub-cache/hosted/pub.dev/js-0.6.7",
       "packageUri": "lib/",
       "languageVersion": "2.19"
+    },
+    {
+      "name": "lints",
+      "rootUri": "file:///Users/macmous/.pub-cache/hosted/pub.dev/lints-2.1.1",
+      "packageUri": "lib/",
+      "languageVersion": "3.0"
     },
     {
       "name": "liquid_swipe",
@@ -380,7 +392,7 @@
       "languageVersion": "2.18"
     }
   ],
-  "generated": "2023-06-06T11:15:13.403011Z",
+  "generated": "2023-06-08T11:18:08.925259Z",
   "generator": "pub",
   "generatorVersion": "3.0.3"
 }

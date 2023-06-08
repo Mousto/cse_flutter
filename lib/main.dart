@@ -6,8 +6,6 @@ import 'package:provider/provider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart' as riverpod;
 import 'package:flutter_localizations/flutter_localizations.dart';
 
-import 'package:cse_talant_valmy/src/features/authentication/screens/welcome/welcome_screen.dart';
-import 'screens/signup_screen.dart';
 import 'screens/produit_detail_screen.dart';
 import './screens/tabs_screen.dart';
 import './screens/home_screen.dart';
