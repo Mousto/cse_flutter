@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import 'package:cse_talant_valmy/src/features/authentication/screens/splash_screen/splash_screen.dart';
-import '../screens/tabs_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});

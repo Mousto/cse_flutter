@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 import './button_widget.dart';
-import '../models/lieu_notification.dart';
 
 class DatePickerWidget extends StatefulWidget {
   const DatePickerWidget({super.key});

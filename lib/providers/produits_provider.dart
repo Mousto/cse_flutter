@@ -62,8 +62,8 @@ class ProduitsProvider with ChangeNotifier {
   }
 
   Future<void> updateProduit(int id, ProduitProvider nouveauProduit) async {
-    final url = 'http://192.168.1.48:8000/api/produits/$id/';
-    final Dio dio = Dio();
+    // final url = 'http://192.168.1.48:8000/api/produits/$id/';
+    // final Dio dio = Dio();
 
     final prodIndex = _items.indexWhere((prod) => prod.id == id);
     if (prodIndex >= 0) {
@@ -73,7 +73,7 @@ class ProduitsProvider with ChangeNotifier {
           "Picture",
           await MultipartFile.fromFile(nouveauProduit.photo),
         ));
-        var response = await dio.patch(url, data: formData);
+        //var response = await dio.patch(url, data: formData);
 
         //Ajouter le prod
         _items[prodIndex] = nouveauProduit;

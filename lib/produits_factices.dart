@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert'; //besoin de cet import pour la méthode jsonDecode().
 
 import 'providers/produit.dart';
 

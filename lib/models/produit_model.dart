@@ -1,5 +1,3 @@
-import 'package:cse_talant_valmy/widgets/produit_item.dart';
-
 class ProduitModel {
   final int id;
   final String nom;
