@@ -1,6 +1,7 @@
-import 'package:cse_talant_valmy/src/constants/colors.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get_connect/http/src/utils/utils.dart';
+import 'package:get/get.dart';
+
+import '../login/login_screen.dart';
 
 //import 'package:cse_talant_valmy/screens/tabs_screen.dart';
 import '../../../../constants/sizes.dart';
@@ -42,7 +43,9 @@ class WelcomeScreen extends StatelessWidget {
               children: [
                 Expanded(
                   child: OutlinedButton(
-                    onPressed: () {},
+                    onPressed: () => Get.to(
+                      () => const LoginScreen(),
+                    ), // Utiliation de GetX pour la rédirection.
                     child: Text(
                       tLogin.toLowerCase(),
                       style: const TextStyle(

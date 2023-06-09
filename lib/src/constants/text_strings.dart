@@ -3,6 +3,7 @@
 //Text généric
 const String tLogin = "Connexion";
 const String tSignup = "S'inscrire";
+const String tSignupInvite = "J'y vais !";
 
 // Splash Screen
 const String tAppName = 'cse Talant-Valmy';
@@ -27,3 +28,27 @@ const String tOnboardingCounter3 = '3/3';
 // Welcome string text
 const String tWelcomeTitle = "Embarques et rejoins nous !";
 const String tWelcomeSubtitle = "Tous unis, tous solidaires.";
+
+// -- Login Screen Text
+const String tLoginTitle = "Welcome Back,";
+const String tLoginSubTitle = "Make it work, make it right, make it fast.";
+const String tRememberMe = "Remember Me?";
+const String tDontHaveAnAccount = "Pas encore inscrit(e) ? ";
+const String tEmail = "E-mail";
+const String tPassword = "Mot de passe";
+
+// -- Forget Password Text
+const String tForgetPassword = 'Mot de passe oublié ?';
+const String tForgetPasswordTitle = "Make Selection!";
+const String tForgetPasswordSubTitle =
+    "Select one of the options given below to reset your password.";
+const String tResetViaEMail = "Reset via Mail Verification";
+const String tResetViaPhone = "Reset via Phone Verification";
+
+// -- Forget Password Via Phone - Text
+const String tForgetPhoneSubTitle =
+    "Enter your registered Phone No to receive OTP";
+
+// -- Forget Password Via E-Mail - Text
+const String tForgetMailSubTitle =
+    "Enter your registered E-Mail to receive OTP";
