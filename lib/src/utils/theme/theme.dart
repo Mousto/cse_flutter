@@ -1,6 +1,4 @@
-import 'package:cse_talant_valmy/src/constants/colors.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 import 'widget_themes/outlined_button_theme.dart';
 import 'widget_themes/text_theme.dart';

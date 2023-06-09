@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+//import 'package:cse_talant_valmy/screens/tabs_screen.dart';
+import '../../../../constants/colors.dart';
 import '../login/login_screen.dart';
 
-//import 'package:cse_talant_valmy/screens/tabs_screen.dart';
 import '../../../../constants/sizes.dart';
 import '../../../../constants/text_strings.dart';
 import '../../../../constants/image_string.dart';
@@ -13,9 +14,13 @@ class WelcomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var screenHeight = MediaQuery.of(context).size.height;
-
+    var mediaquery = MediaQuery.of(context);
+    var screenHeight = mediaquery.size.height;
+    var brightness = mediaquery.platformBrightness;
+    print(brightness);
+    final isDarkmode = brightness == Brightness.dark;
     return Scaffold(
+      backgroundColor: isDarkmode ? tSecondaryColor : tLindaWelcomeBgColor,
       body: Container(
         padding: const EdgeInsets.all(tDefaultSize),
         child: Column(
