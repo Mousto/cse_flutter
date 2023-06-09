@@ -1,11 +1,11 @@
 [
     {
-        "merged": "/Users/macmous/Documents/Flutter/cse_talant_valmy/build/app/intermediates/merged_res/debug/mipmap-mdpi_ic_launcher.png.flat",
-        "source": "/Users/macmous/Documents/Flutter/cse_talant_valmy/android/app/src/main/res/mipmap-mdpi/ic_launcher.png"
-    },
-    {
         "merged": "/Users/macmous/Documents/Flutter/cse_talant_valmy/build/app/intermediates/merged_res/debug/drawable-night_background.png.flat",
         "source": "/Users/macmous/Documents/Flutter/cse_talant_valmy/android/app/src/main/res/drawable-night/background.png"
+    },
+    {
+        "merged": "/Users/macmous/Documents/Flutter/cse_talant_valmy/build/app/intermediates/merged_res/debug/mipmap-mdpi_ic_launcher.png.flat",
+        "source": "/Users/macmous/Documents/Flutter/cse_talant_valmy/android/app/src/main/res/mipmap-mdpi/ic_launcher.png"
     },
     {
         "merged": "/Users/macmous/Documents/Flutter/cse_talant_valmy/build/app/intermediates/merged_res/debug/drawable-night-v21_background.png.flat",

@@ -17,20 +17,20 @@
 15-->/Users/macmous/Documents/Flutter/cse_talant_valmy/android/app/src/debug/AndroidManifest.xml:7:22-64
 16
 17    <permission
-17-->[androidx.core:core:1.9.0] /Users/macmous/.gradle/caches/transforms-3/6710ee2e3546b398da00e75003abfc33/transformed/core-1.9.0/AndroidManifest.xml:22:5-24:47
+17-->[androidx.core:core:1.10.1] /Users/macmous/.gradle/caches/transforms-3/fe42033b107c99448303fdb83d8c6965/transformed/core-1.10.1/AndroidManifest.xml:22:5-24:47
 18        android:name="com.example.cse_talant_valmy.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
-18-->[androidx.core:core:1.9.0] /Users/macmous/.gradle/caches/transforms-3/6710ee2e3546b398da00e75003abfc33/transformed/core-1.9.0/AndroidManifest.xml:23:9-81
+18-->[androidx.core:core:1.10.1] /Users/macmous/.gradle/caches/transforms-3/fe42033b107c99448303fdb83d8c6965/transformed/core-1.10.1/AndroidManifest.xml:23:9-81
 19        android:protectionLevel="signature" />
-19-->[androidx.core:core:1.9.0] /Users/macmous/.gradle/caches/transforms-3/6710ee2e3546b398da00e75003abfc33/transformed/core-1.9.0/AndroidManifest.xml:24:9-44
+19-->[androidx.core:core:1.10.1] /Users/macmous/.gradle/caches/transforms-3/fe42033b107c99448303fdb83d8c6965/transformed/core-1.10.1/AndroidManifest.xml:24:9-44
 20
 21    <uses-permission android:name="com.example.cse_talant_valmy.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION" />
-21-->[androidx.core:core:1.9.0] /Users/macmous/.gradle/caches/transforms-3/6710ee2e3546b398da00e75003abfc33/transformed/core-1.9.0/AndroidManifest.xml:26:5-97
-21-->[androidx.core:core:1.9.0] /Users/macmous/.gradle/caches/transforms-3/6710ee2e3546b398da00e75003abfc33/transformed/core-1.9.0/AndroidManifest.xml:26:22-94
+21-->[androidx.core:core:1.10.1] /Users/macmous/.gradle/caches/transforms-3/fe42033b107c99448303fdb83d8c6965/transformed/core-1.10.1/AndroidManifest.xml:26:5-97
+21-->[androidx.core:core:1.10.1] /Users/macmous/.gradle/caches/transforms-3/fe42033b107c99448303fdb83d8c6965/transformed/core-1.10.1/AndroidManifest.xml:26:22-94
 22
 23    <application
 24        android:name="android.app.Application"
 25        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
-25-->[androidx.core:core:1.9.0] /Users/macmous/.gradle/caches/transforms-3/6710ee2e3546b398da00e75003abfc33/transformed/core-1.9.0/AndroidManifest.xml:28:18-86
+25-->[androidx.core:core:1.10.1] /Users/macmous/.gradle/caches/transforms-3/fe42033b107c99448303fdb83d8c6965/transformed/core-1.10.1/AndroidManifest.xml:28:18-86
 26        android:debuggable="true"
 27        android:icon="@mipmap/ic_launcher"
 28        android:label="cse_talant_valmy" >
@@ -86,17 +86,71 @@
 70        </provider>
 71
 72        <uses-library
-72-->[androidx.window:window:1.0.0-beta04] /Users/macmous/.gradle/caches/transforms-3/49bc944d29f70d45aa5add8e43e3247e/transformed/jetified-window-1.0.0-beta04/AndroidManifest.xml:25:9-27:40
+72-->[androidx.window:window:1.0.0-beta04] /Users/macmous/.gradle/caches/transforms-3/4a29f4c2cf5f9e22e622ef993c4413ee/transformed/jetified-window-1.0.0-beta04/AndroidManifest.xml:25:9-27:40
 73            android:name="androidx.window.extensions"
-73-->[androidx.window:window:1.0.0-beta04] /Users/macmous/.gradle/caches/transforms-3/49bc944d29f70d45aa5add8e43e3247e/transformed/jetified-window-1.0.0-beta04/AndroidManifest.xml:26:13-54
+73-->[androidx.window:window:1.0.0-beta04] /Users/macmous/.gradle/caches/transforms-3/4a29f4c2cf5f9e22e622ef993c4413ee/transformed/jetified-window-1.0.0-beta04/AndroidManifest.xml:26:13-54
 74            android:required="false" />
-74-->[androidx.window:window:1.0.0-beta04] /Users/macmous/.gradle/caches/transforms-3/49bc944d29f70d45aa5add8e43e3247e/transformed/jetified-window-1.0.0-beta04/AndroidManifest.xml:27:13-37
+74-->[androidx.window:window:1.0.0-beta04] /Users/macmous/.gradle/caches/transforms-3/4a29f4c2cf5f9e22e622ef993c4413ee/transformed/jetified-window-1.0.0-beta04/AndroidManifest.xml:27:13-37
 75        <uses-library
-75-->[androidx.window:window:1.0.0-beta04] /Users/macmous/.gradle/caches/transforms-3/49bc944d29f70d45aa5add8e43e3247e/transformed/jetified-window-1.0.0-beta04/AndroidManifest.xml:28:9-30:40
+75-->[androidx.window:window:1.0.0-beta04] /Users/macmous/.gradle/caches/transforms-3/4a29f4c2cf5f9e22e622ef993c4413ee/transformed/jetified-window-1.0.0-beta04/AndroidManifest.xml:28:9-30:40
 76            android:name="androidx.window.sidecar"
-76-->[androidx.window:window:1.0.0-beta04] /Users/macmous/.gradle/caches/transforms-3/49bc944d29f70d45aa5add8e43e3247e/transformed/jetified-window-1.0.0-beta04/AndroidManifest.xml:29:13-51
+76-->[androidx.window:window:1.0.0-beta04] /Users/macmous/.gradle/caches/transforms-3/4a29f4c2cf5f9e22e622ef993c4413ee/transformed/jetified-window-1.0.0-beta04/AndroidManifest.xml:29:13-51
 77            android:required="false" />
-77-->[androidx.window:window:1.0.0-beta04] /Users/macmous/.gradle/caches/transforms-3/49bc944d29f70d45aa5add8e43e3247e/transformed/jetified-window-1.0.0-beta04/AndroidManifest.xml:30:13-37
-78    </application>
-79
-80</manifest>
+77-->[androidx.window:window:1.0.0-beta04] /Users/macmous/.gradle/caches/transforms-3/4a29f4c2cf5f9e22e622ef993c4413ee/transformed/jetified-window-1.0.0-beta04/AndroidManifest.xml:30:13-37
+78
+79        <provider
+79-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/macmous/.gradle/caches/transforms-3/fc67a8c26d3d91a0e34d141f2ef06eec/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:24:9-32:20
+80            android:name="androidx.startup.InitializationProvider"
+80-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/macmous/.gradle/caches/transforms-3/fc67a8c26d3d91a0e34d141f2ef06eec/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:25:13-67
+81            android:authorities="com.example.cse_talant_valmy.androidx-startup"
+81-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/macmous/.gradle/caches/transforms-3/fc67a8c26d3d91a0e34d141f2ef06eec/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:26:13-68
+82            android:exported="false" >
+82-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/macmous/.gradle/caches/transforms-3/fc67a8c26d3d91a0e34d141f2ef06eec/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:27:13-37
+83            <meta-data
+83-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/macmous/.gradle/caches/transforms-3/fc67a8c26d3d91a0e34d141f2ef06eec/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:29:13-31:52
+84                android:name="androidx.profileinstaller.ProfileInstallerInitializer"
+84-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/macmous/.gradle/caches/transforms-3/fc67a8c26d3d91a0e34d141f2ef06eec/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:30:17-85
+85                android:value="androidx.startup" />
+85-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/macmous/.gradle/caches/transforms-3/fc67a8c26d3d91a0e34d141f2ef06eec/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:31:17-49
+86        </provider>
+87
+88        <receiver
+88-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/macmous/.gradle/caches/transforms-3/fc67a8c26d3d91a0e34d141f2ef06eec/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:34:9-52:20
+89            android:name="androidx.profileinstaller.ProfileInstallReceiver"
+89-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/macmous/.gradle/caches/transforms-3/fc67a8c26d3d91a0e34d141f2ef06eec/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:35:13-76
+90            android:directBootAware="false"
+90-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/macmous/.gradle/caches/transforms-3/fc67a8c26d3d91a0e34d141f2ef06eec/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:36:13-44
+91            android:enabled="true"
+91-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/macmous/.gradle/caches/transforms-3/fc67a8c26d3d91a0e34d141f2ef06eec/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:37:13-35
+92            android:exported="true"
+92-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/macmous/.gradle/caches/transforms-3/fc67a8c26d3d91a0e34d141f2ef06eec/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:38:13-36
+93            android:permission="android.permission.DUMP" >
+93-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/macmous/.gradle/caches/transforms-3/fc67a8c26d3d91a0e34d141f2ef06eec/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:39:13-57
+94            <intent-filter>
+94-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/macmous/.gradle/caches/transforms-3/fc67a8c26d3d91a0e34d141f2ef06eec/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:40:13-42:29
+95                <action android:name="androidx.profileinstaller.action.INSTALL_PROFILE" />
+95-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/macmous/.gradle/caches/transforms-3/fc67a8c26d3d91a0e34d141f2ef06eec/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:41:17-91
+95-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/macmous/.gradle/caches/transforms-3/fc67a8c26d3d91a0e34d141f2ef06eec/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:41:25-88
+96            </intent-filter>
+97            <intent-filter>
+97-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/macmous/.gradle/caches/transforms-3/fc67a8c26d3d91a0e34d141f2ef06eec/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:43:13-45:29
+98                <action android:name="androidx.profileinstaller.action.SKIP_FILE" />
+98-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/macmous/.gradle/caches/transforms-3/fc67a8c26d3d91a0e34d141f2ef06eec/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:44:17-85
+98-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/macmous/.gradle/caches/transforms-3/fc67a8c26d3d91a0e34d141f2ef06eec/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:44:25-82
+99            </intent-filter>
+100            <intent-filter>
+100-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/macmous/.gradle/caches/transforms-3/fc67a8c26d3d91a0e34d141f2ef06eec/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:46:13-48:29
+101                <action android:name="androidx.profileinstaller.action.SAVE_PROFILE" />
+101-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/macmous/.gradle/caches/transforms-3/fc67a8c26d3d91a0e34d141f2ef06eec/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:47:17-88
+101-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/macmous/.gradle/caches/transforms-3/fc67a8c26d3d91a0e34d141f2ef06eec/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:47:25-85
+102            </intent-filter>
+103            <intent-filter>
+103-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/macmous/.gradle/caches/transforms-3/fc67a8c26d3d91a0e34d141f2ef06eec/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:49:13-51:29
+104                <action android:name="androidx.profileinstaller.action.BENCHMARK_OPERATION" />
+104-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/macmous/.gradle/caches/transforms-3/fc67a8c26d3d91a0e34d141f2ef06eec/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:50:17-95
+104-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/macmous/.gradle/caches/transforms-3/fc67a8c26d3d91a0e34d141f2ef06eec/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:50:25-92
+105            </intent-filter>
+106        </receiver>
+107    </application>
+108
+109</manifest>
