@@ -54,10 +54,13 @@ class MyApp extends StatelessWidget {
         supportedLocales: const [Locale('en'), Locale('fr')],
 
         title: 'CSE_TALANT_VALMY',
-        theme: MonAppTheme.ligthTheme,
-        darkTheme: MonAppTheme.ligthTheme,
-        themeMode: ThemeMode.system,
+
+        theme: MonAppTheme.ligthTheme, //représente le ligth mode.
+        darkTheme: MonAppTheme
+            .darkTheme, //Sinon par defaut: ThemeData(brightness: Brightness.dark),
+        themeMode: ThemeMode.system, //options: ligth, dark, system.
         //home: const ProduitScreen(),
+
         initialRoute: '/', // default is '/'
         routes: {
           // '/': (ctx) => const ProduitScreen(),

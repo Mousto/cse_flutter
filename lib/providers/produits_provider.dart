@@ -62,8 +62,8 @@ class ProduitsProvider with ChangeNotifier {
   }
 
   Future<void> updateProduit(int id, ProduitProvider nouveauProduit) async {
-    //final url = 'http://192.168.1.48:8000/api/produits/$id/';
-    //final Dio dio = Dio();
+    // final url = 'http://192.168.1.48:8000/api/produits/$id/';
+    // final Dio dio = Dio();
 
     final prodIndex = _items.indexWhere((prod) => prod.id == id);
     if (prodIndex >= 0) {

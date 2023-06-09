@@ -4,13 +4,13 @@
             "outputFile": "/Users/macmous/Documents/Flutter/cse_talant_valmy/build/app/intermediates/incremental/mergeDebugResources/merged.dir/values-ko/values-ko.xml",
             "map": [
                 {
-                    "source": "/Users/macmous/.gradle/caches/transforms-3/6710ee2e3546b398da00e75003abfc33/transformed/core-1.9.0/res/values-ko/values-ko.xml",
+                    "source": "/Users/macmous/.gradle/caches/transforms-3/fe42033b107c99448303fdb83d8c6965/transformed/core-1.10.1/res/values-ko/values-ko.xml",
                     "from": {
-                        "startLines": "2",
-                        "startColumns": "4",
-                        "startOffsets": "55",
-                        "endColumns": "100",
-                        "endOffsets": "151"
+                        "startLines": "2,3,4,5,6,7,8,9",
+                        "startColumns": "4,4,4,4,4,4,4,4",
+                        "startOffsets": "55,147,247,341,438,534,632,732",
+                        "endColumns": "91,99,93,96,95,97,99,100",
+                        "endOffsets": "142,242,336,433,529,627,727,828"
                     }
                 }
             ]
