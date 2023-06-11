@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../../../constants/sizes.dart';
-import '../../../../constants/text_strings.dart';
+import '../../../../../constants/sizes.dart';
+import '../../../../../constants/text_strings.dart';
+import '../../signup/signup_screen.dart';
 
 class LoginForm extends StatelessWidget {
   const LoginForm({
@@ -56,7 +57,7 @@ class LoginForm extends StatelessWidget {
             ),
             const SizedBox(height: tFormHeight - 10),
             TextButton(
-              onPressed: () {},
+              onPressed: () => Get.to(() => const SignUpScreen()),
               child: Text.rich(
                 TextSpan(
                   text: tDontHaveAnAccount,

@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import 'package:cse_talant_valmy/src/common_widgets/fade_in_animation/fade_in_animation_model.dart';
-import 'package:cse_talant_valmy/src/common_widgets/fade_in_animation_controller.dart';
-import 'package:cse_talant_valmy/src/common_widgets/fade_in_animation/animation_design.dart';
+import '../../../../common_widgets/fade_in_animation/fade_in_animation_model.dart';
+import '../../../../common_widgets/fade_in_animation_controller.dart';
+import '../../../../common_widgets/fade_in_animation/animation_design.dart';
 //import 'package:cse_talant_valmy/screens/tabs_screen.dart';
-import 'package:cse_talant_valmy/screens/signup_screen.dart';
+//import 'package:cse_talant_valmy/screens/signup_screen.dart';
+//import '../../../../../screens/signup_screen.dart';
 import '../../../../constants/colors.dart';
 import '../login/login_screen.dart';
 import '../../../../constants/text_strings.dart';
 import '../../../../constants/image_string.dart';
+import '../signup/signup_screen.dart';
 
 class WelcomeScreen extends StatelessWidget {
   const WelcomeScreen({super.key});

@@ -36,7 +36,7 @@ const String tRememberMe = "Remember Me?";
 const String tDontHaveAnAccount = "Pas encore inscrit(e) ? ";
 const String tEmail = "E-mail";
 const String tPassword = "Mot de passe";
-
+const String tFullName = "Nom";
 // -- Forget Password Text
 const String tForgetPassword = 'Mot de passe oublié ?';
 const String tForgetPasswordTitle = "Make Selection!";
@@ -52,3 +52,8 @@ const String tForgetPhoneSubTitle =
 // -- Forget Password Via E-Mail - Text
 const String tForgetMailSubTitle =
     "Enter your registered E-Mail to receive OTP";
+
+// -- Sign Up Screen Text
+const String tSignUpTitle = "Monte À Bord !";
+const String tSignUpSubTitle = "Crée ton profil et rejoins nous.";
+const String tAlreadyHaveAnAccount = "Already have an Account? ";

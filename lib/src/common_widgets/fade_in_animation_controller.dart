@@ -13,6 +13,9 @@ class FadeInAnimationController extends GetxController {
     await Future.delayed(const Duration(milliseconds: 3500));
     animate.value = false;
     await Future.delayed(const Duration(milliseconds: 2000));
+
+    // Get.to(() =>
+    //     const SignUpScreen()); //pas besoin de context avec Getx pour la navigation
     Get.to(() =>
         const WelcomeScreen()); //pas besoin de context avec Getx pour la navigation
     // Get.to(() =>
