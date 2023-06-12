@@ -16,6 +16,8 @@ class FadeInAnimationController extends GetxController {
 
     // Get.to(() =>
     //     const SignUpScreen()); //pas besoin de context avec Getx pour la navigation
+    // Get.to(() =>
+    //     const LoginScreen()); //pas besoin de context avec Getx pour la navigation
     Get.to(() =>
         const WelcomeScreen()); //pas besoin de context avec Getx pour la navigation
     // Get.to(() =>

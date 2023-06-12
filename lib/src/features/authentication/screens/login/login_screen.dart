@@ -20,7 +20,7 @@ class LoginScreen extends StatelessWidget {
                 // Section 1
                 LoginHeaderWidget(),
                 //Section 2: [Form]
-                LoginForm(),
+                LoginFormWidget(),
               ],
             ),
           ),

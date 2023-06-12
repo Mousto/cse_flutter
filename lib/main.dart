@@ -54,7 +54,9 @@ class MyApp extends StatelessWidget {
         supportedLocales: const [Locale('en'), Locale('fr')],
 
         title: 'CSE_TALANT_VALMY',
-
+        defaultTransition: Transition.leftToRightWithFade,
+        transitionDuration: const Duration(microseconds: 500),
+        debugShowCheckedModeBanner: false,
         theme: MonAppTheme.ligthTheme, //représente le ligth mode.
         darkTheme: MonAppTheme
             .darkTheme, //Sinon par defaut: ThemeData(brightness: Brightness.dark),

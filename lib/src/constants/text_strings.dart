@@ -4,6 +4,7 @@
 const String tLogin = "Connexion";
 const String tSignup = "S'inscrire";
 const String tSignupInvite = "J'y vais !";
+const String tNext = "Suivant";
 
 // Splash Screen
 const String tAppName = 'cse Talant-Valmy';
@@ -35,15 +36,18 @@ const String tLoginSubTitle = "Make it work, make it right, make it fast.";
 const String tRememberMe = "Remember Me?";
 const String tDontHaveAnAccount = "Pas encore inscrit(e) ? ";
 const String tEmail = "E-mail";
+const String tPhoneNo = "Numéro Téléphone";
 const String tPassword = "Mot de passe";
 const String tFullName = "Nom";
 // -- Forget Password Text
 const String tForgetPassword = 'Mot de passe oublié ?';
-const String tForgetPasswordTitle = "Make Selection!";
+const String tForgetPasswordTitle = "Fais ton choix !";
 const String tForgetPasswordSubTitle =
-    "Select one of the options given below to reset your password.";
-const String tResetViaEMail = "Reset via Mail Verification";
-const String tResetViaPhone = "Reset via Phone Verification";
+    "Sélectionne une des options ci-dessous pour réinitialiser ton mot de passe.";
+const String tForgetPwdResetMailSubTitle =
+    "Saisir E-mail pour réinitialiser ton mot de passe.";
+const String tResetViaEMail = "Réinitialisation par E-mail.";
+const String tResetViaPhone = "Réinitialisation par téléphone.";
 
 // -- Forget Password Via Phone - Text
 const String tForgetPhoneSubTitle =

@@ -15,3 +15,7 @@ const tOnBordingImage3 =
 // Welcome screen
 const String tWelcomeStringImage =
     "assets/images/welcome_screen/welcome-screen-image.png";
+
+// -- Forget Password Images
+const String tForgetPasswordImage =
+    "assets/images/forget_password/forget-password.png";

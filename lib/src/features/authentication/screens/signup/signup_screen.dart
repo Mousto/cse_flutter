@@ -111,6 +111,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   image: tWelcomeStringImage,
                   title: tSignUpTitle,
                   subtitle: tSignUpSubTitle,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  imageHeight: 0.2,
+                  heightBetweenImgTxt: 20.0,
                 ),
                 Container(
                   padding:
