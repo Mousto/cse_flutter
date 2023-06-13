@@ -36,7 +36,11 @@ class ForgetPasswordScreen {
               subTitle: tResetViaEMail,
               onTap: () {
                 Navigator.pop(context); //Ferme la modal.
-                Get.to(() => const ForgetPasswordMailScreen());
+                Get.to(() => const ForgetPasswordMailScreen(),
+                    duration: const Duration(
+                        seconds: 1), //duration of transitions, default 1 sec
+                    transition: Transition.zoom //transition effect
+                    );
               },
             ),
             const SizedBox(

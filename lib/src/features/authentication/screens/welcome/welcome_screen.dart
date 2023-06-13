@@ -88,7 +88,9 @@ class WelcomeScreen extends StatelessWidget {
                     ),
                     Expanded(
                       child: ElevatedButton(
-                        onPressed: () => Get.to(() => const SignUpScreen()),
+                        onPressed: () => Get.to(
+                          () => const SignUpScreen(),
+                        ),
                         child: Text(
                           tSignup.toUpperCase(),
                         ),

@@ -55,7 +55,7 @@ class MyApp extends StatelessWidget {
 
         title: 'CSE_TALANT_VALMY',
         defaultTransition: Transition.leftToRightWithFade,
-        transitionDuration: const Duration(microseconds: 500),
+        transitionDuration: const Duration(milliseconds: 1000),
         debugShowCheckedModeBanner: false,
         theme: MonAppTheme.ligthTheme, //représente le ligth mode.
         darkTheme: MonAppTheme
@@ -64,21 +64,43 @@ class MyApp extends StatelessWidget {
         //home: const ProduitScreen(),
 
         initialRoute: '/', // default is '/'
-        routes: {
-          // '/': (ctx) => const ProduitScreen(),
-          //'/': (ctx) => const TabsScreen(),
-          '/': (ctx) => const HomeScreen(),
-          //'/': (ctx) => const SignUpScreen(),
-          //'/welcome': ((context) => const WelcomeScreen()),
-          '/produit-detail-screen': ((context) => const ProduitDetailScreen()),
-          UserProductsScreen.routeName: ((context) =>
-              const UserProductsScreen()),
-          PanierScreen.routeName: ((context) => const PanierScreen()),
-          EditProductScreen.routeName: ((context) => const EditProductScreen()),
-          TabsScreen.routeName: ((context) => const TabsScreen()),
-          CommandesScreen.routeName: ((context) => const CommandesScreen()),
-          DoleancesScreen.routeName: ((context) => const DoleancesScreen()),
-        },
+        getPages: [
+          GetPage(name: '/', page: () => const HomeScreen()),
+          GetPage(
+              name: '/produit-detail-screen',
+              page: () => const ProduitDetailScreen()),
+          GetPage(
+              name: PanierScreen.routeName, page: () => const PanierScreen()),
+          GetPage(
+              name: EditProductScreen.routeName,
+              page: () => const EditProductScreen()),
+          GetPage(name: TabsScreen.routeName, page: () => const TabsScreen()),
+          GetPage(
+              name: CommandesScreen.routeName,
+              page: () => const CommandesScreen()),
+          GetPage(
+              name: DoleancesScreen.routeName,
+              page: () => const DoleancesScreen()),
+          GetPage(
+              name: UserProductsScreen.routeName,
+              page: () => const UserProductsScreen(),
+              transition: Transition.zoom),
+        ],
+        // routes: {
+        //   // '/': (ctx) => const ProduitScreen(),
+        //   //'/': (ctx) => const TabsScreen(),
+        //   '/': (ctx) => const HomeScreen(),
+        //   //'/': (ctx) => const SignUpScreen(),
+        //   //'/welcome': ((context) => const WelcomeScreen()),
+        //   '/produit-detail-screen': ((context) => const ProduitDetailScreen()),
+        //   UserProductsScreen.routeName: ((context) =>
+        //       const UserProductsScreen()),
+        //   PanierScreen.routeName: ((context) => const PanierScreen()),
+        //   EditProductScreen.routeName: ((context) => const EditProductScreen()),
+        //   TabsScreen.routeName: ((context) => const TabsScreen()),
+        //   CommandesScreen.routeName: ((context) => const CommandesScreen()),
+        //   DoleancesScreen.routeName: ((context) => const DoleancesScreen()),
+        // },
       ),
     );
   }
