@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
 
-import '../features/authentication/screens/welcome/welcome_screen.dart';
+import '../features/authentication/screens/forget_password/forget_password_otp/otp_screen.dart';
 
 class FadeInAnimationController extends GetxController {
   static FadeInAnimationController get find => Get.find();
@@ -18,13 +18,17 @@ class FadeInAnimationController extends GetxController {
     //     const SignUpScreen()); //pas besoin de context avec Getx pour la navigation
     // Get.to(() =>
     //     const LoginScreen()); //pas besoin de context avec Getx pour la navigation
-    Get.to(() => const WelcomeScreen(),
-        duration:
-            const Duration(seconds: 1), //duration of transitions, default 1 sec
-        transition: Transition.noTransition //transition effect
-        ); //pas besoin de context avec Getx pour la navigation
+
+    // Get.to(() => const WelcomeScreen(),
+    //     duration:
+    //         const Duration(seconds: 1), //duration of transitions, default 1 sec
+    //     transition: Transition.noTransition //transition effect
+    //     ); //pas besoin de context avec Getx pour la navigation
+
     // Get.to(() =>
     //     OnBoardingScreen()); //pas besoin de context avec Getx pour la navigation
+    Get.to(() =>
+        const OTPScreen()); //pas besoin de context avec Getx pour la navigation
   }
 
   Future startAnimation() async {

@@ -61,3 +61,8 @@ const String tForgetMailSubTitle =
 const String tSignUpTitle = "Monte À Bord !";
 const String tSignUpSubTitle = "Crée ton profil et rejoins nous.";
 const String tAlreadyHaveAnAccount = "Already have an Account? ";
+
+// -- OTP screen text
+const String tOtpTitle = 'CO\nDE';
+const String tOtpSubTitle = 'Vérification';
+const String tOtpMessage = 'Entrer le code de vérification envoyé à ';

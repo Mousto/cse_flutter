@@ -11,8 +11,8 @@ class TElevatedButtonTheme {
     style: ElevatedButton.styleFrom(
       elevation: 10,
       textStyle: const TextStyle(fontWeight: FontWeight.bold),
-      shape: const RoundedRectangleBorder(),
-      side: const BorderSide(color: tSudLinda),
+      //shape: const RoundedRectangleBorder(),
+      //side: const BorderSide(color: tSudLinda),
       padding: const EdgeInsets.symmetric(vertical: 15.0),
     ),
   );

@@ -2,7 +2,9 @@ import 'package:cse_talant_valmy/src/common_widgets/form/form_header_widget.dart
 import 'package:cse_talant_valmy/src/constants/image_string.dart';
 import 'package:cse_talant_valmy/src/constants/sizes.dart';
 import 'package:cse_talant_valmy/src/constants/text_strings.dart';
+import 'package:cse_talant_valmy/src/features/authentication/screens/forget_password/forget_password_otp/otp_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class ForgetPasswordMailScreen extends StatelessWidget {
   const ForgetPasswordMailScreen({super.key});
@@ -47,7 +49,9 @@ class ForgetPasswordMailScreen extends StatelessWidget {
                       SizedBox(
                         width: double.infinity,
                         child: ElevatedButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            Get.to(() => const OTPScreen());
+                          },
                           child: const Text(tNext),
                         ),
                       ),
