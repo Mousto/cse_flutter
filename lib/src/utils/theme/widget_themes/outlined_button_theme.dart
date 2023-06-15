@@ -8,7 +8,7 @@ class TOulinedButtonTheme {
   // Ligth theme
   static final lightOutlinedButtonTheme = OutlinedButtonThemeData(
     style: OutlinedButton.styleFrom(
-      shape: const RoundedRectangleBorder(),
+      //shape: const RoundedRectangleBorder(),
       foregroundColor: tSecondaryColor,
       side: const BorderSide(color: tSudLinda),
       padding: const EdgeInsets.symmetric(vertical: 15.0),

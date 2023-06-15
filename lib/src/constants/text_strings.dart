@@ -62,7 +62,17 @@ const String tSignUpTitle = "Monte À Bord !";
 const String tSignUpSubTitle = "Crée ton profil et rejoins nous.";
 const String tAlreadyHaveAnAccount = "Already have an Account? ";
 
-// -- OTP screen text
+// -- OTP screen - text
 const String tOtpTitle = 'CO\nDE';
 const String tOtpSubTitle = 'Vérification';
 const String tOtpMessage = 'Entrer le code de vérification envoyé à ';
+
+//Dashboard Screen - text
+const String tDashboardTitle = "Hey coding with M";
+const String tDashboardHeading = "Explore Course";
+const String tDashboardSearch = "Rechercher...";
+const String tDashboardBannerTitle1 = "Android for Begginers";
+const String tDashboardBannerTitle2 = "JAVA";
+const String tDashboardBannerSubTitle = "10 Lessons";
+const String tDashboardButton = "Tous Voir";
+const String tDashboardTopCourses = "Top Courses";

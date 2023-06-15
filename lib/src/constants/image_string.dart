@@ -19,3 +19,11 @@ const String tWelcomeStringImage =
 // -- Forget Password Images
 const String tForgetPasswordImage =
     "assets/images/forget_password/forget-password.png";
+
+//Dashbord image
+const String tUserProfileImage = "assets/images/dashboard/dash-person.png";
+const String tBannerImage1 = "assets/images/dashboard/dash-01.png";
+const String tBannerImage2 = "assets/images/dashboard/dash-02.png";
+const String tTopCourseImage3 = "assets/images/dashboard/dash-03.png";
+const String tTopCourseImage4 = "assets/images/dashboard/dash-04.png";
+const String tBookmarkIcon = "assets/images/dashboard/bookmark.png";
