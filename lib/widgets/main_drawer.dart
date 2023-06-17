@@ -1,5 +1,7 @@
+import 'package:cse_talant_valmy/src/constants/image_string.dart';
 import 'package:flutter/material.dart';
 
+import '../screens/tabs_screen.dart';
 import '../screens/user_products_screen.dart';
 import '../screens/commandes_screen.dart';
 import '../screens/doleances_screen.dart';
@@ -28,6 +30,7 @@ class MainDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Drawer(
+      width: MediaQuery.of(context).size.width * 0.75,
       child: Column(
         children: <Widget>[
           AppBar(
@@ -60,6 +63,18 @@ class MainDrawer extends StatelessWidget {
             onTap: () {
               Navigator.of(context)
                   .pushReplacementNamed(DoleancesScreen.routeName);
+            },
+          ),
+          const Divider(),
+          ListTile(
+            leading: const Image(
+              image: AssetImage(tTicket),
+              width: 24,
+              height: 24,
+            ), //const Icon(Icons.online_prediction_sharp),
+            title: const Text('Billeterie'),
+            onTap: () {
+              Navigator.of(context).pushReplacementNamed(TabsScreen.routeName);
             },
           ),
           /* Container(

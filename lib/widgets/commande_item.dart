@@ -7,12 +7,12 @@ import '../models/panier_bdd.dart';
 class CommandeItem extends StatefulWidget {
   //final CommandeModelItem commande;
   final PanierBdd panier;
-  final int index;
+  final int? index;
 
   const CommandeItem({
     super.key,
     required this.panier,
-    required this.index,
+    this.index,
   });
 
   @override
@@ -30,7 +30,7 @@ class _CommandeItemState extends State<CommandeItem> {
         children: <Widget>[
           ListTile(
             title: Text(
-                'Le total du panier ${widget.index + 1} est de ${widget.panier.valeurTotale} €'),
+                'Le total du panier ${widget.index! + 1} est de ${widget.panier.valeurTotale} €'),
             subtitle: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -62,6 +62,7 @@ class _CommandeItemState extends State<CommandeItem> {
               padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 4),
               height: min(widget.panier.commandes.length * 40.0 + 10, 100),
               child: ListView.separated(
+                //scrollDirection: Axis.horizontal,
                 separatorBuilder: (BuildContext context, int index) =>
                     const Divider(
                   color: Colors.black,
@@ -70,13 +71,8 @@ class _CommandeItemState extends State<CommandeItem> {
                 itemBuilder: (BuildContext context, int index) => Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(
-                      widget.panier.commandes[index].produit.nom,
-                      style: const TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
+                    Text(widget.panier.commandes[index].produit.nom,
+                        style: Theme.of(context).textTheme.bodyMedium),
                     Column(
                       children: [
                         const Text('Billet Enfant'),

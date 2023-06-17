@@ -14,7 +14,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     // Provider.of<ProduitsProvider>(context, listen: false)
     //     .setProduits(_listProduits);
-    return SplashScreen();
+    return const SplashScreen();
     // Scaffold(
     //   appBar: AppBar(
     //     title: const Text('Application cse'),

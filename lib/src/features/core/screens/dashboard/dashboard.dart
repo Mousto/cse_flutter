@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../../../../widgets/main_drawer.dart';
 import '../../../../constants/sizes.dart';
 import '../../../../constants/text_strings.dart';
 import 'widgets/Categories.dart';
@@ -18,6 +19,7 @@ class Dashboard extends StatelessWidget {
     return SafeArea(
       child: Scaffold(
         appBar: const DashboardAppbar(),
+        drawer: const MainDrawer(),
         body: SingleChildScrollView(
           child: Container(
             padding: const EdgeInsets.all(tDashboardPadding),

@@ -29,3 +29,4 @@ const String tTopCourseImage1 = "assets/images/dashboard/dash1-01.png";
 //const String tTopCourseImage3 = "assets/images/dashboard/dash3-03.png";
 // const String tTopCourseImage4 = "assets/images/dashboard/dash4-04.png";
 const String tBookmarkIcon = "assets/images/dashboard/bookmark.png";
+const String tTicket = "assets/images/welcome_screen/ticket.png";

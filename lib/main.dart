@@ -1,3 +1,4 @@
+import 'package:cse_talant_valmy/src/features/core/screens/commande_produits/panier_produits.dart';
 import 'package:cse_talant_valmy/src/utils/theme/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -85,6 +86,11 @@ class MyApp extends StatelessWidget {
               name: UserProductsScreen.routeName,
               page: () => const UserProductsScreen(),
               transition: Transition.zoom),
+          GetPage(
+            name: PanierProduitScreen.routeName,
+            page: () => const PanierProduitScreen(),
+            //transition: Transition.zoom
+          ),
         ],
         // routes: {
         //   // '/': (ctx) => const ProduitScreen(),
