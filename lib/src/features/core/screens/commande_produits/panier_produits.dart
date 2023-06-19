@@ -1,8 +1,10 @@
+import 'package:cse_talant_valmy/models/produit_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
 import '../../../../../models/panier_bdd.dart';
+import 'ordered_product.dart';
 
 class PanierProduitScreen extends StatelessWidget {
   const PanierProduitScreen({super.key});
@@ -11,9 +13,10 @@ class PanierProduitScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final lePanier = Get.arguments as PanierBdd;
-    print(lePanier.id);
+    print(lePanier.commandes[0].produit);
     return SafeArea(
       child: Scaffold(
+        appBar: AppBar(title: const Text('Votre Panier'), centerTitle: true),
         body: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -35,14 +38,19 @@ class PanierProduitScreen extends StatelessWidget {
                     // AssetImage('assets/images/$imageUrl'),
                   ),
                   title: Text(
-                    lePanier.commandes[index].produit.nom,
+                    'Billet ${lePanier.commandes[index].produit.nom}',
                   ),
                   trailing:
                       Text('Total : ${lePanier.commandes[index].sousTotal}'),
                   onTap: () {
+                    Get.to(() => const OrderedProductScreen(),
+                        arguments: lePanier.commandes[index]);
                     print(
                         'Detail complet de la commande ${lePanier.commandes[index].id} ');
                   },
+                  subtitle: Text(
+                    'Enfant ${lePanier.commandes[index].billetEnfant}/Adulte ${lePanier.commandes[index].billetAdulte}',
+                  ),
                 ),
               ),
             ),

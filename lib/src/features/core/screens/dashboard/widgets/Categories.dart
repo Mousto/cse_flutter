@@ -4,7 +4,6 @@ import 'package:provider/provider.dart';
 
 import '../../../../../../providers/commande_provider.dart';
 import '../../../../../constants/colors.dart';
-import '../../../models/dashboard/categories_model.dart';
 import '../../commande_produits/panier_produits.dart';
 
 class Categories extends StatefulWidget {

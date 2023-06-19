@@ -27,18 +27,17 @@ class DashboardAppbar extends StatelessWidget implements PreferredSizeWidget {
       actions: [
         Container(
           margin: const EdgeInsets.all(10),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(10),
-            color: tCardBgColor,
-          ),
-          child: IconButton(
-            onPressed: () {
-              print("Je me présente");
-            },
-            icon: const Image(
-              image: AssetImage(tUserProfileImage),
-              height: 24,
-              width: 24,
+          child: CircleAvatar(
+            backgroundColor: Colors.white,
+            child: IconButton(
+              onPressed: () {
+                print("Je me présente");
+              },
+              icon: const Image(
+                image: AssetImage(tUserProfileImage),
+                height: 24,
+                width: 24,
+              ),
             ),
           ),
         ),

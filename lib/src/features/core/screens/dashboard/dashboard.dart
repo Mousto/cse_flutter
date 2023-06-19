@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../../../../../widgets/main_drawer.dart';
 import '../../../../constants/sizes.dart';
 import '../../../../constants/text_strings.dart';
-import 'widgets/Categories.dart';
+import 'widgets/categories.dart';
 import 'widgets/appbar.dart';
 import 'widgets/banners.dart';
 import 'widgets/search.dart';
